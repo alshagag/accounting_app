@@ -1,0 +1,90 @@
+:root {
+  --accent:#198754;
+  --muted:#6c757d;
+}
+
+/* الصفحة */
+body {
+  background:#f5f8fb;
+  font-family:Inter, "Segoe UI", Tahoma, Arial, sans-serif;
+  color:#222;
+}
+
+/* الهيدر */
+header {
+  background:var(--accent);
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  border-radius:0 0 16px 16px;
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+}
+
+header .header-sub {
+  font-size:.95rem;
+  opacity:.95;
+}
+
+/* بطاقات الإحصائيات */
+.stats-row {
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+}
+
+.stat-card {
+  border-radius:10px;
+  padding:18px;
+  color:#fff;
+  min-height:88px;
+  flex:1 1 200px;
+}
+
+.stat-sales {background:linear-gradient(135deg,#28a745,#20c997);}
+.stat-purchase {background:linear-gradient(135deg,#ffc107,#ffb703); color:#111;}
+.stat-profit {background:linear-gradient(135deg,#4facfe,#00f2fe);}
+.icon-large {font-size:28px; opacity:.9;}
+
+/* إدخال البيانات */
+.input-icon {
+  position:relative;
+  margin-bottom:10px;
+}
+.input-icon i {
+  position:absolute;
+  top:50%;
+  right:12px;
+  transform:translateY(-50%);
+  color:var(--muted);
+}
+.input-icon input, .input-icon select { padding-right:2.6rem; }
+
+/* تحسين الملخص */
+.summary-boxes {
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:16px;
+}
+.summary-item {
+  flex:1 1 150px;
+  max-width:100%;
+  background:#fff;
+  border-radius:10px;
+  padding:10px 16px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.06);
+  text-align:center;
+}
+.summary-item h4{margin:0 0 6px 0; font-weight:600;}
+.summary-item p{margin:0; font-size:1.25rem; font-weight:700; color:#198754;}
+
+/* الجداول */
+.table-responsive table {
+  min-width: max-content; /* لتجنب ضغط الأعمدة على الجوال */
+}
+
+/* تحسين الجوال */
+@media (max-width:991px){
+  .stats-row{flex-direction:column; gap:12px;}
+  .stat-card{width:100%;}
+}
