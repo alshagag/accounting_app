@@ -10,7 +10,6 @@ export default defineConfig({
       input: {
         index: resolve(__dirname, 'index.html'),
         app: resolve(__dirname, 'accounting.html'),
-        contact: resolve(__dirname, 'contact.html'),
       },
     },
   },
