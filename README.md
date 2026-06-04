@@ -94,59 +94,89 @@ Or use:
 
 # 🧱 التقنيات المستخدمة | Tech Stack
 
-* HTML
-* CSS
-* JavaScript
-* IndexedDB (Local Storage)
+## 🇸🇦 عربي
+
+- ⚡ Vite (أداة بناء وتشغيل المشروع)
+- 🧩 Vue.js (لبناء واجهة المستخدم التفاعلية)
+- 🌐 HTML5 (هيكلة الصفحات)
+- 🎨 CSS3 + Bootstrap (تصميم الواجهة)
+- ⚙️ JavaScript (منطق التطبيق)
+- 🗄️ IndexedDB (تخزين البيانات محليًا داخل المتصفح)
+- 📦 LocalStorage (تخزين بيانات خفيفة وسريعة)
+- 📧 EmailJS (إرسال الإيميلات)
+- 🚀 Vercel (استضافة المشروع)
+
+## 🇬🇧 English
+
+- ⚡ Vite (Modern frontend build tool for fast development)
+- 🧩 Vue.js (Progressive JavaScript framework for building UI)
+- 🌐 HTML5 (Structure of web pages)
+- 🎨 CSS3 + Bootstrap (Styling and responsive design)
+- ⚙️ JavaScript (Core application logic)
+- 🗄️ IndexedDB (Client-side database for storing structured data in the browser)
+- 📦 LocalStorage (Simple key-value storage in the browser)
+- 📧 EmailJS (Sending emails directly from the client-side)
+- 🚀 Vercel (Deployment and hosting platform)
 
 ---
 
 # 📁 هيكلة المشروع| Project Structur
 ````md
 📦 accounting_app
- ┣ 📁 public
- ┃ ┣ favicon.svg
- ┃ ┣ icons.svg
- ┃ ┗ landing-preview.png
- ┣ 📁 screenshots
- ┃ ┗ index.png
- ┣ 📁 src
- ┃ ┣ 📁 assets
- ┃ ┃ ┣ hero.png
- ┃ ┃ ┣ vite.svg
- ┃ ┃ ┗ vue.svg
- ┃ ┣ 📁 components
- ┃ ┃ ┗ HelloWorld.vue
- ┃ ┣ 📁 css
- ┃ ┃ ┣ landing.css
- ┃ ┃ ┗ style.css
- ┃ ┣ 📁 js
- ┃ ┃ ┣ 📁 api
- ┃ ┃ ┃ ┗ email.js
- ┃ ┃ ┣ app.js
- ┃ ┃ ┣ confirm-dialog.js
- ┃ ┃ ┣ db.js
- ┃ ┃ ┣ product-full-edit.js
- ┃ ┃ ┣ product-quick-edit.js
- ┃ ┃ ┣ products.js
- ┃ ┃ ┣ sale-full-edit.js
- ┃ ┃ ┣ transaction-full-edit.js
- ┃ ┃ ┣ transactions.js
- ┃ ┃ ┣ ui.js
- ┃ ┃ ┗ utils.js
- ┃ ┣ App.vue
- ┃ ┗ main.js
- ┣ 📁 versions
- ┃ ┣ versions.html
- ┃ ┣ 📁 css
- ┃ ┃ ┗ versions.css
- ┃ ┗ 📁 v1.0
- ┃   ┣ index.html
- ┃   ┗ style.css
- ┣ 📜 package.json
- ┣ 📜 package-lock.json
- ┣ 📜 vite.config.js
- ┣ 📜 README.md
+│
+├── 🌐 index.html
+├── 🧾 accounting.html
+├── ⚙️ vite.config.js
+├── 📄 package.json
+│
+├── 📁 public/
+│   ├── 🖼️ favicon.svg
+│   ├── 🧩 icons.svg
+│   ├── 🖼️ landing-preview.png
+│   │
+│   └── 📁 versions/
+│       ├── 📄 versions.html
+│       ├── 📁 css/
+│       │   └── 🎨 versions.css
+│       │
+│       └── 📁 v1.0/
+│           ├── 🌐 index.html
+│           └── 🎨 style.css
+│
+├── 📁 src/
+│   ├── 🚀 main.js
+│   ├── 🧩 App.vue
+│   │
+│   ├── 📁 assets/
+│   │   └── 🖼️ favicon.svg
+│   │
+│   ├── 📁 components/
+│   │   └── 🧱 Home.vue
+│   │
+│   ├── 📁 css/
+│   │   ├── 🎨 landing.css
+│   │   └── 🎨 style.css
+│   │
+│   └── 📁 js/
+│       ├── ⚙️ app.js
+│       ├── 🗄️ db.js
+│       ├── 📦 products.js
+│       ├── 💰 transactions.js
+│       ├── 🎛️ ui.js
+│       ├── 🧠 utils.js
+│       ├── 🪄 confirm-dialog.js
+│       ├── ✏️ product-full-edit.js
+│       ├── ⚡ product-quick-edit.js
+│       ├── 💳 sale-full-edit.js
+│       ├── 📊 transaction-full-edit.js
+│       │
+│       └── 📁 api/
+│           └── 📧 email.js
+│
+├── 📸 screenshots/
+│   └── 🖼️ index.png
+│
+└── 📦 node_modules/
 ````
 
 ---
