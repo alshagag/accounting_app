@@ -38,6 +38,15 @@ A simple and lightweight accounting system designed to help small businesses man
 
 ---
 
+---
+# 🚀 Live Demo | النسخة التجريبية
+---
+
+## 🇸🇦 Arabic 
+🔗 **اضغط هنا لتجربة النظام**
+
+👉 https://accounting-app-ochre-omega.vercel.app
+---
 # ⚙️ طريقة التشغيل | How to Run
 
 ## 🇸🇦 التشغيل
