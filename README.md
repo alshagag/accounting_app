@@ -34,7 +34,7 @@ A simple and lightweight accounting system designed to help small businesses man
 
 ## 🏠 الصفحة الرئيسية | Dashboard
 
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/index.png)
 
 ---
 
@@ -92,10 +92,9 @@ Or use:
 
 ---
 
-# 📁 هيكلة المشروع | Project Structure
-
-```bash
-📦 project-folder
+# 📁 هيكلة المشروع| Project Structur
+````md
+📦 accounting_app
  ┣ 📁 public
  ┃ ┣ favicon.svg
  ┃ ┣ icons.svg
@@ -139,21 +138,26 @@ Or use:
  ┣ 📜 package-lock.json
  ┣ 📜 vite.config.js
  ┣ 📜 README.md
+````
 
 ---
 
-# 👨‍💻 المطور | Developer
+# 👨‍💻 Developer | المطور
 
 **alshagag**
 
 ---
 
-# ⭐ ملاحظات | Notes
+# ⭐ Notes | ملاحظات
+
+## 🇸🇦 عربي
 
 * المشروع يعمل بدون قاعدة بيانات خارجية
-* جميع البيانات محفوظة داخل المتصفح
+* جميع البيانات محفوظة داخل المتصفح (LocalStorage / IndexedDB)
 * مناسب للمشاريع الصغيرة والتجارب التعليمية
 
+## 🇬🇧 English
+
 * The project works without an external database
-* All data is stored inside the browser (Local Storage / IndexedDB)
+* All data is stored inside the browser (LocalStorage / IndexedDB)
 * Suitable for small projects and educational purposes
