@@ -2,6 +2,7 @@
    Imports | الاستيرادات
 ========================= */
 import { initApp } from "./db.js";
+import { initTags } from "./gtag.js";
 
 import "./confirm-dialog.js";
 import "./ui.js";
@@ -12,6 +13,8 @@ import "./product-full-edit.js";
 import "./sale-full-edit.js";
 import "./transaction-full-edit.js";
 import "./api/email.js";
+
+
 
 /* =========================
    Global Errors | معالجة الأخطاء العامة
@@ -32,6 +35,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   console.log("APP START");
 
   try {
+    initTags();  
     await initApp();
     console.log("APP READY");
   } catch (e) {
