@@ -1,0 +1,265 @@
+:root {
+  --ink: #102016;
+  --muted: #5d6b63;
+  --line: #dce6df;
+  --surface: #f5f8f6;
+  --green: #198754;
+  --green-dark: #0f5f39;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: #fff;
+  font-family: Inter, "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+.landing-hero {
+  min-height: 78vh;
+  padding: 24px clamp(18px, 4vw, 58px) 64px;
+  color: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-image: url("/landing-preview.png");
+  background-size: cover;
+  background-position: center top;
+}
+
+.landing-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(9, 29, 17, 0.58);
+}
+
+.landing-nav,
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.landing-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand,
+.nav-entry {
+  color: #fff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+}
+
+.nav-entry {
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 6px;
+  padding: 9px 13px;
+  font-weight: 700;
+}
+
+.hero-content {
+  max-width: 760px;
+  padding-block: 72px 24px;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: #d8efe2;
+  font-weight: 800;
+}
+
+.hero-content h1 {
+  margin: 0;
+  font-size: clamp(2.6rem, 7vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.hero-copy {
+  max-width: 680px;
+  margin: 22px 0 0;
+  font-size: clamp(1rem, 2.3vw, 1.35rem);
+  line-height: 1.8;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.hero-actions .btn,
+.cta-section .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+}
+
+.feature-strip,
+.workflow-section,
+.cta-section {
+  padding: 72px 0;
+}
+
+.feature-strip {
+  background: var(--surface);
+}
+
+.section-heading {
+  max-width: 760px;
+  margin-bottom: 28px;
+}
+
+.section-heading p,
+.workflow-copy .eyebrow,
+.cta-section .eyebrow {
+  color: var(--green-dark);
+}
+
+.section-heading h2,
+.workflow-copy h2,
+.cta-section h2 {
+  margin: 0;
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.feature-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 22px;
+  min-height: 210px;
+}
+
+.feature-card i {
+  color: var(--green);
+  font-size: 1.8rem;
+}
+
+.feature-card h3 {
+  margin: 18px 0 10px;
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+
+.feature-card p,
+.workflow-list {
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.workflow-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+  gap: 32px;
+  align-items: center;
+}
+
+.workflow-list {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  display: grid;
+  gap: 14px;
+}
+
+.workflow-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.workflow-list span {
+  flex: 0 0 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--green);
+  font-weight: 900;
+}
+
+.preview-panel {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 16px 40px rgba(16, 32, 22, 0.12);
+}
+
+.preview-panel img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cta-section {
+  background: var(--green-dark);
+  color: #fff;
+}
+
+.cta-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.cta-section .eyebrow {
+  color: #bfe7ce;
+}
+
+@media (max-width: 992px) {
+  .feature-grid,
+  .workflow-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .landing-hero {
+    min-height: 86vh;
+    padding-bottom: 44px;
+  }
+
+  .landing-nav {
+    align-items: flex-start;
+  }
+
+  .nav-entry {
+    padding: 8px 10px;
+  }
+
+  .feature-grid,
+  .workflow-layout,
+  .cta-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-layout {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

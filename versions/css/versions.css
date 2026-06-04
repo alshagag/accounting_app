@@ -1,0 +1,92 @@
+/* 
+========================================
+General Page Style | تنسيق الصفحة العامة
+========================================
+*/
+body{
+  background: linear-gradient(135deg, #f5f7fb, #eef2f7);
+  font-family: Tahoma;
+  color:#333;
+}
+
+/* 
+========================================
+Header Section | قسم الهيدر
+========================================
+*/
+.version-header{
+  background:#198754;
+  color:#fff;
+  padding:40px 0;
+  border-radius:0 0 25px 25px;
+}
+
+/* 
+========================================
+Versions List Container | حاوية قائمة الإصدارات
+========================================
+*/
+.version-list{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+/* 
+========================================
+Single Version Item | عنصر الإصدار
+========================================
+*/
+.version-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#fff;
+  padding:18px 20px;
+  border-radius:14px;
+  text-decoration:none;
+  color:#333;
+  box-shadow:0 4px 15px rgba(0,0,0,.06);
+  transition:.3s;
+  border-right:4px solid transparent;
+}
+
+/* 
+========================================
+Hover Effect | تأثير المرور بالماوس
+========================================
+*/
+.version-item:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 25px rgba(0,0,0,.1);
+  border-right:4px solid #198754;
+}
+
+/* 
+========================================
+Current Version Style | تنسيق الإصدار الحالي
+========================================
+*/
+.version-item.current{
+  border-right:4px solid #198754;
+  background:#f8fff9;
+}
+
+/* 
+========================================
+Version Title Text | نص عنوان الإصدار
+========================================
+*/
+.version-item h5{
+  margin:0;
+  font-weight:700;
+}
+
+/* 
+========================================
+Small Description Text | النص الوصفي الصغير
+========================================
+*/
+.version-item small{
+  color:#777;
+}

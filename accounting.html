@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>المحاسب المبسط | إدارة المبيعات والمشتريات</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+<link rel="stylesheet" href="/src/css/style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<header class="app-header shadow-sm">
+  <div class="container">
+
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+      <div>
+        <h1 class="app-title">
+          <i class="bi bi-calculator-fill"></i>
+          المحاسب المبسط
+        </h1>
+        <p class="app-subtitle">إدارة المبيعات والمشتريات والمخزون بطريقة سهلة وسريعة</p>
+      </div>
+
+      <div class="d-flex gap-2">
+
+        <button
+          class="btn btn-outline-light"
+          data-bs-toggle="modal"
+          data-bs-target="#aboutModal">
+
+          <i class="bi bi-info-circle"></i>
+          حول النظام
+        </button>
+
+        <button
+          class="btn btn-light"
+          data-bs-toggle="modal"
+          data-bs-target="#contactModal">
+
+          <i class="bi bi-envelope"></i>
+          اتصل بنا
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+</header>
+
+
+<div class="modal fade" id="aboutModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="bi bi-info-circle"></i>
+          حول المحاسب المبسط
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <p>
+          المحاسب المبسط نظام محاسبي خفيف يساعد أصحاب المشاريع الصغيرة
+          على إدارة المبيعات والمشتريات ومتابعة الأرباح بسهولة.
+        </p>
+
+        <ul>
+          <li>إدارة المنتجات.</li>
+          <li>إدارة المبيعات.</li>
+          <li>إدارة المشتريات.</li>
+          <li>تقارير وإحصائيات فورية.</li>
+        </ul>
+
+        <div class="alert alert-primary">
+          الإصدار: 1.1
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="contactModal" tabindex="-1">
+
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h5 class="modal-title">
+          <i class="bi bi-chat-dots-fill"></i>
+          اتصل بنا
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal">
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="text-center mb-4">
+          <h5>نسعد بملاحظاتك واقتراحاتك</h5>
+          <small class="text-muted">
+            ساعدنا في تطوير المحاسب المبسط
+          </small>
+        </div>
+        <label class="form-label">الاسم</label>
+        <input
+          id="name"
+          class="form-control mb-3"
+          placeholder="اكتب اسمك">
+        <label class="form-label">البريد الإلكتروني</label>
+        <input
+          id="email"
+          type="email"
+          class="form-control mb-3"
+          placeholder="example@email.com">
+        <label class="form-label">رسالتك</label>
+        <textarea
+          id="message"
+          rows="4"
+          class="form-control mb-3"
+          placeholder="اكتب ملاحظتك هنا">
+        </textarea>
+        <label class="form-label">التقييم</label>
+        <select
+          id="rating"
+          class="form-select mb-4">
+          <option value="5">⭐⭐⭐⭐⭐ ممتاز</option>
+          <option value="4">⭐⭐⭐⭐ جيد</option>
+          <option value="3">⭐⭐⭐ متوسط</option>
+          <option value="2">⭐⭐ ضعيف</option>
+          <option value="1">⭐ سيئ</option>
+        </select>
+        <button
+          class="btn btn-primary w-100"
+          onclick="sendFeedback()">
+
+          <i class="bi bi-send-fill"></i>
+          إرسال الملاحظات
+        </button>
+      </div>
+
+      <!-- Toast Container | حاوية الإشعارات -->
+      <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;">
+        
+        <div id="appToast" class="toast align-items-center text-white border-0" role="alert">
+          <div class="d-flex">
+            <div class="toast-body" id="toastMessage">
+              <!-- message -->
+            </div>
+            <button type="button"
+              class="btn-close btn-close-white me-2 m-auto"
+              data-bs-dismiss="toast">
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer justify-content-center">
+
+        <a
+          href="https://github.com/alshagag"
+          target="_blank"
+          class="btn btn-outline-dark">
+
+          <i class="bi bi-github"></i>
+          GitHub
+
+        </a>
+
+        <a
+          href="https://paypal.me/alshagag"
+          target="_blank"
+          class="btn btn-outline-primary">
+
+          <i class="bi bi-cup-hot-fill"></i>
+          دعم المشروع
+
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Browser compatibility notice | رسالة توافق المتصفح -->
+  <div id="globalAlert" class="alert alert-warning" style="display:none">
+    <strong>ملاحظة:</strong> تم اكتشاف قيود في تخزين المتصفح. التطبيق سيعمل في وضع احتياطي (LocalStorage).
+  </div>
+
+  <!-- Statistics section | قسم الإحصائيات -->
+  <div id="statsRow" class="d-flex stats-row">
+
+    <!-- Sales card | بطاقة المبيعات -->
+    <div class="stat-card stat-sales flex-fill mx-2">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <div class="text-muted">مجموع المبيعات</div>
+          <h3 id="statSales">0.00</h3>
+          <small>ريال</small>
+        </div>
+        <div>
+          <i class="bi bi-cash-stack" style="font-size:28px;opacity:.9"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Purchases card | بطاقة المشتريات -->
+    <div class="stat-card stat-purchase flex-fill mx-2">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <div class="text-muted">مجموع المشتريات</div>
+          <h3 id="statPurchases">0.00</h3>
+          <small>ريال</small>
+        </div>
+        <div>
+          <i class="bi bi-basket" style="font-size:28px;opacity:.9"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profit card | بطاقة الربح -->
+    <div class="stat-card stat-profit flex-fill mx-2">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <div class="text-muted">صافي الربح</div>
+          <h3 id="statProfit">0.00</h3>
+          <small>ريال</small>
+        </div>
+        <div>
+          <i class="bi bi-graph-up" style="font-size:28px;opacity:.9"></i>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Loading screen | شاشة التحميل -->
+  <div id="loadingBox" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status" aria-hidden="true"></div>
+    <div class="mt-2">جاري تهيئة التطبيق...</div>
+  </div>
+
+  <!-- Main application container | الحاوية الرئيسية للتطبيق -->
+  <div id="app" class="d-none">
+
+    <div class="recent-products-section mb-4">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="mb-0">العمليات</h5>
+      </div>
+      <div id="recentProductsContainer" class="recent-products-grid"></div>
+    </div>
+
+    <div class="summary-boxes mb-4">
+      <!-- Sales | المبيعات -->
+      <div class="summary-item border rounded p-3 text-center">
+        <h6 class="text-success mb-2">إجمالي كمية المبيعات</h6>
+        <p id="totalSales" class="fs-4 fw-bold text-success mb-0">0</p>
+      </div>
+
+      <!-- Purchases | المشتريات -->
+      <div class="summary-item border rounded p-3 text-center">
+        <h6 class="text-danger mb-2">إجمالي كمية المشتريات</h6>
+        <p id="totalPurchases" class="fs-4 fw-bold text-danger mb-0">0</p>
+      </div>
+
+      <!-- Last transaction | آخر عملية -->
+      <div class="summary-item border rounded p-3 text-center">
+        <h6 class="text-muted mb-2">آخر عملية</h6>
+        <p id="lastTransaction" class="fs-6 fw-semibold mb-0">-</p>
+      </div>
+    </div>
+
+<div class="row g-4">
+
+<!-- Products management | إدارة المنتجات -->
+<div class="col-12 col-lg-4">
+  <div class="card p-3">
+    <h5 class="mb-3"><i class="bi bi-box-seam"></i> إضافة المنتج سريعاً</h5>
+
+    <div class="input-icon">
+      <label for="productName" class="visually-hidden">اسم المنتج</label>
+      <input id="productName" class="form-control" placeholder="اسم المنتج" />
+      <i class="bi bi-pencil-square"></i>
+    </div>
+
+    <div class="input-icon">
+      <label for="productPrice" class="visually-hidden">سعر تكلفة المنتج</label>
+      <div class="input-group">
+        <input id="productPrice" type="number" class="form-control" placeholder="سعر تكلفة المنتج">
+        <span class="input-group-text">﷼</span>
+      </div>
+    </div>
+
+    <div class="d-flex gap-2 mb-3">
+      <button id="btnAddProduct" class="btn btn-success w-100">
+        <i class="bi bi-plus-lg"></i> إضافة
+      </button>
+
+      <button id="btnCancelProduct" class="btn btn-outline-secondary w-100" style="display:none">
+        <i class="bi bi-x-lg"></i> إلغاء
+      </button>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-hover text-center">
+        <thead class="table-light">
+          <tr>
+            <th>المنتج</th>
+            <th>السعر</th>
+            <th>إجراءات</th>
+          </tr>
+        </thead>
+        <tbody id="productsTbody"></tbody>
+      </table>
+    </div>
+
+    <div class="text-start mt-2">
+      <button
+        type="button"
+        class="btn btn-outline-primary btn-sm"
+        data-bs-toggle="modal"
+        data-bs-target="#salesModal"
+      >
+        <i class="bi bi-box-arrow-up-right me-1"></i>
+        عرض كل المبيعات
+      </button>
+    </div>
+</div>
+</div>
+
+<!-- Transactions -->
+<div class="col-12 col-lg-8">
+
+  <!-- Add transaction -->
+  <div class="card p-3 mb-3">
+    <h5 class="mb-3"><i class="bi bi-cart-check"></i> تسجيل/تحديث عملية بيع / شراء</h5>
+
+    <div class="row g-2">
+
+      <div class="col-4 col-md-3 input-icon">
+        <select id="transType" class="form-select">
+          <option value="بيع">بيع</option>
+          <option value="شراء">شراء</option>
+        </select>
+        <i class="bi bi-arrow-left-right"></i>
+      </div>
+
+      <div class="col-8 col-md-4 input-icon">
+        <select id="transProduct" class="form-select">
+          <option value="">اختر منتج</option>
+        </select>
+        <i class="bi bi-box-seam"></i>
+      </div>
+
+      <div class="col-6 col-md-2 input-icon">
+        <input id="transQty" type="number" class="form-control" placeholder="الكمية">
+        <i class="bi bi-stack"></i>
+      </div>
+
+      <div class="col-6 col-md-3 input-icon">
+        <div class="input-group">
+          <input id="transPrice" type="number" class="form-control" placeholder="السعر">
+          <span class="input-group-text">﷼</span>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3 input-icon">
+        <input id="transDate" type="date" class="form-control">
+        <i class="bi bi-calendar-date"></i>
+      </div>
+
+      <div class="col-12 input-icon" id="supplierRow" style="display:none">
+        <input id="transSupplier" class="form-control" placeholder="اسم المورد">
+        <i class="bi bi-truck"></i>
+      </div>
+
+      <div class="col-12 d-flex gap-2 mt-2">
+        <button id="btnSaveTrans" class="btn btn-primary w-100">
+          <i class="bi bi-save"></i> ارسل العملية
+        </button>
+
+        <button id="btnCancelTrans" class="btn btn-outline-secondary w-100" style="display:none">
+          إلغاء
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Sales -->
+  <div class="card p-3 mb-3">
+    <h6><i class="bi bi-graph-up"></i> المبيعات</h6>
+
+    <div class="table-responsive">
+      <table class="table table-hover text-center">
+        <thead class="table-light">
+          <tr>
+            <th>التاريخ</th>
+            <th>المنتج</th>
+            <th>الكمية</th>
+            <th>السعر</th>
+            <th>الإجمالي</th>
+            <th>إجراءات</th>
+          </tr>
+        </thead>
+        <tbody id="salesTbody"></tbody>
+      </table>
+    </div>
+    
+    <div class="text-start mt-2">
+      <button
+        type="button"
+        class="btn btn-outline-primary btn-sm"
+        data-bs-toggle="modal"
+        data-bs-target="#salesModal"
+      >
+        <i class="bi bi-box-arrow-up-right me-1"></i>
+        عرض كل المبيعات
+      </button>
+    </div>
+</div>
+
+  <!-- Purchases -->
+  <div class="card p-3">
+    <h6><i class="bi bi-graph-down"></i> المشتريات</h6>
+
+    <div class="table-responsive">
+      <table class="table table-hover text-center">
+        <thead class="table-light">
+          <tr>
+            <th>التاريخ</th>
+            <th>المنتج</th>
+            <th>الكمية</th>
+            <th>السعر</th>
+            <th>الإجمالي</th>
+            <th>المورد</th>
+            <th>إجراءات</th>
+          </tr>
+        </thead>
+        <tbody id="purchaseTbody"></tbody>
+      </table>
+    </div>
+
+    <div class="text-start mt-2">
+      <button
+        type="button"
+        class="btn btn-outline-primary btn-sm"
+        data-bs-toggle="modal"
+        data-bs-target="#purchasesModal"
+      >
+        <i class="bi bi-box-arrow-up-right me-1"></i>
+        عرض كل المشتريات
+      </button>
+    </div>
+</div>
+
+<!-- MODALS | النوافذ المنبثقة -->
+
+<!-- Products Modal | نافذة المنتجات -->
+<div class="modal fade" id="productsModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <!-- Header -->
+      <div class="modal-header">
+        <div class="d-flex align-items-center gap-2">
+          <i class="bi bi-bag-check fs-5"></i>
+          <span class="fw-semibold">قائمة المنتجات</span>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body p-0">
+
+        <!-- Title -->
+        <div class="p-3 border-bottom text-center">
+          <h3 class="mb-0 fw-bold">
+            <i class="bi bi-box-seam-fill me-2 text-primary"></i>
+            المنتجات
+          </h3>
+          <small class="text-muted">جميع المنتجات المتوفرة في النظام</small>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive">
+          <table class="table table-hover text-center mb-0">
+
+            <thead class="table-light">
+              <tr>
+                <th>المنتج</th>
+                <th>السعر</th>
+                <th>إجراءات</th>
+              </tr>
+            </thead>
+
+            <tbody id="modalProductsTbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FULL EDIT  PRODUCT MODAL -->
+<div class="modal fade" id="fullEditProductModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <span class="fw-semibold">
+          <i class="bi bi-pencil-square me-1"></i>
+          تعديل شامل
+        </span>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <input type="hidden" id="full_editProductId">
+
+      <label class="form-label mt-3">اسم المنتج</label>
+        <div class="input-group mb-1">
+          <span class="input-group-text"><i class="bi bi-box-seam"></i></span>
+          <input id="full_editProductName" class="form-control">
+        </div>
+        <div class="form-text">
+          <i class="bi bi-exclamation-circle me-1"></i>ادخل اسم المنتج كما تريد ظهوره بقائمة المنتجات والفواتير والتقارير وكافة المعاملات</div>
+
+        <label class="form-label mt-3">السعر</label>
+        <div class="input-group mb-1">
+          <span class="input-group-text"><i class="bi bi-cash-stack"></i></span>
+          <input id="full_editProductPrice" type="number" class="form-control">
+        </div>
+        <div class="form-text">
+          <i class="bi bi-exclamation-circle me-1"></i> أدخل السعر النهائي للمنتج</div>
+
+        <label class="form-label mt-3">وصف المنتج</label>
+        <div class="input-group mb-1">
+          <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+          <textarea id="full_editProductDesc" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="form-text">
+          <i class="bi bi-exclamation-circle me-1"></i>وصف للمنتج</div>
+
+        <label class="form-label mt-3"> رقم المنتج (الباركود)</label>
+        <div class="input-group mb-1">
+          <span class="input-group-text"><i class="bi bi-upc-scan"></i></span>
+          <input id="full_editProductCode" class="form-control" readonly>
+        </div>
+        <div class="form-text">
+          <i class="bi bi-exclamation-circle me-1"></i>رقم المنتج الفريد</div>
+
+
+        <div class="form-text mt-3">
+          <i class="bi bi-exclamation-circle me-1"></i>
+          التعديل الشامل يؤثر مباشرة على بيانات المنتج في النظام
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          إلغاء
+        </button>
+
+        <button type="button" class="btn btn-primary" id="full_btnSaveEditProduct">
+          <i class="bi bi-arrow-repeat me-1"></i>
+          تحديث
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Sales Modal | نافذة المبيعات -->
+<div class="modal fade" id="salesModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-bag-check fs-5"></i>
+        <span class="fw-semibold">قائمة المبيعات</span>
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    </div>
+
+    <!-- Body -->
+    <div class="modal-body p-0">
+
+      <!-- Title inside page | عنوان كبير داخل الصفحة -->
+    <div class="p-3 border-bottom text-center">
+      <h3 class="mb-0 fw-bold">
+      <i class="bi bi-graph-down-arrow me-2 text-primary"></i>
+          قائمة المبيعات
+        </h3>
+        <small class="text-muted">جميع عمليات البيع المسجلة في النظام</small>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover text-center mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>التاريخ</th>
+              <th>المنتج</th>
+              <th>الكمية</th>
+              <th>السعر</th>
+              <th>الإجمالي</th>
+              <th>تحكم</th>
+            </tr>
+          </thead>
+
+            <tbody id="modalSalesTbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Purchases Modal | نافذة المشتريات -->
+<div class="modal fade" id="purchasesModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+
+<div class="modal-header">
+  <div class="d-flex align-items-center gap-2">
+    <i class="bi bi-bag-check fs-5"></i>
+    <span class="fw-semibold">قائمة المشتريات</span>
+  </div>
+  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+
+<!-- Body -->
+<div class="modal-body p-0">
+
+  <div class="p-3 border-bottom text-center">
+    <h3 class="mb-0 fw-bold">
+      <i class="bi bi-graph-down-arrow me-2 text-primary"></i>
+      قائمة المشتريات
+    </h3>
+    <small class="text-muted">جميع عمليات الشراء المسجلة في النظام</small>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover text-center mb-0">
+
+      <thead class="table-light">
+        <tr>
+          <th>التاريخ</th>
+          <th>المنتج</th>
+          <th>الكمية</th>
+          <th>السعر</th>
+          <th>الإجمالي</th>
+          <th>المورد</th>
+          <th>إجراءات</th>
+        </tr>
+      </thead>
+
+      <tbody id="modalPurchaseTbody"></tbody>
+
+    </table>
+  </div>
+
+</div>
+
+    <!-- Fallback notice | تنبيه الوضع الاحتياطي -->
+    <div id="fallbackNotice" style="display:none;margin-top:18px">
+      <div class="alert alert-warning">
+        التطبيق يعمل في وضع التخزين الاحتياطي (LocalStorage)
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- FULL TRANSACTION EDIT MODAL -->
+<div class="modal fade" id="fullEditTransactionModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <div class="d-flex align-items-center gap-2">
+          <i class="bi bi-receipt-cutoff fs-5" id="full_tx_headerIcon"></i>
+          <span class="fw-semibold" id="full_tx_title">تعديل شامل للعملية</span>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <input type="hidden" id="full_tx_id">
+
+        <div class="row g-3 mb-3">
+          <div class="col-12 col-md-4">
+            <div class="border rounded p-3 h-100">
+              <div class="d-flex align-items-center gap-2 text-muted small mb-1">
+                <i class="bi bi-tag"></i>
+                <span>نوع العملية</span>
+              </div>
+              <div class="fw-bold" id="full_tx_typePoster">-</div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <div class="border rounded p-3 h-100">
+              <div class="d-flex align-items-center gap-2 text-muted small mb-1">
+                <i class="bi bi-calculator"></i>
+                <span>الإجمالي الحالي</span>
+              </div>
+              <div class="fw-bold" id="full_tx_totalPoster">0.00</div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <div class="border rounded p-3 h-100">
+              <div class="d-flex align-items-center gap-2 text-muted small mb-1">
+                <i class="bi bi-calendar-check"></i>
+                <span>تاريخ العملية</span>
+              </div>
+              <div class="fw-bold" id="full_tx_datePoster">-</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+
+          <!-- Code -->
+          <div class="col-12 col-md-4">
+            <label class="form-label">رقم العملية</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-hash"></i></span>
+              <input id="full_tx_code" class="form-control" readonly>
+            </div>
+            <div class="form-text">رقم مرجعي للتبع الطلب</div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <label class="form-label">نوع العملية</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-arrow-left-right"></i></span>
+              <select id="full_tx_type" class="form-select">
+                <option value="بيع">بيع</option>
+                <option value="شراء">شراء</option>
+              </select>
+            </div>
+            <div class="form-text">حدد نوع الحركة المالية</div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <label class="form-label">التاريخ</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-calendar-date"></i></span>
+              <input id="full_tx_date" type="date" class="form-control">
+            </div>
+            <div class="form-text">تاريخ تسجيل العملية</div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label">المنتج</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-box-seam"></i></span>
+              <input id="full_tx_product" class="form-control">
+            </div>
+            <div class="form-text">اسم المنتج المرتبط بالعملية</div>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <label class="form-label">الكمية</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-123"></i></span>
+              <input id="full_tx_quantity" type="number" class="form-control">
+            </div>
+            <div class="form-text">عدد الوحدات</div>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <label class="form-label">السعر</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-cash-stack"></i></span>
+              <input id="full_tx_price" type="number" class="form-control">
+            </div>
+            <div class="form-text">سعر الوحدة</div>
+          </div>
+
+          <div class="col-12 col-md-6" id="full_tx_supplierRow">
+            <label class="form-label">المورد</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-truck"></i></span>
+              <input id="full_tx_supplier" class="form-control">
+            </div>
+            <div class="form-text">اسم المورد (إن وجد)</div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label">الإجمالي</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-calculator"></i></span>
+              <input id="full_tx_total" class="form-control" readonly>
+            </div>
+            <div class="form-text">يحسب تلقائيًا (السعر × الكمية)</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          إلغاء
+        </button>
+
+        <button type="button" class="btn btn-primary" id="full_tx_save">
+          <i class="bi bi-arrow-repeat me-1"></i>
+          تحديث
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer | التذييل -->
+<footer class="text-center mt-4 py-3 border-top">
+
+  <!-- GitHub link | رابط GitHub -->
+  <div class="mb-2">
+    <a href="https://github.com/alshagag"
+       target="_blank"
+       class="text-dark text-decoration-none d-inline-flex align-items-center">
+
+      <i class="bi bi-github fs-4"></i>
+      <span class="ms-2">تابع المشروع على GitHub</span>
+
+    </a>
+  </div>
+
+  <!-- Version info | معلومات الإصدار -->
+  <div class="text-muted small mb-3">
+    الإصدار | 1.1 — من تطوير <strong>alshagag</strong>
+  </div>
+
+  <!-- Donation section | دعم المشروع -->
+  <div class="d-flex justify-content-center align-items-center text-muted small flex-nowrap gap-2 mb-3">
+
+    <!-- نص -->
+    <div class="d-flex align-items-center gap-1">
+      <i class="bi bi-cup-hot-fill fs-5"></i>
+      <span class="m-0">عجبك المشروع؟</span>
+    </div>
+
+    <span class="mx-1">|</span>
+
+    <!-- زر التبرع -->
+    <a href="https://paypal.me/alshagag"
+       target="_blank"
+       class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1 m-0">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M7.5 2h6.2c3.3 0 5.3 1.7 5.3 4.6 0 3.6-2.8 5.9-6.9 5.9h-2l-1 6.3H4.7L7.5 2z"/>
+        <path d="M17.5 6.6c-.5 3.4-3.2 5.3-7.2 5.3H8.6L7.8 17h3.5l.7-4.3h1.8c3.6 0 5.8-1.6 6.3-4.9.2-1.5-.2-2.6-1.1-3.2z"/>
+      </svg>
+      <span>ادعم بكوب شاي</span>
+    </a>
+
+  </div>
+
+  <!-- زر الإصدارات -->
+  <div>
+    <a href="versions/versions.html"
+       class="btn btn-outline-primary btn-sm">
+
+      <i class="bi bi-clock-history me-1"></i>
+      عرض الإصدارات السابقة
+
+    </a>
+  </div>
+
+</footer>
+
+<!-- Scripts | ملفات الجافاسكربت -->
+<script type="module" src="/src/js/app.js"></script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,383 @@
+/* ================= ROOT VARIABLES | المتغيرات الأساسية ================= */
+:root {
+  --accent: #198754;
+  --muted: #6c757d;
+}
+
+/* ================= GLOBAL STYLE | تنسيقات عامة ================= */
+body {
+  background: #f5f8fb;
+  font-family: Inter, "Segoe UI", Tahoma, Arial, sans-serif;
+  color: #222;
+}
+
+/* ================= HEADER | الهيدر ================= */
+header {
+  background: var(--accent);
+  color: #fff;
+  padding: 18px;
+  text-align: center;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+}
+
+.header-sub {
+  font-size: .95rem;
+  opacity: .95;
+}
+
+/* ================= MAIN CONTAINER | الحاوية الرئيسية ================= */
+.container {
+  margin-top: 22px;
+  margin-bottom: 40px;
+  padding-inline: 1rem;
+  box-sizing: border-box;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* ================= BOOTSTRAP CARD STYLE | تصميم البطاقات ================= */
+.card {
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(8,26,40,.04);
+}
+
+/* ================= STATS CARDS | بطاقات الإحصائيات ================= */
+.stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* Base stat card | الشكل الأساسي للكرت */
+.stat-card {
+  border-radius: 14px;
+  padding: 18px;
+  color: #fff;
+  min-height: 90px;
+  flex: 1 1 200px;
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+  transition: 0.25s ease;
+}
+
+/* Hover effect | تأثير عند المرور */
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Sales card | كرت المبيعات */
+.stat-sales {
+  background: linear-gradient(135deg, #28a745, #20c997);
+}
+
+/* Purchase card | كرت المشتريات */
+.stat-purchase {
+  background: linear-gradient(135deg, #ffc107, #ffb703);
+  color: #111;
+}
+
+/* Profit card | كرت الربح */
+.stat-profit {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+
+/* Icon inside stat cards | الأيقونات داخل الكروت */
+.icon-large {
+  font-size: 28px;
+  opacity: .85;
+}
+
+/* ================= INPUT FIELDS | حقول الإدخال ================= */
+.input-icon {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.input-icon i {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  color: var(--muted);
+}
+
+.input-icon input,
+.input-icon select {
+  padding-right: 2.6rem;
+  text-align: right;
+}
+
+.input-icon .input-group .form-control {
+  text-align: right;
+}
+
+input[type="number"],
+input[type="date"],
+input.input-number,
+.input-group input[type="number"],
+.modal input[type="number"],
+.modal input[type="date"] {
+  direction: rtl;
+  text-align: right;
+}
+
+/* ================= TABLES | الجداول ================= */
+.table-responsive table {
+  min-width: max-content;
+}
+
+.table thead th {
+  vertical-align: middle;
+}
+
+.empty-state {
+  color: var(--muted);
+  padding: 18px;
+  text-align: center;
+}
+
+/* ================= ALERT FLOATING | التنبيهات ================= */
+.alert-floating {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  left: auto;
+  z-index: 2000;
+  min-width: 280px;
+}
+
+/* ================= FOOTER | الفوتر ================= */
+.footer {
+  margin-top: 30px;
+  text-align: center;
+  color: #666;
+  padding: 18px 0;
+}
+
+/* ================= BADGES | علامات الحالة ================= */
+.badge-sale {
+  background: #198754;
+  color: #fff;
+}
+
+.badge-purchase {
+  background: #ffc107;
+  color: #000;
+}
+
+/* ================= ICONS | الأيقونات الصغيرة ================= */
+.small-ico {
+  font-size: 1rem;
+  margin-inline-start: 0.375rem;
+}
+
+.action-square {
+  width: 31px;
+  height: 31px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  margin-inline-end: 0.25rem;
+  vertical-align: middle;
+}
+
+.action-note {
+  color: #6c757d;
+  font-size: 0.82rem;
+  margin: 0 0 0.5rem;
+}
+
+/* ================= RESPONSIVE | التجاوب ================= */
+@media (max-width: 991px) {
+  .stats-row {
+    flex-direction: column;
+  }
+
+  .summary-item {
+    flex: 1 1 100%;
+  }
+}
+
+/* ================= SUMMARY DASHBOARD UPGRADED | تحسين الكروت ================= */
+
+.summary-boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+/* Base card | الكرت الأساسي */
+.summary-item {
+  position: relative;
+  background: linear-gradient(145deg, #ffffff, #f9fbff);
+  border-radius: 16px;
+  padding: 16px 14px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+/* Hover | عند المرور */
+.summary-item:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+}
+
+/* Title | العنوان */
+.summary-item h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #6c757d;
+}
+
+/* Value | الرقم */
+.summary-item p {
+  margin: 10px 0 0;
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: #198754;
+}
+
+/* ================= ICON BACKGROUND | أيقونة خلفية شفافة ================= */
+.summary-item::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 90px;
+  height: 90px;
+  background: rgba(25,135,84,0.08);
+  border-radius: 50%;
+}
+
+/* ================= DIFFERENT COLORS PER CARD | ألوان مختلفة لكل كرت ================= */
+
+.summary-item:nth-child(1) p {
+  color: #0d6efd;
+}
+
+.summary-item:nth-child(1)::before {
+  background: rgba(13,110,253,0.10);
+}
+
+.summary-item:nth-child(2) p {
+  color: #198754;
+}
+
+.summary-item:nth-child(2)::before {
+  background: rgba(25,135,84,0.10);
+}
+
+.summary-item:nth-child(3) p {
+  color: #fd7e14;
+}
+
+.summary-item:nth-child(3)::before {
+  background: rgba(253,126,20,0.10);
+}
+
+/* ================= RESPONSIVE | الجوال ================= */
+@media (max-width: 768px) {
+  .stats-row,
+  .summary-boxes {
+    gap: 14px;
+  }
+
+  .summary-boxes {
+    grid-template-columns: 1fr;
+    margin-top: 24px;
+  }
+
+  .summary-item {
+    width: 100%;
+    min-width: 0;
+    padding: 14px;
+  }
+
+  .stat-card,
+  .card {
+    padding: 14px;
+  }
+
+  .summary-item p {
+    font-size: 1.3rem;
+  }
+
+  .footer {
+    padding: 18px 12px;
+  }
+
+  .footer .d-flex {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+
+/* MOBILE CARD VIEW | عرض عمودي للجوال */
+
+#modalSalesMobile,
+#modalPurchaseMobile {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Card style */
+.mobile-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+  font-size: 13px;
+}
+
+.mobile-card .row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.mobile-card .label {
+  color: #888;
+}
+
+.app-title{
+    font-size:1.7rem;
+    font-weight:700;
+    line-height:1.2;
+}
+
+.app-subtitle{
+    font-size:.95rem;
+    opacity:.9;
+    margin:0;
+}
+
+@media (max-width:576px){
+
+    .app-title{
+        font-size:1.35rem;
+    }
+
+    .app-subtitle{
+        font-size:.80rem;
+        line-height:1.5;
+        max-width:280px;
+        margin:auto;
+    }
+}
