@@ -284,7 +284,9 @@ function renderProducts(products) {
         ${p.name}
       </option>`
     );
+  });
 
+  products.slice(0, 3).forEach(p => {
     const row = document.createElement("tr");
 
     row.innerHTML = `
@@ -335,7 +337,7 @@ window.onDeleteProduct = async function (id) {
     }
   }
 
-  await window.loadProductsToUI?.();
+  await window.refreshProductsUI?.();
   window.showGlobalAlert?.("تم حذف المنتج", "success");
 };
 
@@ -353,7 +355,7 @@ async function loadProductsToUI() {
 
     products.sort((a, b) => (b.id || 0) - (a.id || 0));
 
-    renderProducts(products.slice(0, 3));
+    renderProducts(products);
 
   } catch (e) {
     console.error("loadProductsToUI error:", e);

@@ -12,6 +12,7 @@ import "./product-quick-edit.js";
 import "./product-full-edit.js";
 import "./sale-full-edit.js";
 import "./transaction-full-edit.js";
+import "./data-transfer.js";
 import "./api/email.js";
 
 

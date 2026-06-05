@@ -26,6 +26,24 @@ header {
   opacity: .95;
 }
 
+.app-header-content {
+  row-gap: 1rem;
+}
+
+.app-header-actions {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.app-header-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 38px;
+  white-space: nowrap;
+}
+
 /* ================= MAIN CONTAINER | الحاوية الرئيسية ================= */
 .container {
   margin-top: 22px;
@@ -369,6 +387,39 @@ input.input-number,
 }
 
 @media (max-width:576px){
+
+    header {
+        padding: 16px 10px;
+    }
+
+    .app-header-content {
+        justify-content: center !important;
+        text-align: center;
+    }
+
+    .app-header-content > div {
+        width: 100%;
+    }
+
+    .app-header-actions {
+        width: 100%;
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px !important;
+    }
+
+    .app-header-actions .btn {
+        width: 100%;
+        min-width: 0;
+        padding: 0.45rem 0.55rem;
+        font-size: 0.82rem;
+        line-height: 1.25;
+    }
+
+    .app-header-actions .btn i {
+        font-size: 1rem;
+        flex: 0 0 auto;
+    }
 
     .app-title{
         font-size:1.35rem;

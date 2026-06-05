@@ -20,7 +20,7 @@
 <header class="app-header shadow-sm">
   <div class="container">
 
-    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <div class="app-header-content d-flex justify-content-between align-items-center flex-wrap gap-3">
 
       <div>
         <h1 class="app-title">
@@ -30,7 +30,31 @@
         <p class="app-subtitle">إدارة المبيعات والمشتريات والمخزون بطريقة سهلة وسريعة</p>
       </div>
 
-      <div class="d-flex gap-2">
+      <div class="app-header-actions d-flex gap-2">
+
+        <button
+          id="btnExportData"
+          class="btn btn-outline-light"
+          type="button">
+
+          <i class="bi bi-download"></i>
+          تصدير البيانات
+        </button>
+
+        <button
+          id="btnImportData"
+          class="btn btn-outline-light"
+          type="button">
+
+          <i class="bi bi-upload"></i>
+          استيراد البيانات
+        </button>
+
+        <input
+          id="importDataFile"
+          type="file"
+          accept="application/json,.json"
+          class="d-none">
 
         <button
           class="btn btn-outline-light"
@@ -339,10 +363,10 @@
         type="button"
         class="btn btn-outline-primary btn-sm"
         data-bs-toggle="modal"
-        data-bs-target="#salesModal"
+        data-bs-target="#productsModal"
       >
         <i class="bi bi-box-arrow-up-right me-1"></i>
-        عرض كل المبيعات
+        عرض كل المنتجات
       </button>
     </div>
 </div>
@@ -389,6 +413,11 @@
         <i class="bi bi-calendar-date"></i>
       </div>
 
+      <div class="col-12 input-icon" id="customerPhoneRow">
+        <input id="transCustomerPhone" class="form-control" placeholder="رقم جوال العميل">
+        <i class="bi bi-telephone"></i>
+      </div>
+
       <div class="col-12 input-icon" id="supplierRow" style="display:none">
         <input id="transSupplier" class="form-control" placeholder="اسم المورد">
         <i class="bi bi-truck"></i>
@@ -420,6 +449,7 @@
             <th>الكمية</th>
             <th>السعر</th>
             <th>الإجمالي</th>
+            <th>جوال العميل</th>
             <th>إجراءات</th>
           </tr>
         </thead>
@@ -499,7 +529,7 @@
             <i class="bi bi-box-seam-fill me-2 text-primary"></i>
             المنتجات
           </h3>
-          <small class="text-muted">جميع المنتجات المتوفرة في النظام</small>
+          <small class="text-muted">عدد المنتجات: <span id="productsCount">0</span></small>
         </div>
 
         <!-- Table -->
@@ -618,7 +648,7 @@
       <i class="bi bi-graph-down-arrow me-2 text-primary"></i>
           قائمة المبيعات
         </h3>
-        <small class="text-muted">جميع عمليات البيع المسجلة في النظام</small>
+        <small class="text-muted">عدد المبيعات: <span id="salesCount">0</span></small>
       </div>
 
       <div class="table-responsive">
@@ -630,6 +660,7 @@
               <th>الكمية</th>
               <th>السعر</th>
               <th>الإجمالي</th>
+              <th>جوال العميل</th>
               <th>تحكم</th>
             </tr>
           </thead>
@@ -664,7 +695,7 @@
       <i class="bi bi-graph-down-arrow me-2 text-primary"></i>
       قائمة المشتريات
     </h3>
-    <small class="text-muted">جميع عمليات الشراء المسجلة في النظام</small>
+    <small class="text-muted">عدد المشتريات: <span id="purchasesCount">0</span></small>
   </div>
 
   <div class="table-responsive">
@@ -770,7 +801,7 @@
                 <option value="شراء">شراء</option>
               </select>
             </div>
-            <div class="form-text">حدد نوع الحركة المالية</div>
+            <div class="form-text" id="full_tx_typeNotice">نوع العملية الحالي: -</div>
           </div>
 
           <div class="col-12 col-md-4">
@@ -816,6 +847,15 @@
               <input id="full_tx_supplier" class="form-control">
             </div>
             <div class="form-text">اسم المورد (إن وجد)</div>
+          </div>
+
+          <div class="col-12 col-md-6" id="full_tx_phoneRow">
+            <label class="form-label">رقم جوال العميل</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+              <input id="full_tx_customerPhone" class="form-control">
+            </div>
+            <div class="form-text">يظهر هذا الحقل مع عمليات البيع</div>
           </div>
 
           <div class="col-12 col-md-6">

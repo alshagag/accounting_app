@@ -18,12 +18,15 @@ const FullEditTransactionModule = (() => {
     date: "full_tx_date",
     supplier: "full_tx_supplier",
     supplierRow: "full_tx_supplierRow",
+    customerPhone: "full_tx_customerPhone",
+    phoneRow: "full_tx_phoneRow",
     total: "full_tx_total",
     title: "full_tx_title",
     headerIcon: "full_tx_headerIcon",
     typePoster: "full_tx_typePoster",
     totalPoster: "full_tx_totalPoster",
     datePoster: "full_tx_datePoster",
+    typeNotice: "full_tx_typeNotice",
     save: "full_tx_save"
   };
 
@@ -85,11 +88,13 @@ const FullEditTransactionModule = (() => {
   function updateSupplierVisibility() {
     const isPurchase = isPurchaseType(el(ids.type)?.value);
     const supplierRow = el(ids.supplierRow);
+    const phoneRow = el(ids.phoneRow);
 
     supplierRow?.classList.toggle('d-none', !isPurchase);
+    phoneRow?.classList.toggle('d-none', isPurchase);
 
-    if (!isPurchase) {
-      setValue(ids.supplier, "");
+    if (isPurchase) {
+      setValue(ids.customerPhone, "");
     }
   }
 
@@ -109,6 +114,7 @@ const FullEditTransactionModule = (() => {
 
     setText(ids.title, isPurchase ? "تعديل شامل للمشتريات" : "تعديل شامل للمبيعات");
     setText(ids.typePoster, type);
+    setText(ids.typeNotice, `نوع العملية الحالي: ${type}`);
     setText(ids.datePoster, el(ids.date)?.value || "-");
 
     const icon = el(ids.headerIcon);
@@ -134,6 +140,7 @@ const FullEditTransactionModule = (() => {
     setValue(ids.price, transaction.price);
     setValue(ids.date, transaction.date);
     setValue(ids.supplier, transaction.supplier || "");
+    setValue(ids.customerPhone, transaction.customerPhone || "");
 
     updateSupplierVisibility();
     updatePoster();
@@ -151,16 +158,12 @@ const FullEditTransactionModule = (() => {
       quantity: Number(el(ids.quantity)?.value),
       price: Number(el(ids.price)?.value),
       date: el(ids.date)?.value,
-      supplier: el(ids.supplier)?.value?.trim() || ""
+      supplier: el(ids.supplier)?.value?.trim() || "",
+      customerPhone: el(ids.customerPhone)?.value?.trim() || ""
     };
 
     if (!values.product || !values.date || values.quantity <= 0 || values.price <= 0) {
       showGlobalAlert?.("يرجى إدخال بيانات العملية بشكل صحيح", "warning");
-      return;
-    }
-
-    if (isPurchaseType(values.type) && !values.supplier) {
-      showGlobalAlert?.("يرجى إدخال اسم المورد", "warning");
       return;
     }
 

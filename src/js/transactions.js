@@ -82,9 +82,10 @@ function getTransactionFormValues() {
   const quantity = Number($("transQty")?.value);
   const price = Number($("transPrice")?.value);
   const date = $("transDate")?.value || "";
-  const supplier = isPurchaseType(type)
-    ? $("transSupplier")?.value?.trim() || ""
-    : "";
+  const supplier = $("transSupplier")?.value?.trim() || "";
+  const customerPhone = isPurchaseType(type)
+    ? ""
+    : $("transCustomerPhone")?.value?.trim() || "";
 
   return {
     type,
@@ -93,7 +94,8 @@ function getTransactionFormValues() {
     price,
     total: Number((quantity * price).toFixed(2)),
     date,
-    supplier
+    supplier,
+    customerPhone
   };
 }
 
@@ -124,12 +126,6 @@ function validateTransaction(values) {
     return false;
   }
 
-  if (isPurchaseType(values.type) && !values.supplier) {
-    showGlobalAlert("أدخل اسم المورد", "warning");
-    $("transSupplier")?.focus();
-    return false;
-  }
-
   return true;
 }
 
@@ -137,14 +133,23 @@ function validateTransaction(values) {
 
 function setSupplierVisibility(type) {
   const supplierRow = $("supplierRow");
-  if (!supplierRow) return;
+  const customerPhoneRow = $("customerPhoneRow");
 
-  const show = isPurchaseType(type);
-  supplierRow.classList.toggle("d-none", !show);
-  supplierRow.style.display = show ? "block" : "none";
+  const showSupplier = isPurchaseType(type);
+  const showCustomerPhone = !showSupplier;
 
-  if (!show && $("transSupplier")) {
-    $("transSupplier").value = "";
+  if (supplierRow) {
+    supplierRow.classList.toggle("d-none", !showSupplier);
+    supplierRow.style.display = showSupplier ? "block" : "none";
+  }
+
+  if (customerPhoneRow) {
+    customerPhoneRow.classList.toggle("d-none", !showCustomerPhone);
+    customerPhoneRow.style.display = showCustomerPhone ? "block" : "none";
+  }
+
+  if (!showCustomerPhone && $("transCustomerPhone")) {
+    $("transCustomerPhone").value = "";
   }
 }
 
@@ -242,7 +247,8 @@ async function saveTransactionEdit(id, values) {
     quantity: Number(values.quantity),
     price: Number(values.price),
     total: Number((Number(values.quantity) * Number(values.price)).toFixed(2)),
-    supplier: isPurchaseType(values.type) ? values.supplier || "" : ""
+    supplier: values.supplier || "",
+    customerPhone: isPurchaseType(values.type) ? "" : values.customerPhone || ""
   };
 
   if (isFallbackMode()) {
@@ -304,6 +310,7 @@ function clearTransactionForm() {
   if ($("transQty")) $("transQty").value = "";
   if ($("transPrice")) $("transPrice").value = "";
   if ($("transSupplier")) $("transSupplier").value = "";
+  if ($("transCustomerPhone")) $("transCustomerPhone").value = "";
 
   setDefaultDate();
   setSupplierVisibility("بيع");
@@ -333,6 +340,7 @@ async function fillTransactionFormForEdit(id) {
   if ($("transPrice")) $("transPrice").value = transaction.price ?? "";
   if ($("transDate")) $("transDate").value = transaction.date || "";
   if ($("transSupplier")) $("transSupplier").value = transaction.supplier || "";
+  if ($("transCustomerPhone")) $("transCustomerPhone").value = transaction.customerPhone || "";
 
   window.editTransactionId = Number(transaction.id);
   setSupplierVisibility(transaction.type);
@@ -439,6 +447,11 @@ function renderEmptyRow(tbody, colspan, message) {
   `;
 }
 
+function setTextContent(id, value) {
+  const element = $(id);
+  if (element) element.textContent = value;
+}
+
 function renderTransactionsTable(transactions) {
   const salesTbody = $("salesTbody");
   const purchaseTbody = $("purchaseTbody");
@@ -454,7 +467,7 @@ function renderTransactionsTable(transactions) {
   const purchases = transactions.filter(t => normalizeTransactionType(t.type) === "شراء");
 
   if (!sales.length) {
-    renderEmptyRow(salesTbody, 6, "لا توجد مبيعات");
+    renderEmptyRow(salesTbody, 7, "لا توجد مبيعات");
   } else {
     sales.slice(0, 4).forEach(t => {
       const total = Number(t.total ?? Number(t.quantity) * Number(t.price));
@@ -465,6 +478,7 @@ function renderTransactionsTable(transactions) {
           <td>${Number(t.quantity)}</td>
           <td>${Number(t.price).toFixed(2)}</td>
           <td>${total.toFixed(2)}</td>
+          <td>${escapeHtml(t.customerPhone || "")}</td>
           <td>${renderActionButtons(t)}</td>
         </tr>
       `);
@@ -496,10 +510,11 @@ function renderSalesModal(sales) {
   if (!tbody) return;
 
   tbody.innerHTML = "";
+  setTextContent("salesCount", sales?.length || 0);
   setActionNote(tbody, "القلم الرمادي: تعديل كامل.");
 
   if (!sales?.length) {
-    renderEmptyRow(tbody, 6, "لا توجد مبيعات");
+    renderEmptyRow(tbody, 7, "لا توجد مبيعات");
     return;
   }
 
@@ -512,6 +527,7 @@ function renderSalesModal(sales) {
         <td>${Number(t.quantity)}</td>
         <td>${Number(t.price).toFixed(2)}</td>
         <td>${total.toFixed(2)}</td>
+        <td>${escapeHtml(t.customerPhone || "")}</td>
         <td>${renderActionButtons(t, { fullEdit: true })}</td>
       </tr>
     `);
@@ -523,6 +539,7 @@ function renderPurchasesModal(purchases) {
   if (!tbody) return;
 
   tbody.innerHTML = "";
+  setTextContent("purchasesCount", purchases?.length || 0);
   setActionNote(tbody, "القلم الرمادي: تعديل كامل.");
 
   if (!purchases?.length) {
@@ -551,6 +568,7 @@ function renderProductsModal(products) {
   if (!tbody) return;
 
   tbody.innerHTML = "";
+  setTextContent("productsCount", products?.length || 0);
 
   if (!products?.length) {
     renderEmptyRow(tbody, 3, "لا توجد منتجات");
