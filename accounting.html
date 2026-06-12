@@ -13,9 +13,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Google tag (gtag.js) -->
-<script src="/gtag.js"></script>
-
 
 <header class="app-header shadow-sm">
   <div class="container">
@@ -278,6 +275,83 @@
 
   </div>
 
+  
+  
+
+<!-- Period Profit Section | قسم أرباح الفترة -->
+<div class="card mt-3">
+  <div
+    class="card-header d-flex justify-content-between align-items-center"
+    data-bs-toggle="collapse"
+    data-bs-target="#periodProfitSection"
+    style="cursor:pointer;">
+    <div class="d-flex align-items-center gap-2">
+      <i class="bi bi-calendar3"></i>
+      <strong>الأرباح حسب الفترة</strong>
+    </div>
+    <i class="bi bi-chevron-down"></i>
+  </div>
+
+  <!-- Content | المحتوى -->
+  <div id="periodProfitSection" class="collapse">
+    <div class="card-body">
+      <div class="row g-2 align-items-end">
+        <div class="col-md-4">
+          <label class="form-label">من تاريخ</label>
+          <input type="date" id="profitFromDate" class="form-control">
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">إلى تاريخ</label>
+          <input type="date" id="profitToDate" class="form-control">
+        </div>
+
+        <div class="col-md-4 d-flex flex-column gap-2">
+          <button
+            id="btnCalculatePeriodProfit"
+            class="btn btn-primary w-100">
+            <i class="bi bi-search"></i>
+            عرض التقرير
+          </button>
+          <button
+            id="btnResetStats"
+            class="btn btn-outline-secondary w-100">
+            <i class="bi bi-arrow-counterclockwise"></i>
+            إعادة تعيين
+          </button>
+        </div>
+      </div>
+
+      <!-- Info | معلومات -->
+      <div
+        id="periodInfo"
+        class="alert alert-info mt-3 mb-0 d-flex align-items-center gap-2">
+
+        <i class="bi bi-collection"></i>
+        <span>اختر الفترة لعرض الأرباح والخسائر</span>
+
+      </div>
+
+      <!-- Result | النتيجة -->
+      <div
+        id="periodProfitAlert"
+        class="alert alert-success mt-3 mb-0 d-flex justify-content-between align-items-center">
+
+        <div class="d-flex align-items-center gap-2">
+          <i id="periodProfitIcon" class="bi bi-graph-up-arrow"></i>
+          <strong>صافي الربح للفترة</strong>
+        </div>
+
+        <div>
+          <strong id="periodProfitValue">0.00</strong>
+          ريال
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
   <!-- Loading screen | شاشة التحميل -->
   <div id="loadingBox" class="text-center py-5">
     <div class="spinner-border text-primary" role="status" aria-hidden="true"></div>
@@ -287,7 +361,7 @@
   <!-- Main application container | الحاوية الرئيسية للتطبيق -->
   <div id="app" class="d-none">
 
-    <div class="recent-products-section mb-4">
+    <div class="recent-products-section mt-3">
       <div class="d-flex justify-content-between align-items-center mb-2">
         <h5 class="mb-0">العمليات</h5>
       </div>

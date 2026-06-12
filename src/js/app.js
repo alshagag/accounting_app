@@ -2,7 +2,9 @@
    Imports | الاستيرادات
 ========================= */
 import { initApp } from "./db.js";
-import { initTags } from "./gtag.js";
+import { initTags } from "../utils/gtag.js";
+
+
 
 import "./confirm-dialog.js";
 import "./ui.js";
@@ -132,4 +134,200 @@ productsModal?.addEventListener("show.bs.modal", async () => {
 
   const products = await getAllProducts();
   renderProductsModal(products);
+});
+
+
+/* =========================
+   Period Profit | أرباح فترة محددة
+   Date Range Profit
+========================= */
+async function calculatePeriodProfit() {
+
+  console.log("START calculatePeriodProfit");
+
+  const fromDate = document.getElementById("profitFromDate")?.value;
+  const toDate = document.getElementById("profitToDate")?.value;
+
+  console.log("INPUT DATES:", { fromDate, toDate });
+
+  if (!fromDate || !toDate) {
+    console.warn("MISSING DATES");
+
+    // fallback: full range if empty | عرض كامل إذا بدون فترة
+    return loadFullProfit();
+  }
+
+  // Save range | حفظ الفترة
+  localStorage.setItem("profitFromDate", fromDate);
+  localStorage.setItem("profitToDate", toDate);
+
+  // Info text | نص المعلومات
+  const infoEl = document.getElementById("periodInfo");
+  if (infoEl) {
+    infoEl.textContent =
+      `قائمة الأرباح والخسائر من ${fromDate} إلى ${toDate}`;
+  }
+
+  const getAllTransactions = window.getAllTransactions;
+
+  if (typeof getAllTransactions !== "function") {
+    console.error("getAllTransactions NOT FOUND");
+    return;
+  }
+
+  const data = await getAllTransactions();
+
+  if (!Array.isArray(data)) {
+    console.error("INVALID DATA");
+    return;
+  }
+
+  let totalSales = 0;
+  let totalPurchases = 0;
+
+  let salesCount = 0;
+  let purchasesCount = 0;
+  let filteredCount = 0;
+
+  for (const t of data) {
+
+    if (!t?.date) continue;
+
+    const date = String(t.date).slice(0, 10);
+
+    if (date < fromDate || date > toDate) continue;
+
+    filteredCount++;
+
+    const type = (window.normalizeTransactionType?.(t.type) || "").trim();
+
+    const price = Number(t.price) || 0;
+    const qty = Number(t.quantity ?? t.qty ?? 0);
+
+    const total = price * qty;
+
+    if (type === "بيع") {
+      totalSales += total;
+      salesCount++;
+    } 
+    else if (type === "شراء") {
+      totalPurchases += total;
+      purchasesCount++;
+    }
+  }
+
+  const profit = totalSales - totalPurchases;
+
+  // =========================
+  // Update UI | تحديث الواجهة
+  // =========================
+
+  updateUI(totalSales, totalPurchases, profit);
+
+  console.log("FINAL RESULT:", {
+    totalSales,
+    totalPurchases,
+    profit,
+    salesCount,
+    purchasesCount,
+    filteredCount
+  });
+}
+
+
+/* =========================
+   Full Range Loader | عرض كامل البيانات
+========================= */
+async function loadFullProfit() {
+
+  console.log("LOAD FULL RANGE");
+
+  const getAllTransactions = window.getAllTransactions;
+  const data = await getAllTransactions();
+
+  let totalSales = 0;
+  let totalPurchases = 0;
+
+  for (const t of data || []) {
+
+    const type = (window.normalizeTransactionType?.(t.type) || "").trim();
+
+    const price = Number(t.price) || 0;
+    const qty = Number(t.quantity ?? t.qty ?? 0);
+
+    const total = price * qty;
+
+    if (type === "بيع") totalSales += total;
+    else if (type === "شراء") totalPurchases += total;
+  }
+
+  const profit = totalSales - totalPurchases;
+
+  updateUI(totalSales, totalPurchases, profit);
+
+  const infoEl = document.getElementById("periodInfo");
+  if (infoEl) {
+    infoEl.textContent = "عرض كامل البيانات (كل السنوات)";
+  }
+
+  // clear inputs | تنظيف الحقول
+  document.getElementById("profitFromDate").value = "";
+  document.getElementById("profitToDate").value = "";
+}
+
+
+/* =========================
+   UI Update | تحديث الواجهة
+========================= */
+function updateUI(totalSales, totalPurchases, profit) {
+
+  const salesEl = document.getElementById("statSales");
+  const purchasesEl = document.getElementById("statPurchases");
+  const profitEl = document.getElementById("statProfit");
+  const periodEl = document.getElementById("periodProfitValue");
+
+  if (salesEl) salesEl.textContent = totalSales.toFixed(2);
+  if (purchasesEl) purchasesEl.textContent = totalPurchases.toFixed(2);
+  if (profitEl) profitEl.textContent = profit.toFixed(2);
+  if (periodEl) periodEl.textContent = profit.toFixed(2);
+
+  console.log("UPDATED UI");
+}
+
+
+/* =========================
+   Button Event | زر التشغيل
+========================= */
+document.addEventListener("DOMContentLoaded", () => {
+
+  console.log("DOM READY");
+
+  const btn = document.getElementById("btnCalculatePeriodProfit");
+
+  if (!btn) {
+    console.error("Button not found");
+    return;
+  }
+
+  btn.addEventListener("click", () => {
+    console.log("BUTTON CLICKED");
+    calculatePeriodProfit();
+  });
+
+});
+
+document.getElementById("btnResetStats")?.addEventListener("click", () => {
+
+  console.log("RESET CLICKED");
+
+  // clear inputs
+  document.getElementById("profitFromDate").value = "";
+  document.getElementById("profitToDate").value = "";
+
+  // remove saved range
+  localStorage.removeItem("profitFromDate");
+  localStorage.removeItem("profitToDate");
+
+  // load full data
+  loadFullProfit();
 });
