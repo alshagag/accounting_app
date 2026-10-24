@@ -2,9 +2,9 @@
 
 # 💼 المحاسب المبسط | Simple Accountant
 
-نظام محاسبة مبسط وسهل الاستخدام يساعد أصحاب المشاريع الصغيرة على إدارة المبيعات والمشتريات والمنتجات بطريقة منظمة وسريعة.
+نظام محاسبة مبسط وسهل الاستخدام يساعد أصحاب المشاريع الصغيرة على إدارة المبيعات والمشتريات والمنتجات بطريقة منظمة وسريعة — يعمل كتطبيق PWA قابل للتثبيت على الهاتف والحاسوب، مع دعم العمل بدون إنترنت.
 
-A simple and lightweight accounting system designed to help small businesses manage sales, purchases, and products easily.
+A simple and lightweight accounting system designed to help small businesses manage sales, purchases, and products easily — now a **Progressive Web App (PWA)** that can be installed on phones and desktops and works offline.
 
 ---
 
@@ -13,19 +13,27 @@ A simple and lightweight accounting system designed to help small businesses man
 ## 🇸🇦 المميزات العربية
 
 * ➕ إضافة المنتجات بسهولة
-* 🧾 تسجيل عمليات البيع والشراء
-* 📊 حساب الأرباح بشكل تلقائي
-* 💾 تخزين البيانات داخل المتصفح (IndexedDB)
+* 🧾 تسجيل عمليات البيع والشراء (فواتير المبيعات والمشتريات)
+* 📊 حساب الأرباح بشكل تلقائي + تقارير حسب الفترة
+* 💾 تخزين البيانات داخل المتصفح (IndexedDB) — لا خادم ولا قاعدة بيانات خارجية
+* 📲 **تثبيت التطبيق على الشاشة الرئيسية** (iOS / Android / حاسوب)
+* 📶 **العمل بدون إنترنت** بعد التثبيت، مع بقاء البيانات في جهازك
+* 🔄 **تحديث تلقائي للنسخة** عند نشر إصدار جديد (دون أكواخ قديمة)
 * ✏️ تعديل وحذف العمليات بسهولة
+* 🏷️ دعم إدخال المنتجات بالباركود / الكاميرا
 * 📦 واجهة بسيطة وسهلة الاستخدام
 
 ## 🇬🇧 English Features
 
 * ➕ Add products easily
-* 🧾 Record sales and purchases
-* 📊 Automatic profit calculation
-* 💾 Store data locally using IndexedDB
+* 🧾 Record sales and purchases (sales / purchase invoices)
+* 📊 Automatic profit calculation + period reports
+* 💾 Store data locally using IndexedDB — no external database
+* 📲 **Install the app on the home screen** (iOS / Android / Desktop)
+* 📶 **Works offline** once installed, data stays on your device
+* 🔄 **Automatic app updates** after deploying a new version (old caches purged)
 * ✏️ Edit and delete transactions
+* 🏷️ Barcode / camera product entry
 * 📦 Simple and user-friendly interface
 
 ---
@@ -38,146 +46,102 @@ A simple and lightweight accounting system designed to help small businesses man
 
 ---
 
----
 # 🚀 Live Demo | النسخة التجريبية
----
 
-## 🇸🇦 Arabic 
+## 🇸🇦 Arabic
+
 🔗 **اضغط هنا لتجربة النظام**
 
-👉 https://accounting-app-ochre-omega.vercel.app
+👉 https://accounting-app-ochre-omega.vercel.app/accounting
+
+> على الجوال: افتح الرابط من موقع التطبيق، ثم اضغط زر **«تثبيت التطبيق»** في أعلى الصفحة واتبع الشرح — وأضف التطبيق إلى الشاشة الرئيسية.
+
+## 🇬🇧 English
+
+🔗 **Try the live demo**
+
+👉 https://accounting-app-ochre-omega.vercel.app/accounting
+
+> On mobile: open the link, tap the **Install App** button at the top and follow the steps to add it to your home screen.
+
 ---
+
 # ⚙️ طريقة التشغيل | How to Run
 
 ## 🇸🇦 التشغيل
 
-1. افتح مجلد المشروع
-2. ثبّت الحزم:
+### وضع التطوير
 
 ```bash
 npm install
-````
-
-3. شغّل المشروع:
-
-```bash
 npm run dev
 ```
 
-أو استخدم:
+### بناء نسخة الإنتاج ونشرها محليًا
 
-* VS Code Live Server (في حال تشغيل نسخة static)
-* أو افتح الرابط الذي يظهر في الطرفية
+```bash
+npm run build
+npm run start
+```
 
----
+> ملاحظة PWA: يعمل التثبيت والعمل بدون إنترنت عبر Service Worker الذي يتطلب **نطاقًا آمنًا (HTTPS)** — يُستثنى فقط `http://localhost`. على الشبكات الداخلية يُفضَّل استخدام شهادة SSL (حتى لو ذاتية التوقيع) أو النشر على Vercel/أي استضافة HTTPS.
 
 ## 🇬🇧 Run Instructions
 
-1. Open the project folder
-2. Install dependencies:
+### Development
 
 ```bash
 npm install
-```
-
-3. Run the project:
-
-```bash
 npm run dev
 ```
 
-Or use:
+### Production build & local serve
 
-* VS Code Live Server (for static version)
-* Or open the link shown in terminal
+```bash
+npm run build
+npm run start
+```
+
+> PWA note: installation and offline support rely on a Service Worker, which requires a **secure context (HTTPS)** — only `http://localhost` is exempt. For internal networks use an SSL certificate (even self-signed) or deploy to an HTTPS host like Vercel.
+
+---
+
+# 🧪 الاختبارات والجودة | Tests & Quality
+
+```bash
+npm test       # اختبارات الوحدات / unit tests
+npm run lint   # فحص الكود / code quality
+```
+
 ---
 
 # 🧱 التقنيات المستخدمة | Tech Stack
 
 ## 🇸🇦 عربي
 
-- ⚡ Vite (أداة بناء وتشغيل المشروع)
-- 🧩 Vue.js (لبناء واجهة المستخدم التفاعلية)
+- ⚛️ Next.js (إطار عمل React للإنتاج)
+- 🧩 React (لبناء واجهة المستخدم التفاعلية)
 - 🌐 HTML5 (هيكلة الصفحات)
-- 🎨 CSS3 + Bootstrap (تصميم الواجهة)
+- 🎨 CSS3 + Bootstrap (تصميم الواجهة والتصميم المتجاوب)
 - ⚙️ JavaScript (منطق التطبيق)
 - 🗄️ IndexedDB (تخزين البيانات محليًا داخل المتصفح)
 - 📦 LocalStorage (تخزين بيانات خفيفة وسريعة)
-- 📧 EmailJS (إرسال الإيميلات)
+- 🧩 **Web App Manifest + Service Worker** (تطبيق PWA: تثبيت، أوفلاين، تحديث تلقائي)
+- 🔍 **ZXing** (قراءة الباركود بالكاميرا)
 - 🚀 Vercel (استضافة المشروع)
 
 ## 🇬🇧 English
 
-- ⚡ Vite (Modern frontend build tool for fast development)
-- 🧩 Vue.js (Progressive JavaScript framework for building UI)
+- ⚛️ Next.js (The React Framework for Production)
+- 🧩 React (For building user interfaces)
 - 🌐 HTML5 (Structure of web pages)
 - 🎨 CSS3 + Bootstrap (Styling and responsive design)
 - ⚙️ JavaScript (Core application logic)
 - 🗄️ IndexedDB (Client-side database for storing structured data in the browser)
 - 📦 LocalStorage (Simple key-value storage in the browser)
-- 📧 EmailJS (Sending emails directly from the client-side)
+- 🧩 **Web App Manifest + Service Worker** (PWA: install, offline, auto-update)
+- 🔍 **ZXing** (camera barcode scanning)
 - 🚀 Vercel (Deployment and hosting platform)
-
----
-
-# 📁 هيكلة المشروع| Project Structur
-````md
-📦 accounting_app
-│
-├── 🌐 index.html
-├── 🧾 accounting.html
-├── ⚙️ vite.config.js
-├── 📄 package.json
-│
-├── 📁 public/
-│   ├── 🖼️ favicon.svg
-│   ├── 🧩 icons.svg
-│   ├── 🖼️ landing-preview.png
-│   │
-│   └── 📁 versions/
-│       ├── 📄 versions.html
-│       ├── 📁 css/
-│       │   └── 🎨 versions.css
-│       │
-│       └── 📁 v1.0/
-│           ├── 🌐 index.html
-│           └── 🎨 style.css
-│
-├── 📁 src/
-│   ├── 🚀 main.js
-│   ├── 🧩 App.vue
-│   │
-│   ├── 📁 assets/
-│   │   └── 🖼️ favicon.svg
-│   │
-│   ├── 📁 components/
-│   │   └── 🧱 Home.vue
-│   │
-│   ├── 📁 css/
-│   │   ├── 🎨 landing.css
-│   │   └── 🎨 style.css
-│   │
-│   └── 📁 js/
-│       ├── ⚙️ app.js
-│       ├── 🗄️ db.js
-│       ├── 📦 products.js
-│       ├── 💰 transactions.js
-│       ├── 🎛️ ui.js
-│       ├── 🧠 utils.js
-│       ├── 🪄 confirm-dialog.js
-│       ├── ✏️ product-full-edit.js
-│       ├── ⚡ product-quick-edit.js
-│       ├── 💳 sale-full-edit.js
-│       ├── 📊 transaction-full-edit.js
-│       │
-│       └── 📁 api/
-│           └── 📧 email.js
-│
-├── 📸 screenshots/
-│   └── 🖼️ index.png
-│
-└── 📦 node_modules/
-````
 
 ---
 
@@ -192,11 +156,13 @@ Or use:
 ## 🇸🇦 عربي
 
 * المشروع يعمل بدون قاعدة بيانات خارجية
-* جميع البيانات محفوظة داخل المتصفح (LocalStorage / IndexedDB)
+* جميع البيانات محفوظة داخل المتصفح (LocalStorage / IndexedDB) وليست على أي سيرفر
+* التثبيت والأوفلاين يتطلبان HTTPS (عدا localhost) — انظر قسم التشغيل
 * مناسب للمشاريع الصغيرة والتجارب التعليمية
 
 ## 🇬🇧 English
 
 * The project works without an external database
-* All data is stored inside the browser (LocalStorage / IndexedDB)
+* All data is stored inside the browser (LocalStorage / IndexedDB), never on a server
+* Installation & offline require HTTPS (except localhost) — see How to Run
 * Suitable for small projects and educational purposes

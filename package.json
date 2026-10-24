@@ -1,19 +1,44 @@
 {
   "name": "accounting_app",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "test": "node tests/render-products-race.test.mjs && node tests/payment-summary.test.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "vue": "^3.5.34"
+    "html5-qrcode": "^2.3.8",
+    "lodash": "^4.18.1",
+    "next": "^16.2.10",
+    "react": "^19.2.7",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
+    "react-dom": "^19.2.7",
+    "react-select": "^5.10.2"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.6",
-    "vite": "^8.0.12"
-  }
+    "eslint": "^9",
+    "eslint-config-next": "^16.2.10"
+  },
+  "description": "---",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alshagag/accounting_app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alshagag/accounting_app/issues"
+  },
+  "homepage": "https://github.com/alshagag/accounting_app#readme"
 }

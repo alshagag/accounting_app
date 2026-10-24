@@ -9,48 +9,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-<style>
-:root{--accent:#198754;--muted:#6c757d}
-body{background:#f5f8fb;font-family:Inter, "Segoe UI", Tahoma, Arial, sans-serif;color:#222}
-header{background:var(--accent);color:#fff;padding:18px;text-align:center;border-radius:0 0 16px 16px;box-shadow:0 6px 18px rgba(0,0,0,.08)}
-.header-sub{font-size:.95rem;opacity:.95}
-.container{margin-top:22px;margin-bottom:40px}
-.card{border-radius:12px;box-shadow:0 6px 18px rgba(8,26,40,.04)}
-.input-icon{position:relative;margin-bottom:10px}
-.input-icon i{position:absolute;top:50%;right:12px;transform:translateY(-50%);color:var(--muted)}
-.input-icon input,.input-icon select{padding-right:2.6rem}
-.stats-row{gap:16px}
-.stat-card{border-radius:10px;padding:18px;color:#fff;min-height:88px}
-.stat-sales{background:linear-gradient(135deg,#28a745,#20c997)}
-.stat-purchase{background:linear-gradient(135deg,#ffc107,#ffb703);color:#111}
-.stat-profit{background:linear-gradient(135deg,#4facfe,#00f2fe)}
-.table thead th{vertical-align:middle}
-.empty-state{color:var(--muted);padding:18px;text-align:center}
-.alert-floating{position:fixed;top:18px;left:18px;z-index:1050;min-width:280px}
-.footer{margin-top:30px;text-align:center;color:#666;padding:24px 0 18px;background:#fff;border-top:1px solid rgba(0,0,0,.08)}
-.footer-actions{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;margin-bottom:12px}
-.footer-actions .btn{min-width:180px}
-@media (min-width:576px){.footer-actions{flex-direction:row}}
-.footer-note{color:#6c757d;font-size:.95rem}
-.badge-sale{background:#198754;color:#fff}
-.badge-purchase{background:#ffc107;color:#000}
-.small-ico{font-size:1rem;margin-left:6px}
-
-/* تحسين تباعد الملخص | Improve summary spacing */
-.summary-boxes { display:flex; gap:18px; flex-wrap:wrap; margin-top:16px; }
-.summary-item { min-width:200px; background:#fff; border-radius:10px; padding:12px 16px; box-shadow:0 4px 10px rgba(0,0,0,0.06); text-align:center; }
-.summary-item h4{margin:0 0 6px 0; font-weight:600}
-.summary-item p{margin:0; font-size:1.25rem; font-weight:700; color:#198754}
-
-/* تحسين عرض الجداول في الشاشات الكبيرة | Improve table layout on large screens */
-@media (min-width:992px){
-  .tables-column { display:block; }
-}
-@media (max-width:991px){
-  .stats-row{flex-direction:column}
-}
-</style>
+<!-- Refactored styles moved to external stylesheet -->
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -238,59 +198,40 @@ header{background:var(--accent);color:#fff;padding:18px;text-align:center;border
 
 <!-- Footer | التذييل -->
 <footer class="text-center mt-4 py-3 border-top">
-
-  <!-- GitHub link | رابط GitHub -->
   <div class="mb-2">
-    <a href="https://github.com/alshagag"
-       target="_blank"
-       class="text-dark text-decoration-none d-inline-flex align-items-center">
-
+    <a href="https://github.com/alshagag" target="_blank" class="text-dark text-decoration-none d-inline-flex align-items-center">
       <i class="bi bi-github fs-4"></i>
       <span class="ms-2">تابع المشروع على GitHub</span>
-
     </a>
   </div>
-
-  <!-- Version info | معلومات الإصدار -->
-  <div class="text-muted small mb-3">
-    الإصدار | 1.0 — من تطوير <strong>alshagag</strong>
-  </div>
-
-  <!-- Donation section | دعم المشروع -->
-  <div class="d-flex justify-content-center align-items-center text-muted small flex-nowrap gap-2 mb-3">
-
-    <!-- نص -->
-    <div class="d-flex align-items-center gap-1">
-      <i class="bi bi-cup-hot-fill fs-5"></i>
-      <span class="m-0">عجبك المشروع؟</span>
+  <div class="text-muted small mb-3">الإصدار | 1.0 ـ من تطوير <strong>alshagag</strong></div>
+  <div class="footer-support mb-3">
+    <div class="support-intro">
+      <i class="bi bi-cup-hot-fill"></i>
+      <span>عجبك المشروع؟ تبرع أو اشتري.</span>
     </div>
-
-    <span class="mx-1">|</span>
-
-    <!-- زر التبرع -->
-    <a href="https://paypal.me/alshagag"
-       target="_blank"
-       class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1 m-0">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <div class="footer-actions">
+    <a href="https://paypal.me/alshagag" target="_blank" class="support-card">
+      <span class="support-word">تبرع</span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
         <path d="M7.5 2h6.2c3.3 0 5.3 1.7 5.3 4.6 0 3.6-2.8 5.9-6.9 5.9h-2l-1 6.3H4.7L7.5 2z"/>
         <path d="M17.5 6.6c-.5 3.4-3.2 5.3-7.2 5.3H8.6L7.8 17h3.5l.7-4.3h1.8c3.6 0 5.8-1.6 6.3-4.9.2-1.5-.2-2.6-1.1-3.2z"/>
       </svg>
-      <span>ادعم بكوب شاي</span>
+      <span class="support-label">دعم بكوب شاي</span>
     </a>
-
+    <a href="https://safsif.net" target="_blank" class="support-card support-card--store">
+      <span class="support-word">اشتري</span>
+      <i class="bi bi-shop"></i>
+      <span class="support-label">متجر سفسيف</span>
+    </a>
+    </div>
   </div>
-
-  <!-- زر الإصدارات -->
   <div>
-    <a href="../versions.html"
-       class="btn btn-outline-primary btn-sm">
-
-      <i class="bi bi-clock-history me-1"></i>
-      عرض الإصدارات السابقة
-
-    </a>
+    <a href="../versions.html" class="btn btn-outline-primary btn-sm"><i class="bi bi-clock-history me-1"></i> عرض الإصدارات السابقة</a>
   </div>
+</footer>
 
+</div><!-- end container -->
 </footer>
 
 <!-- JavaScript: IndexedDB + LocalStorage fallback + واجهة المستخدم | UI logic with IndexedDB and LocalStorage fallback -->
@@ -323,13 +264,17 @@ function getFallbackTransactions(){ try{ return JSON.parse(localStorage.getItem(
 function setFallbackProducts(arr){ localStorage.setItem(FALLBACK_KEY_PRODUCTS, JSON.stringify(arr)); }
 function setFallbackTransactions(arr){ localStorage.setItem(FALLBACK_KEY_TRANSACTIONS, JSON.stringify(arr)); }
 
+/* التحليلات | Analytics: واجهة عامة تتصل بملف التحليل المشترك /analytics/gtag.js */
+function gaTrack(event, params){ try{ window.__ga && window.__ga.track && window.__ga.track(event, params || {}); }catch(_){} }
+
 /* أدوات IndexedDB Promises (Firefox/Chrome) | IndexedDB Promise helpers */
-function openDatabase(){
+/* محاولة فتح واحدة: تُمرَّر نسخة مُحدَّدة أو null لفتح القاعدة بإصدارها الحالي. */
+function _openDatabaseAttempt(version){
   return new Promise((resolve, reject)=>{
-    if(!window.indexedDB) return reject(new Error('IndexedDB غير مدعوم'));
-    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    const req = version ? indexedDB.open(DB_NAME, version) : indexedDB.open(DB_NAME);
     req.onerror = (e)=> reject(e.target.error || new Error('فشل فتح قاعدة البيانات'));
-    req.onblocked = ()=> console.warn('openDatabase: blocked');
+    /* blocked ليس فشلاً: نافذة أخرى تحتجز الاتصال، فننتظر ولا نتحول للاحتياطي. */
+    req.onblocked = ()=> console.warn('openDatabase: blocked — نافذة أخرى تحتجز الاتصال، جارٍ الانتظار.');
     req.onupgradeneeded = (e)=>{
       const rdb = e.target.result;
       if(!rdb.objectStoreNames.contains(STORE_PRODUCTS)){
@@ -347,6 +292,23 @@ function openDatabase(){
       db.onversionchange = ()=> { db.close(); showGlobalAlert('قاعدة البيانات تتطلب إعادة تحميل الصفحة (تغيير الإصدار)', 'warning'); };
       resolve(db);
     };
+  });
+}
+
+function openDatabase(){
+  if(!window.indexedDB) return Promise.reject(new Error('IndexedDB غير مدعوم'));
+  return _openDatabaseAttempt(DB_VERSION).catch((err)=>{
+    /* السبب الجذري historic: هذه النسخة تطلب الإصدار 1 بينما القاعدة موجودة
+       بالفعل بإصدار أحدث (نسخة التطبيق الحالية تفتح الإصدار 2). مطالبة المتصفح
+       بالتخفيض تُنتج VersionError، وكان الكود يفسّره خطأً كـ"قيود في تخزين
+       المتصفح" فيحذّر المستخدم ويفرّغ بياناته إلى LocalStorage. الحل: نلتصق
+       بالنسخة الموجودة كما هي instead من مطالبة المتصفح بالتراجع. */
+    if(err && err.name === 'VersionError'){
+      console.warn(`openDatabase: VersionError — الإصدار المطلوب (${DB_VERSION}) أقل من الموجود. ` +
+                   'سيتم فتح القاعدة بإصدارها الحالي دون تغيير أي بيانات.');
+      return _openDatabaseAttempt(null);
+    }
+    throw err;
   });
 }
 
@@ -406,16 +368,29 @@ async function initApp(){
  // محاولة فتح IndexedDB | Try to open IndexedDB
   try{
     await openDatabase();
-    useFallback = false;
 // مزامنة LocalStorage مع IndexedDB | Sync LocalStorage to IndexedDB
-    await syncFallbackToIDB();
-    showGlobalAlert('قاعدة البيانات محملة (IndexedDB).', 'success', 2000);
+    if(!useFallback) await syncFallbackToIDB();
+    if(!useFallback) showGlobalAlert('قاعدة البيانات محملة (IndexedDB).', 'success', 2000);
   }catch(err){
-    console.warn('IndexedDB غير متاح أو فشل:', err);
-    useFallback = true;
-    $('compatNotice').style.display = 'block';
-    $('fallbackNotice').style.display = 'block';
-    showGlobalAlert('العمل في وضع التخزين الاحتياطي (LocalStorage).', 'warning', 3500);
+    /* لا نلمس البيانات ولا نخفي شيئاً: نحدّد السبب الحقيقي، و LocalStorage
+       لا يصبح الخيار الأساسي إلا إذا كان IndexedDB مستحيلاً فعلاً. */
+    const name = err && err.name ? err.name : 'UnknownError';
+    const msg = err && err.message ? err.message : String(err);
+    console.error('IndexedDB error:', { name, message: msg, code: err && err.code });
+
+    const trulyUnavailable = !window.indexedDB || name === 'NotSupportedError' || name === 'SecurityError';
+    if(trulyUnavailable){
+      useFallback = true;
+      $('compatNotice').style.display = 'block';
+      $('fallbackNotice').style.display = 'block';
+      showGlobalAlert('العمل في وضع التخزين الاحتياطي (LocalStorage).', 'warning', 3500);
+    }else{
+      /* IndexedDB موجود لكنه لم يُفتح لسبب مؤقت/متعلق بالبيئة. لا نحوّل للتخزين. */
+      useFallback = false;
+      $('compatNotice').style.display = 'none';
+      $('fallbackNotice').style.display = 'none';
+      showGlobalAlert(`تعذّر فتح قاعدة البيانات (${name}). لم يتم تحويل التطبيق إلى LocalStorage.`, 'danger', 6000);
+    }
   }finally{
     $('loadingBox').style.display = 'none';
     $('app').style.display = 'block';
@@ -471,15 +446,18 @@ async function onAddProductClick(){
   if(!name){ showGlobalAlert('الرجاء إدخال اسم المنتج', 'warning'); $('productName').focus(); return; }
   if(isNaN(price) || price<=0){ showGlobalAlert('الرجاء إدخال سعر تكلفة صحيح', 'warning'); $('productPrice').focus(); return; }
 
+  if(!editProductId) gaTrack('product_add_started', { feature_name:'products', entry_point:'quick_form', page_name:'products' });
+
   if(useFallback){
     const arr = getFallbackProducts();
     if(editProductId){
       const idx = arr.findIndex(p=>p.id===editProductId);
-      if(idx!==-1){ arr[idx].name = name; arr[idx].price = price; showGlobalAlert('تم تعديل المنتج (وضع مؤقت)', 'success'); }
+      if(idx!==-1){ arr[idx].name = name; arr[idx].price = price; showGlobalAlert('تم تعديل المنتج (وضع مؤقت)', 'success'); gaTrack('product_edit_success', { feature_name:'products', entry_point:'quick_form', method:'fallback' }); }
       editProductId = null; $('btnCancelProduct').style.display='none';
     } else {
       arr.push({ id: Date.now(), name, price });
       showGlobalAlert('تم إضافة المنتج (وضع مؤقت)', 'success');
+      gaTrack('product_add_success', { feature_name:'products', entry_point:'quick_form', method:'fallback' });
     }
     setFallbackProducts(arr);
     loadProductsToUI();
@@ -489,9 +467,11 @@ async function onAddProductClick(){
         await idbPut(STORE_PRODUCTS, { id: editProductId, name, price });
         editProductId = null; $('btnCancelProduct').style.display='none';
         showGlobalAlert('تم تعديل المنتج', 'success');
+        gaTrack('product_edit_success', { feature_name:'products', entry_point:'quick_form', method:'indexeddb' });
       } else {
         await idbAdd(STORE_PRODUCTS, { name, price });
         showGlobalAlert('تم إضافة المنتج', 'success');
+        gaTrack('product_add_success', { feature_name:'products', entry_point:'quick_form', method:'indexeddb' });
       }
       loadProductsToUI();
     }catch(e){
@@ -499,6 +479,7 @@ async function onAddProductClick(){
       showGlobalAlert('خطأ في IndexedDB — سيتم الحفظ بشكل مؤقت', 'danger', 4000);
       useFallback = true;
       const arr = getFallbackProducts(); arr.push({ id: Date.now(), name, price }); setFallbackProducts(arr); loadProductsToUI();
+      gaTrack('product_add_success', { feature_name:'products', entry_point:'quick_form', method:'fallback', failure_reason:'db_error' });
     }
   }
 
@@ -526,16 +507,19 @@ function renderProducts(products){
     sel.insertAdjacentHTML('beforeend', `<option value="${escapeHtml(p.name)}" data-price="${p.price}">${escapeHtml(p.name)}</option>`);
     const row = document.createElement('tr');
     row.innerHTML = `<td>${escapeHtml(p.name)}</td>
-      <td>${p.price.toFixed(2)} ﷼</td>
-      <td>
-        <button class="btn btn-sm btn-warning me-1" onclick="onEditProduct(${p.id})" title="تعديل"><i class="bi bi-pencil"></i></button>
-        <button class="btn btn-sm btn-danger" onclick="onDeleteProduct(${p.id})" title="حذف"><i class="bi bi-trash"></i></button>
+      <td>${(p.price || 0).toFixed(2)} ﷼</td>
+      <td class="v1-actions-cell">
+        <div class="v1-actions">
+          <button class="btn btn-sm btn-warning" onclick="onEditProduct(${p.id})" title="تعديل"><i class="bi bi-pencil"></i></button>
+          <button class="btn btn-sm btn-danger" onclick="onDeleteProduct(${p.id})" title="حذف"><i class="bi bi-trash"></i></button>
+        </div>
       </td>`;
     tbody.appendChild(row);
   });
 }
 
 async function onEditProduct(id){
+  gaTrack('product_edit_started', { feature_name:'products', entry_point:'quick_form' });
   if(useFallback){
     const arr = getFallbackProducts();
     const p = arr.find(x=>x.id===id);
@@ -556,9 +540,10 @@ function onDeleteProduct(id){
     setFallbackProducts(arr);
     loadProductsToUI();
     showGlobalAlert('تم حذف المنتج', 'success');
+    gaTrack('product_delete_success', { feature_name:'products' });
   } else {
-    idbDelete(STORE_PRODUCTS, id).then(()=>{ loadProductsToUI(); showGlobalAlert('تم حذف المنتج', 'success'); })
-    .catch(e=>{ console.error(e); showGlobalAlert('خطأ عند حذف المنتج', 'danger'); });
+    idbDelete(STORE_PRODUCTS, id).then(()=>{ loadProductsToUI(); showGlobalAlert('تم حذف المنتج', 'success'); gaTrack('product_delete_success', { feature_name:'products' }); })
+    .catch(e=>{ console.error(e); showGlobalAlert('خطأ عند حذف المنتج', 'danger'); gaTrack('product_delete_failed', { feature_name:'products', failure_reason:'db_error' }); });
   }
 }
 
@@ -634,6 +619,7 @@ async function addTransaction(){
     arr.push({ id: Date.now(), type, product, quantity: qty, price, total, date, supplier });
     setFallbackTransactions(arr);
     showGlobalAlert('تم حفظ العملية (وضع مؤقت)', 'success');
+    gaTrack('transaction_create_success', { feature_name:'transactions', doc_type: type==='شراء' ? 'purchase' : 'sale', method:'fallback' });
     loadTransactionsToUI();
     clearTransactionForm();
     return;
@@ -642,6 +628,7 @@ async function addTransaction(){
   try{
     await idbAdd(STORE_TRANSACTIONS, { type, product, quantity: qty, price, total, date, supplier });
     showGlobalAlert('تم حفظ العملية', 'success');
+    gaTrack('transaction_create_success', { feature_name:'transactions', doc_type: type==='شراء' ? 'purchase' : 'sale', method:'indexeddb' });
     loadTransactionsToUI();
     clearTransactionForm();
   }catch(e){
@@ -649,6 +636,7 @@ async function addTransaction(){
     showGlobalAlert('خطأ في IndexedDB — سيتم الحفظ بشكل مؤقت', 'warning', 4000);
     useFallback = true;
     const arr = getFallbackTransactions(); arr.push({ id: Date.now(), type, product, quantity: qty, price, total, date, supplier }); setFallbackTransactions(arr);
+    gaTrack('transaction_create_success', { feature_name:'transactions', doc_type: type==='شراء' ? 'purchase' : 'sale', method:'fallback', failure_reason:'db_error' });
     loadTransactionsToUI();
     clearTransactionForm();
   }
@@ -678,13 +666,15 @@ function updateTransactionTables(transactions){
   const sales = transactions.filter(t=>t.type==='بيع');
   if(sales.length===0) salesTbody.innerHTML = `<tr><td colspan="6" class="empty-state"><i class="bi bi-cart-x"></i><div>لا توجد مبيعات</div></td></tr>`;
   else sales.forEach(t=>{
-    sumSales += t.total;
+    sumSales += t.total || 0;
     const tr = document.createElement('tr');
     tr.className='sale';
-    tr.innerHTML = `<td>${escapeHtml(t.date)}</td><td>${escapeHtml(t.product)}</td><td>${t.quantity}</td><td>${t.price.toFixed(2)}</td><td>${t.total.toFixed(2)}</td>
-      <td>
-        <button class="btn btn-sm btn-warning me-1" onclick="onEditTransaction(${t.id})" title="تعديل"><i class="bi bi-pencil"></i></button>
-        <button class="btn btn-sm btn-danger" onclick="onDeleteTransaction(${t.id})" title="حذف"><i class="bi bi-trash"></i></button>
+    tr.innerHTML = `<td>${escapeHtml(t.date)}</td><td>${escapeHtml(t.product)}</td><td>${t.quantity || 0}</td><td>${(t.price || 0).toFixed(2)}</td><td>${(t.total || 0).toFixed(2)}</td>
+      <td class="v1-actions-cell">
+        <div class="v1-actions">
+          <button class="btn btn-sm btn-warning" onclick="onEditTransaction(${t.id})" title="تعديل"><i class="bi bi-pencil"></i></button>
+          <button class="btn btn-sm btn-danger" onclick="onDeleteTransaction(${t.id})" title="حذف"><i class="bi bi-trash"></i></button>
+        </div>
       </td>`;
     salesTbody.appendChild(tr);
   });
@@ -692,13 +682,15 @@ function updateTransactionTables(transactions){
   const purchases = transactions.filter(t=>t.type==='شراء');
   if(purchases.length===0) purchaseTbody.innerHTML = `<tr><td colspan="7" class="empty-state"><i class="bi bi-cart-x"></i><div>لا توجد مشتريات</div></td></tr>`;
   else purchases.forEach(t=>{
-    sumPurchases += t.total;
+    sumPurchases += t.total || 0;
     const tr = document.createElement('tr');
     tr.className='purchase';
-    tr.innerHTML = `<td>${escapeHtml(t.date)}</td><td>${escapeHtml(t.product)}</td><td>${t.quantity}</td><td>${t.price.toFixed(2)}</td><td>${t.total.toFixed(2)}</td><td>${escapeHtml(t.supplier||'')}</td>
-      <td>
-        <button class="btn btn-sm btn-warning me-1" onclick="onEditTransaction(${t.id})" title="تعديل"><i class="bi bi-pencil"></i></button>
-        <button class="btn btn-sm btn-danger" onclick="onDeleteTransaction(${t.id})" title="حذف"><i class="bi bi-trash"></i></button>
+    tr.innerHTML = `<td>${escapeHtml(t.date)}</td><td>${escapeHtml(t.product)}</td><td>${t.quantity || 0}</td><td>${(t.price || 0).toFixed(2)}</td><td>${(t.total || 0).toFixed(2)}</td><td>${escapeHtml(t.supplier||'')}</td>
+      <td class="v1-actions-cell">
+        <div class="v1-actions">
+          <button class="btn btn-sm btn-warning" onclick="onEditTransaction(${t.id})" title="تعديل"><i class="bi bi-pencil"></i></button>
+          <button class="btn btn-sm btn-danger" onclick="onDeleteTransaction(${t.id})" title="حذف"><i class="bi bi-trash"></i></button>
+        </div>
       </td>`;
     purchaseTbody.appendChild(tr);
   });
@@ -726,10 +718,11 @@ function onDeleteTransaction(id){
     setFallbackTransactions(arr);
     loadTransactionsToUI();
     showGlobalAlert('تم حذف العملية', 'success');
+    gaTrack('transaction_delete_success', { feature_name:'transactions' });
     return;
   }
-  idbDelete(STORE_TRANSACTIONS, id).then(()=>{ loadTransactionsToUI(); showGlobalAlert('تم حذف العملية', 'success'); })
-  .catch(e=>{ console.error(e); showGlobalAlert('فشل حذف العملية', 'danger'); });
+  idbDelete(STORE_TRANSACTIONS, id).then(()=>{ loadTransactionsToUI(); showGlobalAlert('تم حذف العملية', 'success'); gaTrack('transaction_delete_success', { feature_name:'transactions' }); })
+  .catch(e=>{ console.error(e); showGlobalAlert('فشل حذف العملية', 'danger'); gaTrack('transaction_delete_failed', { feature_name:'transactions', failure_reason:'db_error' }); });
 }
 
 /* تعديل العملية | Edit transaction */
@@ -769,6 +762,7 @@ function fillTransactionFormForEdit(t){
   $('transSupplier').value = t.supplier || '';
   onTransTypeChange();
   editTransactionId = t.id;
+  gaTrack('transaction_edit_started', { feature_name:'transactions', entry_point:'quick_form', doc_type: t.type==='شراء' ? 'purchase' : 'sale' });
   $('btnCancelTrans').style.display='inline-block';
   $('btnSaveTrans').innerHTML = '<i class="bi bi-pencil-square small-ico" aria-hidden="true"></i> تحديث';
 }
@@ -795,6 +789,7 @@ async function updateTransaction(){
       arr[idx] = { id: editTransactionId, type, product, quantity: qty, price, total, date, supplier };
       setFallbackTransactions(arr);
       showGlobalAlert('تم تحديث العملية', 'success');
+      gaTrack('transaction_create_success', { feature_name:'transactions', action_type:'update', doc_type: type==='شراء' ? 'purchase' : 'sale', method:'fallback' });
       loadTransactionsToUI();
     }
     editTransactionId = null;
@@ -807,12 +802,13 @@ async function updateTransaction(){
   try{
     await idbPut(STORE_TRANSACTIONS, { id: editTransactionId, type, product, quantity: qty, price, total, date, supplier });
     showGlobalAlert('تم تحديث العملية', 'success');
+    gaTrack('transaction_create_success', { feature_name:'transactions', action_type:'update', doc_type: type==='شراء' ? 'purchase' : 'sale', method:'indexeddb' });
     editTransactionId = null;
     $('btnCancelTrans').style.display='none';
     $('btnSaveTrans').innerHTML = '<i class="bi bi-save small-ico" aria-hidden="true"></i> حفظ العملية';
     loadTransactionsToUI();
     clearTransactionForm();
-  }catch(e){ console.error('updateTransaction error', e); showGlobalAlert('خطأ أثناء تحديث العملية', 'danger'); }
+  }catch(e){ console.error('updateTransaction error', e); showGlobalAlert('خطأ أثناء تحديث العملية', 'danger'); gaTrack('transaction_create_failed', { feature_name:'transactions', action_type:'update', failure_reason:'db_error', doc_type: type==='شراء' ? 'purchase' : 'sale' }); }
 }
 
 /* أدوات مساعدة | Utility functions */
@@ -821,6 +817,12 @@ function escapeHtml(str){ if(str===null||str===undefined) return ''; return Stri
 
 /* بدء التشغيل | Start application */
 initApp();
+</script>
+
+<!-- التحليلات المشتركة: نفس ملف التطبيق الحديث بلا تكرار | Shared analytics: the same file as the modern app, no duplication -->
+<script type="module">
+  import { initTags } from "/analytics/gtag.js";
+  initTags({ pageView: true });
 </script>
 
 </body>

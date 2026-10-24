@@ -1,0 +1,3400 @@
+/* ══════════════════════════════════════════════════════════════════════
+   PWA.css — كل CSS الجوال/PWA للمشروع (مُستخرج من globals.css).
+   مستورد بعد globals.css في layout.js. يحتوي فقط على بلوكات
+   الجوال (max-width) وقواعد سطر الإيصال المشتركة وتخطيط
+   بيانات المنشأة الثلاثي (إنجليزي يسار | القيمة وسطي هندسياً | عربي يمين).
+   @media print وبلوك عزل Desktop (min-width:768px) يبقيان في globals.css.
+   ══════════════════════════════════════════════════════════════════════ */
+
+
+/* ================= RESPONSIVE | التجاوب ================= */
+.app-header-actions .app-header-backup-settings {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.app-header-backup-settings > .dropdown,
+.app-header-backup-settings > #btnOpenSettings {
+  min-width: 0;
+}
+
+.app-header-backup-settings .dropdown .btn,
+.app-header-backup-settings > #btnOpenSettings {
+  width: 100%;
+}
+
+@media (max-width: 991px) {
+  .stats-row {
+    flex-direction: column;
+  }
+
+  .summary-item {
+    flex: 1 1 100%;
+  }
+}
+
+
+/* ================= RESPONSIVE | الجوال ================= */
+@media (max-width: 768px) {
+  .stats-row,
+  .summary-boxes {
+    gap: 14px;
+  }
+
+  .summary-boxes {
+    grid-template-columns: 1fr;
+    margin-top: 24px;
+  }
+
+  .summary-item {
+    width: 100%;
+    min-width: 0;
+    padding: 14px;
+  }
+
+  .stat-card,
+  .card {
+    padding: 14px;
+  }
+
+  .summary-item p {
+    font-size: 1.3rem;
+  }
+
+  .footer {
+    padding: 18px 12px;
+  }
+
+  .footer .d-flex {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+
+@media (max-width:576px){
+
+    header {
+        padding: 16px 10px;
+    }
+
+    .app-header-content {
+        justify-content: center !important;
+        text-align: center;
+    }
+
+    .app-header-content > div {
+        width: 100%;
+    }
+
+    /* أضفنا .d-flex ليرتفع التخصيص إلى (0,2,0) فيتغلب على قاعدة
+       .d-flex{display:flex!important} في Bootstrap (0,1,0) مهما ترتّب
+       تحميل الملفين، فتُطبَّق الشبكة فعلياً بدل بقاء الأزرار عمودية.
+       | Added .d-flex so specificity (0,2,0) beats Bootstrap's
+       .d-flex{display:flex!important} (0,1,0) regardless of file order,
+       so the grid actually applies instead of buttons staying vertical. */
+    .app-header-actions.d-flex {
+        width: 100%;
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px !important;
+        /* ارتفاعات صفوف موحّدة بلا بكسلات مخمّنة: نص زر النسخة أطول فيلتفّ
+           سطرين على الشاشات الضيقة فيزيد ارتفاعه عن زر «حول النظام»، و1fr
+           يمنح كل صفّي القسم ارتفاع أطول محتوى فيتساوى الزران تماماً
+           (وأزرار القسم كلها بارتفاع واحد) دون أي قصّ.
+           | Equal row heights with no guessed pixels: the longer backup
+           label wraps to two lines on narrow screens making its row taller
+           than About-System; 1fr gives every row of the section the tallest
+           content height so both buttons match exactly (and all section
+           buttons share one height) with no clipping. */
+        grid-auto-rows: 1fr;
+    }
+
+    /* حاوية الزوج (نسخ واستعادة + الإعدادات) تمتد على الصف كاملاً
+       وتوزّع زرّيها بالتساوي داخله | The pair wrapper spans the full
+       row and shares it equally between its two buttons */
+    .app-header-actions > .d-flex {
+        grid-column: 1 / -1;
+    }
+
+    /* موازنة عرض زر النسخ مع زر الإعدادات بالضبط: حصة متساوية من عرض
+       الحاوية بلا بكسلات ثابتة، مع السماح للنص بالالتفاف لسطرين بدل
+       القصّ (قاعدة .btn الافتراضية white-space:nowrap) | Balance the
+       copy button's width exactly with settings: equal shares of the
+       wrapper with no fixed pixels, and let the text wrap to two lines
+       instead of clipping (base .btn rule uses white-space:nowrap) */
+    .app-header-backup-settings > .dropdown,
+    .app-header-backup-settings > #btnOpenSettings {
+        min-width: 0;
+        white-space: normal;
+    }
+
+    .app-header-backup-settings .dropdown .btn,
+    .app-header-backup-settings > #btnOpenSettings {
+        white-space: normal;
+    }
+
+    /* تثبيت «حول النظام» و«عن المطور» متجاورين في الصف الأول مهما تغيّر ترتيب العناصر في DOM | Pin About-System and About-Developer side-by-side in the first row regardless of DOM order */
+    .app-header-actions [data-bs-target="#aboutModal"],
+    .app-header-actions [data-bs-target="#developerModal"] {
+        order: -1;
+    }
+
+    .app-header-actions .btn {
+        width: 100%;
+        min-width: 0;
+        padding: 0.45rem 0.55rem;
+        font-size: 0.82rem;
+        line-height: 1.25;
+    }
+
+    .app-header-actions .btn i {
+        font-size: 1rem;
+        flex: 0 0 auto;
+    }
+
+    .app-title{
+        font-size:1.35rem;
+    }
+
+    .app-subtitle{
+        font-size:.80rem;
+        line-height:1.5;
+        max-width:280px;
+        margin:auto;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+  .documents-section .nav-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .documents-section .nav-tabs .nav-item {
+    flex: 0 0 auto;
+  }
+
+  .documents-section .nav-tabs .nav-link {
+    padding: .4rem .75rem;
+    font-size: .82rem;
+  }
+
+  .documents-section .nav-tabs .nav-link i {
+    font-size: .8rem;
+  }
+}
+
+
+@media (max-width: 768px) {
+  #voucherModal .table td .voucher-line-account-wrapper .input-group-text,
+  #voucherModal .table td .voucher-line-account-wrapper .react-select__control,
+  #voucherModal .table td .voucher-line-account-wrapper .input-group .form-control,
+  #voucherModal .table td .voucher-line-account-wrapper .input-group .form-select,
+  #voucherModal .table td .voucher-line-account-wrapper .input-group .react-select-container {
+    height: 36px;
+  }
+
+  #voucherModal .table td .voucher-line-account-wrapper .input-group-text {
+    padding: 0 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  #voucherModal .table td .voucher-line-account-wrapper .voucher-line-account-type-container {
+    flex: 0 0 100px;
+    width: 100px;
+  }
+}
+
+
+/* Smaller screens: let selects wrap nicely */
+@media (max-width: 576px) {
+  .react-select-container { min-width: 120px; }
+  .react-select__control { height: 36px; }
+  /* In the transaction form, let selects shrink to fit their narrow
+     columns (type / party) instead of overflowing on small phones. */
+  .transaction-form .react-select-container { min-width: 0; }
+}
+
+
+@media (max-width:768px){
+
+#allItemsModal .page-header{
+    flex-direction:column;
+    align-items:flex-start;
+    padding:18px;
+}
+
+#allItemsModal .page-header-actions{
+    width:100%;
+}
+
+#allItemsModal .page-header-actions .btn{
+    width:100%;
+    justify-content:center;
+}
+
+#allItemsModal .page-toolbar{
+    flex-direction:column;
+    align-items:stretch;
+    padding:18px;
+}
+
+#allItemsModal .search-bar{
+    max-width:100%;
+}
+
+#allItemsModal .toolbar-actions{
+    width:100%;
+}
+
+#allItemsModal .toolbar-actions .btn{
+    width:100%;
+}
+}
+
+
+@media (max-width:768px){
+
+#productsModal .page-header{
+    flex-direction:column;
+    align-items:flex-start;
+    padding:18px;
+}
+
+#productsModal .page-header-actions{
+    width:100%;
+}
+
+#productsModal .page-header-actions .btn{
+    width:100%;
+    justify-content:center;
+}
+}
+
+
+/* -- Prevention: no accidental horizontal page overflow on small phones -- */
+@media screen and (max-width: 767px) {
+  html,
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  .container {
+    padding-inline: 0.75rem;
+    margin-top: 12px;
+  }
+
+  /* Keep all inputs at 16px on mobile to avoid iOS auto-zoom on focus */
+  .modal form input,
+  .modal form select,
+  .modal form textarea,
+  .modal .form-control-sm {
+    font-size: 16px;
+  }
+}
+
+/* -- Modals: near full width with small margins on mobile -- */
+@media screen and (max-width: 767px) {
+  .modal-dialog,
+  .modal-dialog.modal-lg,
+  .modal-dialog.modal-xl {
+    margin: 0.5rem 0.25rem;
+    max-width: calc(100vw - 0.5rem);
+  }
+
+  .modal-dialog-centered {
+    min-height: calc(100% - 1rem);
+  }
+}
+
+/* -- Invoice & voucher line tables: readable font + comfortable cells + touch targets -- */
+@media screen and (max-width: 767px) {
+  #salesInvoiceModal .table-responsive,
+  #purchaseInvoiceModal .table-responsive,
+  #voucherModal .table-responsive {
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 10px;
+    padding: 0.15rem;
+  }
+
+  #salesInvoiceModal .table-responsive table,
+  #purchaseInvoiceModal .table-responsive table,
+  #voucherModal .table-responsive table {
+    min-width: max-content;
+  }
+
+  #salesInvoiceModal .table-responsive td,
+  #purchaseInvoiceModal .table-responsive td,
+  #voucherModal .table-responsive td,
+  #salesInvoiceModal .table-responsive th,
+  #purchaseInvoiceModal .table-responsive th,
+  #voucherModal .table-responsive th {
+    padding: 0.4rem 0.35rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+  /* Inputs inside invoice/voucher lines stay 16px, readable, with room to tap */
+  #salesInvoiceModal .table-responsive .form-control,
+  #purchaseInvoiceModal .table-responsive .form-control,
+  #voucherModal .table-responsive .form-control,
+  #salesInvoiceModal .table-responsive .form-select,
+  #purchaseInvoiceModal .table-responsive .form-select,
+  #voucherModal .table-responsive .form-select,
+  #salesInvoiceModal .table-responsive .input-group-text,
+  #purchaseInvoiceModal .table-responsive .input-group-text,
+  #voucherModal .table-responsive .input-group-text {
+    font-size: 1rem;
+    height: 44px;
+  }
+
+  /* Row action buttons (scan / copy / delete / toggle): touch-friendly, not huge */
+  #salesInvoiceModal .table-responsive .btn,
+  #purchaseInvoiceModal .table-responsive .btn,
+  #voucherModal .table-responsive .btn {
+    min-width: 36px;
+    min-height: 36px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* The camera scan button stays compact but graspable */
+  #salesInvoiceModal .table-responsive [class$="-scan-product"],
+  #purchaseInvoiceModal .table-responsive [class$="-scan-product"],
+  #voucherModal .table-responsive [class$="-scan-product"] {
+    min-width: 38px;
+    min-height: 38px;
+    padding: 0;
+    flex: 0 0 auto;
+  }
+}
+
+/* -- Mobile: side margins removed on nested selects (party/invoice groups) -- */
+@media screen and (max-width: 767px) {
+  #voucherModal .voucher-line-account-wrapper .d-flex {
+    flex-wrap: wrap;
+  }
+
+  /* Allow voucher line account groups to stack vertically on phones
+     instead of forcing a 450px-wide horizontal scroll per line. */
+  #voucherModal .voucher-line-account-group {
+    min-width: 0;
+    flex-wrap: wrap;
+  }
+
+  #voucherModal .voucher-line-party-group,
+  #voucherModal .voucher-line-invoice-group {
+    flex: 1 1 auto;
+  }
+}
+
+/* -- Toolbars, section headers & card actions: wrap instead of squeeze -- */
+@media screen and (max-width: 767px) {
+  .card-header-actions,
+  .toolbar-actions,
+  .page-toolbar,
+  .documents-section .card-header-actions {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .documents-section {
+    padding: 0.75rem;
+  }
+
+  .btn.btn-doc-sm {
+    width: 38px;
+    height: 38px;
+  }
+
+  .invoice-header-tools,
+  .d-inline-flex.align-items-center {
+    flex-wrap: wrap;
+  }
+}
+
+/* -- Invoice/voucher header fields: stacked vertically on the smallest screens -- */
+@media screen and (max-width: 575px) {
+  #salesInvoiceModal .flex > .flex-item,
+  #purchaseInvoiceModal .flex > .flex-item,
+  #voucherModal .flex > .flex-item {
+    flex: 1 1 100%;
+  }
+
+  #salesInvoiceModal .form-group,
+  #purchaseInvoiceModal .form-group,
+  #voucherModal .form-group {
+    padding: 8px 10px;
+  }
+}
+
+/* -- Barcode scanner video: always fit the phone screen -- */
+@media screen {
+  #barcodeScannerReader video,
+  #quickBarcodeScannerView video {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+/* -- PWA standalone: respect notch / home-indicator safe areas (screen only) -- */
+@supports (padding: env(safe-area-inset-top)) {
+  @media screen and (max-width: 767px) {
+    .modal {
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .modal-dialog-scrollable .modal-content {
+      max-height: calc(
+        100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 1rem
+      );
+    }
+
+    .modal-footer {
+      padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+    }
+  }
+
+  @media screen {
+    header {
+      padding-top: max(18px, env(safe-area-inset-top));
+    }
+
+    .footer {
+      padding-bottom: max(18px, env(safe-area-inset-bottom));
+    }
+  }
+}
+
+
+@media screen and (max-width: 767px) {
+  /* Section headers with a title + action buttons wrap gracefully */
+  .documents-section > .d-flex,
+  .documents-section .d-flex.justify-content-between.align-items-center {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .documents-section .nav-tabs-bar {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  /* Action buttons: uniform height and touch-friendly, never tiny */
+  .card-header-actions {
+    flex-wrap: wrap;
+  }
+
+  .card-header-actions .btn,
+  .page-header-actions .btn,
+  .toolbar-actions .btn {
+    min-height: 38px;
+    white-space: nowrap;
+  }
+
+  /* Modal footer buttons never shrink or overlap */
+  .modal-footer {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .modal-footer .btn {
+    min-height: 38px;
+  }
+
+  /* Document/voucher details action bars wrap instead of overflowing */
+  #documentDetailsModal .d-flex.gap-1,
+  #voucherDetailsModal .d-flex.gap-1 {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  /* Inputs inside input/select groups keep a minimum width to avoid crushing */
+  .input-group .form-control,
+  .input-group .form-select,
+  .input-group .input-group-text {
+    min-width: 0;
+  }
+
+  /* Give the scan/viewer modal a comfortable full-width body */
+  #barcodeScannerModal .modal-body {
+    padding: 0.75rem;
+  }
+}
+
+/* Extra-tiny screens (320–360px): heading rows stack fully */
+@media screen and (max-width: 575px) {
+  .documents-section .d-flex.justify-content-between.align-items-center {
+    align-items: flex-start;
+  }
+
+  .documents-section .card-header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+
+@media screen and (max-width: 767px) {
+  /* Stack fields vertically — full width each — to avoid squeezed/overlapping
+     narrow columns (type/3, product/4, party/6). */
+  .transaction-form .col-4,
+  .transaction-form .col-8,
+  .transaction-form .col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  /* Uniform 38px height for every control, matching the adjacent + button */
+  .transaction-form .react-select__control {
+    height: 38px;
+    min-height: 38px;
+  }
+
+  .transaction-form .react-select__indicators {
+    height: 38px;
+  }
+
+  .transaction-form .form-control {
+    height: 38px;
+  }
+
+  /* Text must never leave the field bounds (covers the clipping/overlap issue) */
+  .transaction-form .react-select__value-container {
+    overflow: hidden;
+  }
+
+  .transaction-form .react-select__single-value {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* The + button keeps its fixed 38px size and aligns exactly with the select */
+  .transaction-form #btn-new-party {
+    height: 38px;
+    min-width: 38px;
+    width: 38px;
+    flex: 0 0 38px;
+  }
+
+  /* Save/cancel buttons: full-width, stacked, touch-friendly */
+  .transaction-form .col-12.d-flex.gap-2 {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .transaction-form .col-12.d-flex.gap-2 .btn {
+    min-height: 44px;
+    width: 100%;
+  }
+}
+
+
+@media screen and (max-width: 767px) {
+  /* React Select injects its styles via emotion DURING runtime — AFTER the
+     bundled CSS — so equal-specificity rules (.react-select__single-value)
+     LOSE the cascade. Scoping under .react-select-container raises specificity
+     to (0,2,0), which always beats emotion's (0,1,0) regardless of order. */
+  .react-select-container .react-select__control {
+    direction: rtl;
+  }
+
+  /* Replace emotion's GRID value-lane (which mis-anchors RTL text on WebKit/iOS)
+     with an explicit flex row: value first (RIGHT in RTL), caret after it. */
+  .react-select-container .react-select__value-container {
+    direction: rtl;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    text-align: right;
+    overflow: hidden;
+  }
+
+  /* Selected value: grows to fill the lane, text pinned to the right,
+     ellipsis only at the far left, never behind the indicators. */
+  .react-select-container .react-select__single-value {
+    direction: rtl;
+    text-align: right;
+    flex: 1 1 0%;
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Placeholder behaves identically so empty fields stay RTL too */
+  .react-select-container .react-select__placeholder {
+    direction: rtl;
+    text-align: right;
+    flex: 1 1 0%;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Caret input sits in its own lane on the far side and never pushes the value */
+  .react-select-container .react-select__input {
+    direction: rtl;
+    text-align: right;
+    flex: 0 0 auto;
+  }
+}
+
+
+@media screen and (max-width: 767px) {
+  .footer-actions {
+    gap: 0.4rem;
+  }
+
+  .support-card {
+    flex: 1 1 7.5rem;
+    max-width: 8.5rem;
+    min-width: 0;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .support-card svg,
+  .support-card i {
+    font-size: 1.05rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .support-card {
+    flex: 1 1 6.75rem;
+    padding: 0.35rem 0.5rem;
+  }
+}
+
+
+/* -- Document/Voucher PREVIEW: scrolls inside itself; page never scrolls laterally */
+@media screen and (max-width: 767px) {
+  #documentDetailsModal .invoice-preview,
+  #voucherDetailsModal .invoice-preview {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+
+  /* Widen preview invoice tables so they scroll horizontally instead of
+     crushing product names / totals into unusable cells. */
+  #documentDetailsModal .invoice-preview .invoice-table,
+  #voucherDetailsModal .invoice-preview .invoice-table {
+    table-layout: auto;
+    width: max-content;
+    min-width: 100%;
+  }
+
+  /* Preview header: logo + business info + barcode must wrap, never squeeze */
+  #documentDetailsModal .invoice-preview-header > .d-flex,
+  #voucherDetailsModal .invoice-preview-header > .d-flex {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  /* Info tiles take the full line on phones instead of 55/35 side-by-side */
+  #documentDetailsModal .invoice-info-grid-main,
+  #voucherDetailsModal .invoice-info-grid-main,
+  #documentDetailsModal .invoice-info-grid-side,
+  #voucherDetailsModal .invoice-info-grid-side {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  /* Voucher payment-history totals bar wraps instead of overflowing */
+  #documentDetailsModal .invoice-payment-history > div[style*="display:flex"],
+  #voucherDetailsModal .invoice-payment-history > div[style*="display:flex"] {
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+  }
+}
+
+/* -- React Select / select-with-clear inside invoice & voucher line tables:
+      no crushing, no overlap, controls match the 38px field height -- */
+@media screen and (max-width: 767px) {
+  #salesInvoiceModal td .react-select-container,
+  #purchaseInvoiceModal td .react-select-container,
+  #voucherModal td .react-select-container,
+  #salesInvoiceModal td .select-with-clear,
+  #purchaseInvoiceModal td .select-with-clear,
+  #voucherModal td .select-with-clear {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  #salesInvoiceModal td .react-select__control,
+  #purchaseInvoiceModal td .react-select__control,
+  #voucherModal td .react-select__control {
+    height: 38px;
+    min-height: 38px;
+  }
+
+  /* Legacy "account inputs" group (type/party/invoice): allow wrapping so the
+     three selects never force a 450px-wide cell on a 320px screen */
+  #salesInvoiceModal .account-inputs-group,
+  #purchaseInvoiceModal .account-inputs-group {
+    flex-wrap: wrap;
+  }
+}
+
+/* -- Voucher line account group: stack vertically on the smallest phones -- */
+@media screen and (max-width: 575px) {
+  #voucherModal .voucher-line-account-wrapper .d-flex {
+    flex-direction: column;
+    align-items: stretch;
+    row-gap: 0.35rem;
+  }
+}
+
+/* -- Toggle switches in option lists: label wraps, switch never squishes -- */
+@media screen and (max-width: 575px) {
+  #salesInvoiceModal .form-switch,
+  #purchaseInvoiceModal .form-switch,
+  #voucherModal .form-switch,
+  #fullEditProductModal .form-switch {
+    align-items: flex-start;
+  }
+
+  #salesInvoiceModal .form-switch .form-check-input,
+  #purchaseInvoiceModal .form-switch .form-check-input,
+  #voucherModal .form-switch .form-check-input,
+  #fullEditProductModal .form-switch .form-check-input {
+    flex: 0 0 auto;
+    margin-top: 0.15rem;
+  }
+}
+
+/* -- Modal body overflow guard: long names/selects/texts resolve inside the
+      modal — the page itself never scrolls horizontally -- */
+@media screen and (max-width: 767px) {
+  .modal-body {
+    min-width: 0;
+  }
+
+  .modal-body .form-label,
+  .modal-body .form-text {
+    overflow-wrap: break-word;
+  }
+}
+
+
+@media screen and (max-width: 767px) {
+
+  /* ── هيكل الجدول: قائمة بطاقات عمودية ─────────────────────────────────── */
+  .table-responsive table.table-hover,
+  table.parties-table {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .table-responsive table.table-hover > thead,
+  table.parties-table > thead {
+    display: none; /* لا عناوين أعمدة نهائيًا على الجوال */
+  }
+
+  .table-responsive table.table-hover > tbody,
+  table.parties-table > tbody {
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  /* ── البطاقة: Compact — padding مُحكَم ────────────────────────────────── */
+  .table-responsive table.table-hover > tbody > tr,
+  table.parties-table > tbody > tr {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0; /* عمودي لا شيء — كي تلتقي خطوط الفصل بين الخلايا المتجاورة في خط متصل */
+    margin: 0;
+    padding: 0.7rem 0.85rem;
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 14px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .table-responsive table.table-hover > tbody > tr:hover,
+  table.parties-table > tbody > tr:hover {
+    background: #fff;
+  }
+
+  /* ── الخلية: بلا تسميات — القيمة وحدها ────────────────────────────────── */
+  .table-responsive table.table-hover > tbody > tr > td,
+  table.parties-table > tbody > tr > td {
+    display: flex;
+    min-width: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: right;
+    white-space: normal;
+    overflow-wrap: break-word;
+    border: 0;
+    line-height: 1.4;
+  }
+
+  /* ــ افتراضيات الاتجاه لكل خلية مصنّفة: عمودية يمين (تُعيد تخصيصها المجموعات) ــ */
+  td[data-mcb-group="ref"],
+  td[data-mcb-group="date"],
+  td[data-mcb-group="info"],
+  td[data-mcb-group="finance"] {
+    flex-direction: column;
+    align-items: flex-start; /* يمين (RTL) */
+    gap: 0.05rem;
+  }
+
+  /* التاريخ والمبالغ تُحاذى يسارًا (RTL end) */
+  td[data-mcb-group="date"],
+  td[data-mcb-group="finance"] {
+    align-items: flex-end;
+  }
+
+  /* التسميات المُحقونة تبقى مخفية دائمًا (لا تسميات — لا Label+Value) */
+  .table-responsive table.table-hover td .mcb-label,
+  table.parties-table td .mcb-label {
+    display: none;
+  }
+
+  /* ─── المرجع: يمين أعلى، عريض وواضح ───────────────────────────────────── */
+  td[data-mcb-group="ref"] {
+    font-weight: 700;
+    font-size: 0.98rem;
+    color: #212529;
+  }
+
+  /* ─── التاريخ والوقت: يسار أعلى، أصغر وصامت ────────────────────────────── */
+  td[data-mcb-group="date"] {
+    align-items: flex-end; /* يسار (RTL end) */
+    font-size: 0.78rem;
+    color: #6c757d;
+  }
+
+  /* ─── المعلومات (العميل/البيان): يمين، مقروء ──────────────────────────── */
+  td[data-mcb-group="info"] {
+    font-size: 0.9rem;
+  }
+
+  /* ─── المالية: يسار، بارزة ────────────────────────────────────────────── */
+  td[data-mcb-group="finance"] {
+    align-items: flex-end; /* يسار (RTL end) */
+    font-size: 0.92rem;
+    font-weight: 600;
+  }
+
+  /* العنصر الأبرز (المبلغ): أكبر خط وأعلى وزن ─────────────────────────── */
+  td[data-mcb-group="finance"][data-mcb-size="lg"],
+  td[data-mcb-group="ref"][data-mcb-size="lg"] {
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: #212529;
+  }
+
+  /* ─── الحالة: Pills ناعمة تنساب في الأسفل ─────────────────────────────── */
+  td[data-mcb-group="status"] {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end; /* الشارة جهة اليسار */
+    gap: 0.3rem;
+    margin-top: 0.1rem;
+  }
+
+  td[data-mcb-group="status"] .badge {
+    border-radius: 999px;
+    padding: 0.3em 0.75em;
+    font-size: 0.72rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* ─── الإجراءات: هادئة وصغيرة أسفل البطاقة ─────────────────────────────── */
+  td[data-mcb-group="actions"] {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end; /* مجموعة الأزرار جهة اليسار */
+    gap: 0.35rem;
+    margin-top: 0.1rem;
+  }
+
+  td[data-mcb-group="actions"] .btn {
+    min-width: 34px;
+    min-height: 34px;
+    padding: 0.25rem 0.55rem;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+  }
+
+  /* ─── بطاقتا الطرف والضريبة: صفوف (تسمية يمين ← قيمة يسار) ────────────── */
+  #partiesModal .parties-table td[data-mcb-group="info"],
+  #partiesModal .parties-table td[data-mcb-group="finance"],
+  #partiesModal .parties-table td[data-mcb-group="status"],
+  #taxSettingsModal #savedTaxesTbody td[data-mcb-group="info"],
+  #taxSettingsModal #savedTaxesTbody td[data-mcb-group="status"] {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.35rem;
+    width: 100%;
+  }
+
+  /* التسميات ظاهرة في هذين الجدولين فقط، في الطرف الأول (يمين) */
+  #partiesModal .parties-table td .mcb-label,
+  #taxSettingsModal #savedTaxesTbody td .mcb-label {
+    display: inline-block;
+    flex: 0 0 auto;
+    margin-inline-end: auto; /* تُبعد القيمة إلى الطرف المقابل (يسار) */
+    color: #6c757d;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  /* القيمة الأساسية (الاسم) بارزة */
+  #partiesModal .parties-table td[data-mcb-group="info"],
+  #taxSettingsModal #savedTaxesTbody td[data-mcb-group="info"] {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #212529;
+  }
+
+  /* قيمة الرصيد: الرقم + وحدة العملة بجانبه */
+  #partiesModal .parties-table td[data-mcb-group="finance"] .open-party-statement {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+  }
+
+  #partiesModal .parties-table td[data-mcb-group="finance"] .open-party-statement::after {
+    content: "ريال";
+    order: 1;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #6c757d;
+  }
+
+  #partiesModal .parties-table td[data-mcb-group="finance"] .open-party-statement .bi-box-arrow-up-left {
+    order: 2;
+  }
+
+  /* ─── أزرار إجراءات جداول الأطراف والضرائب: مقاسات موحّدة ─────────────── */
+  #partiesModal .parties-table tbody tr,
+  #taxSettingsModal #savedTaxesTbody tr {
+    justify-content: flex-end; /* صف الأزرار في نهاية البطاقة (يسار RTL) */
+  }
+
+  #partiesModal .parties-table tbody td[data-mcb-group="actions"] .btn:not(.btn-link),
+  #taxSettingsModal #savedTaxesTbody td[data-mcb-group="actions"] .btn:not(.btn-link) {
+    min-width: 38px;
+    min-height: 38px;
+    height: 38px;
+    padding: 0 0.65rem;
+    font-size: 0.8rem;
+  }
+
+  /* زر تحرير الضريبة: مستطيل صغير خفيف */
+  #taxSettingsModal #savedTaxesTbody td[data-mcb-group="actions"] .btn.btn-edit-saved-tax {
+    min-width: 0;
+    min-height: 0;
+    height: 30px;
+    padding: 0 0.55rem;
+    gap: 0.25rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    border-radius: 6px;
+    background: rgba(var(--bs-primary-rgb), 0.06);
+    border: 1px solid rgba(var(--bs-primary-rgb), 0.32);
+    color: var(--bs-primary);
+  }
+
+  #taxSettingsModal #savedTaxesTbody td[data-mcb-group="actions"] .btn.btn-edit-saved-tax:hover,
+  #taxSettingsModal #savedTaxesTbody td[data-mcb-group="actions"] .btn.btn-edit-saved-tax:focus {
+    background: rgba(var(--bs-primary-rgb), 0.12);
+    border-color: rgba(var(--bs-primary-rgb), 0.55);
+    color: var(--bs-primary);
+  }
+
+  /* ─── بطاقة المنتج (جدول الأصناف الجانبي): موضع النصوص وأيقوناتها فقط ─── */
+  #productsTbody td[data-mcb-group="info"] {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #212529;
+  }
+
+  #productsTbody td[data-mcb-group="finance"] {
+    align-items: flex-start; /* السعر على اليمين كبقية السطور */
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+
+  #productsTbody .mcb-price-wrap {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  #productsTbody .mcb-price-wrap .mcb-prod-icon {
+    color: #198754;
+  }
+
+  #productsTbody .mcb-currency {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #6c757d;
+  }
+
+  /* المخزون: أيقونة + الشارة + الحالة، في بداية السطر (اليمين) */
+  #productsTbody td[data-mcb-group="status"] {
+    justify-content: flex-start;
+    gap: 0.35rem;
+  }
+
+  #productsTbody .mcb-prod-stock {
+    font-size: 0.95rem;
+    color: #6c757d;
+  }
+
+  #productsTbody .mcb-prod-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+
+  /* النقاط ⋯: ثلاث نقاط أفقية داخل/قرب دائرة خفيفة في الزاوية العلوية اليسرى */
+  #productsTbody td[data-mcb-group="actions"] .btn {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    background: #f1f3f4;
+    border: 1px solid #e9ecef;
+    color: #495057;
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  /* الاسم والنقاط في مستوى أفقي واحد: هيئة الدائرة تبقى قريبة من المنتصف */
+  #productsTbody td[data-mcb-group="actions"] {
+    align-items: center;
+    justify-content: flex-end; /* ⋯ في الطرف الأيسر مع الاسم على يمينه */
+  }
+
+  /* ─── بطاقة «عرض كل المنتجات» (نافذة قائمة المنتجات): نفس شكل بطاقة الرئيسية ─── */
+  #modalProductsTbody td.product-thumbnail-cell[data-mcb-size="thumb"] {
+    flex: 0 0 52px !important;
+    width: 52px;
+    min-width: 52px;
+    height: 52px;
+    align-items: center;
+    justify-content: center;
+    margin-inline-end: 0.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  #modalProductsTbody .product-table-thumb {
+    width: 52px !important;
+    height: 52px !important;
+    max-width: none;
+    margin: 0;
+    object-fit: contain;
+  }
+
+  #modalProductsTbody .product-thumbnail-placeholder {
+    display: inline-flex;
+    width: 52px;
+    height: 52px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    background: #fff;
+  }
+
+  #modalProductsTbody td[data-mcb-group="info"] {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #212529;
+  }
+
+  #modalProductsTbody td[data-mcb-group="status"] {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  #modalProductsTbody .mcb-prod-stock,
+  #modalProductsTbody .mcb-prod-stock-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+
+  #modalProductsTbody td[data-mcb-group="finance"] {
+    align-items: flex-start;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  #modalProductsTbody .mcb-prod-fin-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #6c757d;
+  }
+
+  #modalProductsTbody .mcb-price-wrap {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  #modalProductsTbody .mcb-price-wrap .mcb-prod-icon {
+    color: #198754;
+  }
+
+  #modalProductsTbody .mcb-currency {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #6c757d;
+  }
+
+  /* ⋯ الدائرة (زر القائمة) + قائمة عرض/تعديل — نفس وظائف الزرّين الأصليين */
+  #modalProductsTbody td[data-mcb-group="actions"] {
+    align-items: center;
+    justify-content: flex-end; /* القائمة في الطرف الأيسر مع الاسم على يمينه */
+  }
+
+  #modalProductsTbody .mcb-modal-dots .mcb-dots-btn {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    background: #f1f3f4;
+    border: 1px solid #e9ecef;
+    color: #495057;
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  #modalProductsTbody .mcb-modal-dots .dropdown-toggle::after {
+    display: none;
+  }
+
+  #modalProductsTbody .mcb-modal-dots .dropdown-menu {
+    font-size: 0.9rem;
+  }
+
+  /* ─── خط فصل خفيف بين أقسام البطاقة ───────────────────────────────────── */
+  td[data-mcb-sep] {
+    border-top: 1px solid #f1f3f4;
+    padding-top: 0.45rem;
+  }
+
+  /* ─── صف فارغ/تحميل: رسالة بعرض البطاقة ──────────────────────────────── */
+  .table-responsive table.table-hover > tbody > tr:has(> td[colspan]),
+  table.parties-table > tbody > tr:has(> td[colspan]) {
+    display: block;
+    padding: 0.5rem;
+    text-align: center;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .table-responsive table.table-hover > tbody > tr:has(> td[colspan]) > td,
+  table.parties-table > tbody > tr:has(> td[colspan]) > td {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* ─── صف ملخص (tfoot) ────────────────────────────────────────────────── */
+  .table-responsive table.table-hover > tfoot {
+    display: block;
+    margin-top: 0.65rem;
+  }
+
+  .table-responsive table.table-hover > tfoot > tr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.35rem 0.75rem;
+    margin: 0;
+    padding: 0.6rem 0.85rem;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+  }
+
+  .table-responsive table.table-hover > tfoot > tr > td {
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    text-align: right;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  /* ─── VIEWER: جدول بنود الفاتورة/السند → بطاقات معنونة ─── */
+  #documentDetailsModal .invoice-preview,
+  #voucherDetailsModal .invoice-preview {
+    overflow: visible;
+    max-width: 100%;
+  }
+
+  /* يسري على جدول البنود وجدول سجل المدفوعات داخل المعاينة */
+  #documentDetailsModal .invoice-preview .invoice-table,
+  #voucherDetailsModal .invoice-preview .invoice-table {
+    width: 100%;
+    min-width: 0;
+    table-layout: auto;
+    border-collapse: separate;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table thead,
+  #voucherDetailsModal .invoice-preview .invoice-table thead {
+    display: none;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tbody,
+  #documentDetailsModal .invoice-preview .invoice-table tfoot,
+  #voucherDetailsModal .invoice-preview .invoice-table tbody,
+  #voucherDetailsModal .invoice-preview .invoice-table tfoot {
+    display: block;
+    width: 100%;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tbody tr,
+  #voucherDetailsModal .invoice-preview .invoice-table tbody tr {
+    display: block;
+    margin-bottom: 0.65rem;
+    padding: 0.55rem 0.65rem;
+    background: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tbody td,
+  #voucherDetailsModal .invoice-preview .invoice-table tbody td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.3rem 0;
+    border: none;
+    white-space: normal;
+    text-align: start;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tbody td::before,
+  #voucherDetailsModal .invoice-preview .invoice-table tbody td::before {
+    content: attr(data-label);
+    flex: 0 0 auto;
+    font-size: 0.78rem;
+    color: var(--muted, #6c757d);
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tbody td[data-label="index"],
+  #voucherDetailsModal .invoice-preview .invoice-table tbody td[data-label="index"] {
+    display: none;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tbody td[data-label="البند"],
+  #voucherDetailsModal .invoice-preview .invoice-table tbody td[data-label="البند"] {
+    font-weight: 600;
+    padding-top: 0.45rem;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tbody td[data-label="الإجمالي"],
+  #voucherDetailsModal .invoice-preview .invoice-table tbody td[data-label="الإجمالي"] {
+    font-weight: 700;
+    color: var(--accent, #198754);
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr,
+  #voucherDetailsModal .invoice-preview .invoice-table tfoot tr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.3rem 0.75rem;
+    margin: 0 0 0.4rem;
+    padding: 0.5rem 0.75rem;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr th,
+  #voucherDetailsModal .invoice-preview .invoice-table tfoot tr th {
+    display: block;
+    border: none;
+    background: transparent;
+    color: #343a40;
+    min-width: 0;
+    padding: 0;
+    white-space: normal;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr th:last-child,
+  #voucherDetailsModal .invoice-preview .invoice-table tfoot tr th:last-child {
+    font-weight: 700;
+    color: var(--accent, #198754);
+  }
+
+  /* ─── EDITOR: صفوف أسطر الفواتير/السندات → صفوف مكدّسة ─── */
+  #salesInvoiceModal .table-responsive,
+  #purchaseInvoiceModal .table-responsive,
+  #voucherModal .table-responsive {
+    overflow: visible;
+    border: none;
+    padding: 0;
+  }
+
+  #salesInvoiceModal .table-responsive table,
+  #purchaseInvoiceModal .table-responsive table,
+  #voucherModal .table-responsive table {
+    min-width: 0;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  #salesInvoiceModal .table-responsive thead,
+  #purchaseInvoiceModal .table-responsive thead,
+  #voucherModal .table-responsive thead {
+    display: none;
+  }
+
+  #salesInvoiceModal .table-responsive tbody,
+  #purchaseInvoiceModal .table-responsive tbody,
+  #voucherModal .table-responsive tbody {
+    display: block;
+    width: 100%;
+  }
+
+  #salesInvoiceModal .table-responsive tbody tr,
+  #purchaseInvoiceModal .table-responsive tbody tr,
+  #voucherModal .table-responsive tbody tr {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 0.7rem;
+    margin-bottom: 1rem;
+    padding: 0.7rem 0.75rem;
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  #salesInvoiceModal .table-responsive tbody td,
+  #purchaseInvoiceModal .table-responsive tbody td,
+  #voucherModal .table-responsive tbody td {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.2rem;
+    min-width: 0;
+    padding: 0;
+    border: none;
+    white-space: normal;
+    vertical-align: middle;
+    text-align: start;
+  }
+
+  #salesInvoiceModal .table-responsive tbody td::before,
+  #purchaseInvoiceModal .table-responsive tbody td::before,
+  #voucherModal .table-responsive tbody td::before {
+    content: attr(data-label);
+    flex: 0 0 auto;
+    font-size: 0.72rem;
+    line-height: 1;
+    color: var(--muted, #6c757d);
+  }
+
+  #salesInvoiceModal .table-responsive tbody td[data-label="index"],
+  #purchaseInvoiceModal .table-responsive tbody td[data-label="index"],
+  #voucherModal .table-responsive tbody td[data-label="index"] {
+    display: none;
+  }
+
+  /* البند والكمية في سطر واحد: الكمية على اليمين (أول عنصر في صف RTL)
+     واسم المنتج يأخذ ما تبقّى على اليسار. basis=0 مقصود: بـ auto يتم
+     التفافهما إلى سطرين قبل أن يسمح Flexbox بالانكماص. */
+  #salesInvoiceModal .table-responsive tbody td[data-label="البند"],
+  #purchaseInvoiceModal .table-responsive tbody td[data-label="البند"],
+  #voucherModal .table-responsive tbody td[data-label="البند"] {
+    flex: 1 1 0%;
+    order: 2;
+    /* لا بد من تجاوز inline min-width:200px وإلا ضغط الحقل في 320px */
+    min-width: 0 !important;
+  }
+
+  #salesInvoiceModal .table-responsive tbody td[data-label="الكمية"],
+  #purchaseInvoiceModal .table-responsive tbody td[data-label="الكمية"],
+  #voucherModal .table-responsive tbody td[data-label="الكمية"] {
+    /* الكمية رقم قصير: حصة صغيرة تكفي، والفرق كله لصالح الاسم */
+    flex: 0 0 25%;
+    order: 1;
+    min-width: 0 !important;
+  }
+
+  /* زر المسح يضغط الاسم؛ نضيّقه (ويبقى فوق حدّ اللمس 24px) */
+  #salesInvoiceModal .table-responsive tbody td[data-label="البند"] button,
+  #purchaseInvoiceModal .table-responsive tbody td[data-label="البند"] button,
+  #voucherModal .table-responsive tbody td[data-label="البند"] button {
+    flex: 0 0 auto;
+    width: 34px;
+    padding-inline: 0;
+  }
+
+  /* سعر الوحدة يبقي تحتهما بعرض كامل */
+  #salesInvoiceModal .table-responsive tbody td[data-label="سعر الوحدة"],
+  #purchaseInvoiceModal .table-responsive tbody td[data-label="سعر الوحدة"] {
+    flex: 1 1 100%;
+    order: 3;
+  }
+
+  #voucherModal .table-responsive tbody td[data-label="المبلغ"] {
+    flex: 1 1 50%;
+    order: 3;
+  }
+
+  #salesInvoiceModal .table-responsive tbody td[data-label="الحساب"],
+  #purchaseInvoiceModal .table-responsive tbody td[data-label="الحساب"],
+  #voucherModal .table-responsive tbody td[data-label="الحساب"] {
+    flex: 1 1 100%;
+    order: 4;
+  }
+
+  #salesInvoiceModal .table-responsive tbody td[data-label="البيان"],
+  #purchaseInvoiceModal .table-responsive tbody td[data-label="البيان"],
+  #voucherModal .table-responsive tbody td[data-label="البيان"] {
+    flex: 1 1 100%;
+    order: 5;
+  }
+
+  #salesInvoiceModal .table-responsive tbody td[data-label="الخصم"],
+  #purchaseInvoiceModal .table-responsive tbody td[data-label="الخصم"],
+  #voucherModal .table-responsive tbody td[data-label="الخصم"] {
+    flex: 1 1 100%;
+    order: 6;
+  }
+
+  #salesInvoiceModal .table-responsive tbody td[data-label="الضريبة"],
+  #purchaseInvoiceModal .table-responsive tbody td[data-label="الضريبة"],
+  #voucherModal .table-responsive tbody td[data-label="الضريبة"] {
+    flex: 1 1 100%;
+    order: 7;
+  }
+
+  #salesInvoiceModal .table-responsive tbody td[data-label="المجموع"],
+  #purchaseInvoiceModal .table-responsive tbody td[data-label="المجموع"],
+  #voucherModal .table-responsive tbody td[data-label="المجموع"] {
+    flex: 0 0 44%;
+    order: 8;
+  }
+
+  #salesInvoiceModal .table-responsive tbody td[data-label="ضريبة المبلغ"],
+  #purchaseInvoiceModal .table-responsive tbody td[data-label="ضريبة المبلغ"],
+  #voucherModal .table-responsive tbody td[data-label="ضريبة المبلغ"] {
+    flex: 1 1 50%;
+    order: 9;
+  }
+
+  #salesInvoiceModal .table-responsive tbody td[data-label="الإجمالي"],
+  #purchaseInvoiceModal .table-responsive tbody td[data-label="الإجمالي"],
+  #voucherModal .table-responsive tbody td[data-label="الإجمالي"] {
+    flex: 1 1 100%;
+    order: 10;
+    padding-block-start: 0.35rem;
+    border-top: 1px dashed #dee2e6;
+  }
+
+  #salesInvoiceModal .table-responsive tbody td[data-label="الإجمالي"]::before,
+  #purchaseInvoiceModal .table-responsive tbody td[data-label="الإجمالي"]::before,
+  #voucherModal .table-responsive tbody td[data-label="الإجمالي"]::before {
+    font-weight: 700;
+    color: var(--accent, #198754);
+  }
+
+  /* أزرار الصف: صف واحد في نهاية البطاقة */
+  #salesInvoiceModal .table-responsive tbody td.line-action-cell,
+  #purchaseInvoiceModal .table-responsive tbody td.line-action-cell,
+  #voucherModal .table-responsive tbody td.line-action-cell {
+    flex: 1 1 100%;
+    order: 11;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+    padding-block-start: 0.35rem;
+    border-top: 1px dashed #dee2e6;
+  }
+
+  #salesInvoiceModal .table-responsive tbody td.line-action-cell .btn,
+  #purchaseInvoiceModal .table-responsive tbody td.line-action-cell .btn,
+  #voucherModal .table-responsive tbody td.line-action-cell .btn {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 44px;
+    border-radius: 10px;
+  }
+
+  /* الحقول تملأ عرض الخلية */
+  #salesInvoiceModal .table-responsive tbody td .input-group,
+  #purchaseInvoiceModal .table-responsive tbody td .input-group,
+  #voucherModal .table-responsive tbody td .input-group,
+  #salesInvoiceModal .table-responsive tbody td .select-with-clear,
+  #purchaseInvoiceModal .table-responsive tbody td .select-with-clear,
+  #voucherModal .table-responsive tbody td .select-with-clear,
+  #salesInvoiceModal .table-responsive tbody td .react-select-container,
+  #purchaseInvoiceModal .table-responsive tbody td .react-select-container,
+  #voucherModal .table-responsive tbody td .react-select-container {
+    width: 100%;
+  }
+
+  /* حساب السند: أعمدة نوع الحساب/الطرف/الفاتورة تتصفّف تحت بعضها */
+  #voucherModal .table-responsive tbody td[data-label="الحساب"] > .voucher-line-account-wrapper > .d-flex {
+    flex-wrap: wrap;
+  }
+  #voucherModal .table-responsive tbody td[data-label="الحساب"] > .voucher-line-account-wrapper > .d-flex > div {
+    flex: 1 1 100% !important;
+  }
+
+  /* نوع الحساب في محرر السند: يأخذ عرض الخلية كاملاً على الجوال
+     حتى تُعرض القيمة كاملة بلا قصّ (كان مربوطاً بعرض ثابت 100-120px
+     يتعارض مع min-width للـ Select فيقصّ النص إلى بضع وحدات CSS) */
+  #voucherModal .table-responsive tbody td[data-label="الحساب"] .voucher-line-account-type-container {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  /* حقول رأس المحرر (التاريخ/الشروط/الأيام/المرجع...) تتوزّع عمودياً
+     سطراً تحت سطر بدلاً من ضغط عدة حقول في صف واحد. العميل/المورد
+     كان بالفعل بعرض كامل — يبقى كذلك. */
+  #salesInvoiceModal .row.g-2.mb-3 .col-12 > .d-flex.flex-wrap.gap-2 > div,
+  #purchaseInvoiceModal .row.g-2.mb-3 .col-12 > .d-flex.flex-wrap.gap-2 > div,
+  #voucherModal .row.g-2.mb-3 .col-12 > .d-flex.flex-wrap.gap-2 > div {
+    flex: 1 1 100% !important;
+  }
+
+  /* حاويات الـ Select المُعاد بناؤها (React Select) تملأ عرض
+     الحقل/الخلية وتنهار بأمان في الحيز المتاح */
+  #salesInvoiceModal .reactized-select-container,
+  #purchaseInvoiceModal .reactized-select-container,
+  #voucherModal .reactized-select-container {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  /* لوحة التحكم تنمو عمودياً مع المحتوى بدلاً من قصّه بارتفاع ثابت */
+  #salesInvoiceModal .react-select-container .react-select__control,
+  #purchaseInvoiceModal .react-select-container .react-select__control,
+  #voucherModal .react-select-container .react-select__control {
+    height: auto;
+    min-height: 44px;
+  }
+
+  /* حاوية القيمة: inline height:38px من Select.jsx كان يقصّ الاسم الطويل
+     إلى شرائط بعرض بضعة بكسلات (نص يبدو عمودياً). height/min-height
+     يحتاجان !important لتجاوز Inline. */
+  #salesInvoiceModal .react-select-container .react-select__value-container,
+  #purchaseInvoiceModal .react-select-container .react-select__value-container,
+  #voucherModal .react-select-container .react-select__value-container {
+    height: auto !important;
+    min-height: 38px;
+    align-items: center;
+  }
+
+  /* حقل الإدخال المخفي كان يأخذ نصف العرض المتاح ويخنق القيمة */
+  #salesInvoiceModal .react-select-container .react-select__input-container,
+  #purchaseInvoiceModal .react-select-container .react-select__input-container,
+  #voucherModal .react-select-container .react-select__input-container {
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 30%;
+  }
+
+  /* القيمة المختارة (اسم العميل/البند/الحساب...) والـ placeholder:
+     نص كامل، يلتفّ لأسطر عند الطول بدلاً من القصّ بـ "…" */
+  #salesInvoiceModal .react-select-container .react-select__single-value,
+  #purchaseInvoiceModal .react-select-container .react-select__single-value,
+  #voucherModal .react-select-container .react-select__single-value,
+  #salesInvoiceModal .react-select-container .react-select__placeholder,
+  #purchaseInvoiceModal .react-select-container .react-select__placeholder,
+  #voucherModal .react-select-container .react-select__placeholder {
+    flex: 1 1 0%;
+    min-width: 0;
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: break-word;
+    line-height: 1.35;
+    padding-block: 4px;
+    font-size: 1rem;
+  }
+
+  /* مؤشرات القائمة/المسح تتمطط رأسياً لتوازي الحقل النامي */
+  #salesInvoiceModal .react-select-container .react-select__indicators,
+  #purchaseInvoiceModal .react-select-container .react-select__indicators,
+  #voucherModal .react-select-container .react-select__indicators {
+    height: auto;
+    align-self: stretch;
+  }
+
+  /* المؤشرات وحدها كانت تلتهم ~75px من 166px متاحة، فلم يبقَ للاسم إلا
+     61px (نص يبدو عمودياً). نضغطها على الجوال بدل قصّ الاسم. */
+  #salesInvoiceModal .react-select-container .react-select__indicators,
+  #purchaseInvoiceModal .react-select-container .react-select__indicators,
+  #voucherModal .react-select-container .react-select__indicators {
+    padding: 0;
+    gap: 0;
+  }
+
+  #salesInvoiceModal .react-select-container .react-select__indicator,
+  #purchaseInvoiceModal .react-select-container .react-select__indicator,
+  #voucherModal .react-select-container .react-select__indicator,
+  #salesInvoiceModal .react-select-container .react-select__dropdown-indicator,
+  #purchaseInvoiceModal .react-select-container .react-select__dropdown-indicator,
+  #voucherModal .react-select-container .react-select__dropdown-indicator {
+    padding: 0 3px;
+  }
+
+  #salesInvoiceModal .react-select-container .react-select__indicator svg,
+  #purchaseInvoiceModal .react-select-container .react-select__indicator svg,
+  #voucherModal .react-select-container .react-select__indicator svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* جهة الاتصال والسند (مدفوع من): الحقل المتبقي ينكمش ويمتلئ العرض
+     دون تجاوز الحقل المجاور */
+  #voucherModal .input-group .select-with-clear.flex-grow-1 {
+    min-width: 0;
+  }
+
+  /* رأس السند على الجوال: «نوع الجهة» (آخر/عميل/مورد) يأخذ صفاً مستقلاً
+     بكامل العرض، ويأتي اسم الجهة (العميل/المورد) بعده في صف مستقل بعرض
+     كامل بمحاذاة بقية حقول الرأس (التاريخ/المرجع) — بدل ضغطه في بقايا
+     عرض الحصة الثابتة 120px مع مصدرارتفاع 44px لا يطابق بقية الحقول 38px */
+  #voucherModal .form-group:has(#voucherPartyType) .input-group {
+    flex-wrap: wrap;
+    row-gap: 0.25rem;
+    align-items: stretch;
+  }
+
+  #voucherModal .form-group:has(#voucherPartyType) .select-with-clear.flex-grow-0 {
+    flex: 1 1 auto !important;
+    min-width: 0;
+  }
+
+  #voucherModal .form-group:has(#voucherPartyType) .input-group > .form-control,
+  #voucherModal .form-group:has(#voucherPartyType) .select-with-clear.flex-grow-1 {
+    flex: 1 1 100% !important;
+    min-width: 0;
+  }
+
+  /* بند/منتج السطر: النص يأخذ المساحة الأكبر والأزرار بجانبه بحجم
+     مسّ ثابت ومناسب (42px) */
+  #salesInvoiceModal .table-responsive tbody td[data-label="البند"] .btn,
+  #purchaseInvoiceModal .table-responsive tbody td[data-label="البند"] .btn,
+  #voucherModal .table-responsive tbody td[data-label="البند"] .btn {
+    flex: 0 0 44px;
+    width: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  /* ─── رأس الفاتورة (بيع/شراء): العميل/المورد أولاً، ثم التاريخ/المرجع ─── */
+  #salesInvoiceModal .row.g-2.mb-3 .col-12 > .d-flex.flex-wrap.gap-2 > div:has(#saleInvCustomer),
+  #purchaseInvoiceModal .row.g-2.mb-3 .col-12 > .d-flex.flex-wrap.gap-2 > div:has(#purchaseInvSupplier) {
+    order: 1;
+  }
+
+  #salesInvoiceModal .row.g-2.mb-3 .col-12 > .d-flex.flex-wrap.gap-2 > div:has(#saleInvDate),
+  #purchaseInvoiceModal .row.g-2.mb-3 .col-12 > .d-flex.flex-wrap.gap-2 > div:has(#purchaseInvDate) {
+    order: 2;
+  }
+
+  #salesInvoiceModal .row.g-2.mb-3 .col-12 > .d-flex.flex-wrap.gap-2 > div:has(#saleInvRef),
+  #purchaseInvoiceModal .row.g-2.mb-3 .col-12 > .d-flex.flex-wrap.gap-2 > div:has(#purchaseInvRef) {
+    order: 3;
+  }
+
+  #salesInvoiceModal .row.g-2.mb-3 .col-12 > .d-flex.flex-wrap.gap-2 > div:has(#saleInvPaymentTerms),
+  #purchaseInvoiceModal .row.g-2.mb-3 .col-12 > .d-flex.flex-wrap.gap-2 > div:has(#purchaseInvPaymentTerms) {
+    order: 4;
+  }
+
+  #salesInvoiceModal .row.g-2.mb-3 .col-12 > .d-flex.flex-wrap.gap-2 > div:has(#saleInvDays),
+  #purchaseInvoiceModal .row.g-2.mb-3 .col-12 > .d-flex.flex-wrap.gap-2 > div:has(#purchaseInvDays) {
+    order: 5;
+  }
+
+  #salesInvoiceModal .row.g-2.mb-3 .col-12 > .d-flex.flex-wrap.gap-2 > div#saleInvDueDateGroup {
+    order: 6;
+  }
+
+  #salesInvoiceModal .row.g-2.mb-3 .col-12 > .d-flex.flex-wrap.gap-2 > div:has(#saleInvShippingAddress),
+  #purchaseInvoiceModal .row.g-2.mb-3 .col-12 > .d-flex.flex-wrap.gap-2 > div:has(#purchaseInvShippingAddress) {
+    order: 7;
+  }
+
+  #salesInvoiceModal .row.g-2.mb-3 .col-12 > .d-flex.flex-wrap.gap-2 > div:has(#saleInvDescription),
+  #purchaseInvoiceModal .row.g-2.mb-3 .col-12 > .d-flex.flex-wrap.gap-2 > div:has(#purchaseInvDescription) {
+    order: 8;
+  }
+
+  /* ─── السند: ترتيب الأقسام في السند (جهة الاتصال → التاريخ → مدفوع من →
+         البيان → البنود → الخيارات) عبر flex column على modal-body ─── */
+  #voucherModal .modal-body {
+    display: flex;
+    flex-direction: column;
+  }
+  #voucherModal .modal-body > div:has(#voucherPartyType) { order: 1; }
+  #voucherModal .modal-body > div:has(#voucherDate)      { order: 2; }
+  #voucherModal .modal-body > div:has(#voucherAccountType) { order: 3; }
+  #voucherModal .modal-body > div:has(#voucherDescription) { order: 4; }
+  #voucherModal .modal-body > .table-responsive  { order: 5; }
+  #voucherModal .modal-body > #btnAddVoucherLine { order: 6; }
+  #voucherModal .modal-body > .card              { order: 7; }
+
+  /* ─── زر "إضافة سطر": العنصر الرئيسي البارز في منطقة البنود ─── */
+  #salesInvoiceModal #saleInvLinesBodyAddLine,
+  #purchaseInvoiceModal #purchaseInvAddLine,
+  #voucherModal #btnAddVoucherLine {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--accent, #198754);
+    border: 1px solid var(--accent, #198754);
+    border-radius: 12px;
+  }
+
+  #salesInvoiceModal #saleInvLinesBodyAddLine .bi,
+  #purchaseInvoiceModal #purchaseInvAddLine .bi,
+  #voucherModal #btnAddVoucherLine .bi {
+    font-size: 1.15rem;
+  }
+}
+
+/* شاشات صغيرة جداً: عمود واحد كامل لكل حقل في بطاقة السطر
+   بدل إقران السعر/المجموع أو الضريبة في صف واحد.
+   «الكمية» مستثناة عمداً: تبقى مع «البند» في سطر واحد (اليمين/اليسار)
+   لأن تلاصقهما هو ما يجعل الصف مقروءاً على الجوال. */
+@media screen and (max-width: 575px) {
+  #salesInvoiceModal .table-responsive tbody td[data-label="سعر الوحدة"],
+  #purchaseInvoiceModal .table-responsive tbody td[data-label="سعر الوحدة"],
+  #voucherModal .table-responsive tbody td[data-label="المبلغ"],
+  #salesInvoiceModal .table-responsive tbody td[data-label="المجموع"],
+  #purchaseInvoiceModal .table-responsive tbody td[data-label="المجموع"],
+  #voucherModal .table-responsive tbody td[data-label="المجموع"],
+  #salesInvoiceModal .table-responsive tbody td[data-label="ضريبة المبلغ"],
+  #purchaseInvoiceModal .table-responsive tbody td[data-label="ضريبة المبلغ"],
+  #voucherModal .table-responsive tbody td[data-label="ضريبة المبلغ"] {
+    flex: 1 1 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  td[data-mcb-group="info"][data-mcb-size="paired"] {
+    align-items: flex-end;
+  }
+}
+
+
+@media (max-width: 400px) {
+  .barcode-scanner-draft .draft-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Mobile tax-invoice card | بطاقة فاتورة الجوال — ترتيب أعضاء البطاقة بـ order/flex فقط داخل @media الجوال؛ Desktop والطباعة بلا مساس */
+
+/* عناوين/رسوم Desktop الأصلية؛ التنسيق الطولي للجوال/الإيصال داخل @media الجوال فقط */
+
+@media screen and (max-width: 767px) {
+
+  /* ─── بطاقة الفاتورة: عمود مرن لإعادة ترتيب الأقسام ومسافات مريحة ─── */
+  #documentDetailsModal .invoice-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 1rem;
+    border-radius: 16px;
+  }
+
+  /* الرأس يذوب (display:contents)؛ ترتيب أعضائه عبر order فقط */
+  #documentDetailsModal .invoice-preview-header {
+    display: contents;
+  }
+
+  /* ─── 1) عنوان نوع المستند: لافتة واضحة أعلى البطاقة ─── */
+  #documentDetailsModal .invoice-preview-header > .invoice-doc-title {
+    display: block;
+    order: 1;
+    text-align: center;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--accent, #198754);
+    background: #eaf6f0;
+    border: 1px solid #cfe6d8;
+    border-radius: 999px;
+    padding: 0.5rem 0.75rem;
+    margin: 0;
+  }
+
+  /* ─── 2) بيانات النشاط (الشعار/الاسم/العنوان/الضريبي) ─── */
+  #documentDetailsModal .invoice-preview-header > .d-flex {
+    order: 2;
+    flex: 1 1 100%;
+    justify-content: center;
+    text-align: center;
+    gap: 0.6rem;
+  }
+
+  #documentDetailsModal .invoice-preview-header > .d-flex .invoice-logo {
+    max-height: 56px;
+  }
+
+  #documentDetailsModal .invoice-preview-header > .d-flex > div {
+    text-align: center;
+  }
+
+  /* ─── 3,4) شبكتا معلومات (العميل/التاريخ، عنوان التسليم/الاستحقاق) ─── */
+  #documentDetailsModal .invoice-preview .invoice-info-grid {
+    order: 3;
+    width: 100%;
+    margin: 0 !important;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-info-grid[style*="margin"] {
+    order: 4;
+  }
+
+  /* ─── 5) جدول البنود: بطاقات معنونة ملائمة للجوال ─── */
+  #documentDetailsModal .invoice-preview .invoice-table {
+    order: 5;
+    margin-bottom: 0;
+    border-collapse: separate;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tbody tr {
+    padding: 0.6rem 0.7rem;
+    border-radius: 12px;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tbody td {
+    min-width: 0;
+  }
+
+  /* اسم المنتج: العنصر الرئيسي في بطاقة البند — عريض بلا تسمية */
+  #documentDetailsModal .invoice-preview .invoice-table tbody td[data-label="البند"] {
+    flex: 1 1 100%;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #212529;
+    padding-block: 0.1rem 0.35rem;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tbody td[data-label="البند"]::before {
+    content: none;
+  }
+
+  /* الكمية + سعر الوحدة: إقران في صف واحد لتوفير المساحة */
+  #documentDetailsModal .invoice-preview .invoice-table tbody td[data-label="الكمية"],
+  #documentDetailsModal .invoice-preview .invoice-table tbody td[data-label="سعر الوحدة"] {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  /* إجمالي البند: بارز في نهاية بطاقة البند */
+  #documentDetailsModal .invoice-preview .invoice-table tbody td[data-label="الإجمالي"] {
+    flex: 1 1 100%;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--accent, #198754);
+    border-top: 1px dashed #dee2e6;
+    margin-top: 0.4rem;
+    padding-top: 0.4rem;
+  }
+
+  /* ─── ملخص المبالغ: عمود خالٍ من البطاقات الصغيرة ─── */
+  #documentDetailsModal .invoice-preview .invoice-table tfoot {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 100%;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr th {
+    display: block;
+    border: none;
+    background: transparent;
+    padding: 0;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #343a40;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr th:first-child {
+    text-align: start;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr th:last-child {
+    text-align: end;
+    font-weight: 700;
+    color: #343a40;
+  }
+
+  /* المجموع قبل الضريبة — تسمية أوضح للجوال (نص بديل عبر ::after) */
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .subtotal-row th:first-child,
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .total-row th:first-child {
+    font-size: 0;
+    line-height: 0;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .subtotal-row th:first-child::after {
+    content: "المجموع قبل الضريبة";
+    font-size: 0.92rem;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  /* اسم الضريبة الفعلي من الإعدادات — label حيّ، لا نص ثابت */
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .tax-row th:first-child {
+    font-size: 0.92rem;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .total-row th:first-child::after {
+    content: "الإجمالي النهائي";
+    font-size: 1rem;
+    line-height: 1.4;
+    font-weight: 700;
+  }
+
+  /* صف الضريبة ظاهر على الجوال فقط (جديد — محجوب بـ Desktop/الطباعة) */
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .tax-row {
+    display: flex;
+    border-bottom: 1px dashed #dee2e6;
+    padding-bottom: 0.45rem;
+  }
+
+  /* الإجمالي النهائي: صندوق بارز بخلفية خضراء داكنة ونص أبيض */
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .total-row {
+    display: flex;
+    background: #146c43;
+    border-radius: 14px;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 2px 6px rgba(20, 108, 67, 0.25);
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .total-row th {
+    color: #ffffff;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .total-row th:last-child {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #ffffff;
+  }
+
+  /* ─── 6) حالة الدفع وطريقة الدفع: أسفل ملخص المبالغ مباشرة ─── */
+  #documentDetailsModal .invoice-preview .invoice-payment-summary {
+    order: 11;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    background: #f8f9fa;
+    border: 1px dashed #dee2e6;
+    border-radius: 12px;
+    padding: 0.6rem 0.75rem;
+    margin-top: 0;
+  }
+
+/* حالة الفاتورة: عمود Desktop الجانبي؛ على الجوال تُخفى وتظهر ضمن كتلة الدفع */
+  #documentDetailsModal .invoice-preview .invoice-info-grid-side .invoice-status {
+    display: none;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-payment-summary-item {
+    flex: 1 1 50%;
+    min-width: 0;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-payment-summary-item .info-tile-label {
+    font-size: 0.78rem;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-payment-status,
+  #documentDetailsModal .invoice-preview .invoice-payment-method {
+    font-size: 0.92rem;
+  }
+
+  /* ─── سجل المدفوعات: بطاقة بارزة منفصلة ─── */
+  #documentDetailsModal .invoice-preview .invoice-payment-history {
+    order: 6;
+    width: 100%;
+    margin-top: 0 !important;
+    border-top: 1px dashed #dee2e6;
+    padding-top: 0.85rem;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-payment-history > div[style*="display:flex"] {
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 0.6rem 0.75rem;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-payment-history > div[style*="display:flex"] > div {
+    flex: 1 1 auto;
+    min-width: 120px;
+    text-align: right;
+  }
+
+  /* ─── 7) ملاحظات/تذييل الفاتورة ─── */
+  #documentDetailsModal .invoice-preview .invoice-notes,
+  #documentDetailsModal .invoice-preview .invoice-footer {
+    order: 7;
+    width: 100%;
+  }
+
+  /* ─── 8) رقم الفاتورة + الباركود/QR: أسفل البطاقة، واضح وغير مقطوع ─── */
+  #documentDetailsModal .invoice-preview-header > .text-center:not(.invoice-barcode-top) {
+    order: 99;
+    width: 100%;
+    border-top: 1px dashed #dee2e6;
+    padding-top: 0.85rem;
+    margin-top: 0.25rem;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-barcode-wrap {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0.7rem 0.5rem;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-barcode-wrap svg {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* ─── أزرار المستند (تعديل/طباعة/.../سند قبض/سند صرف):
+       تنسيق زر «سند القبض» — عرض ذاتي متناسق، Padding مناسب،
+       Touch-friendly وبارتفاع مساوٍ لزر التعديل. الأيقونة وحدثها
+       كما هما (لا تغيير في Event Handler). */
+  #documentDetailsModal .d-flex.gap-1.justify-content-center.p-2.border-bottom {
+    flex-wrap: wrap;
+    row-gap: 0.4rem;
+  }
+
+  #documentDetailsModal .btn.btn-doc-receipt,
+  #documentDetailsModal .btn.btn-doc-payment {
+    width: auto;
+    height: 38px;
+    min-height: 38px;
+    padding: 0 0.8rem;
+    font-size: 0.85rem;
+    gap: 0.4rem;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+  }
+
+  #documentDetailsModal .btn.btn-doc-receipt .bi,
+  #documentDetailsModal .btn.btn-doc-payment .bi {
+    font-size: 0.95rem;
+  }
+}
+
+/* الجوال الفائق الضيق: خلايا الحقول تعود عموداً كاملة حتى لا تتزاحم */
+@media screen and (max-width: 400px) {
+  #documentDetailsModal .invoice-preview .invoice-table tbody td[data-label="الكمية"],
+  #documentDetailsModal .invoice-preview .invoice-table tbody td[data-label="سعر الوحدة"] {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+/* Simplified tax invoice | فاتورة ضريبية مبسطة — Mobile only: رأس نظيف، جدول ثلاثي الأعمدة، ملخص بارز، الحالة ثم الباركود. داخل #documentDetailsModal فقط — Desktop والطباعة بلا مساس */
+
+@media screen and (max-width: 767px) {
+
+  /* ─── بطاقة الفاتورة: عمود مرن بمسافات مضغوطة ─── */
+  #documentDetailsModal .invoice-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 0.9rem 0.85rem;
+    border-radius: 16px;
+  }
+
+  /* ذوبان الرأس وشبكة معلومات العميل لتشارك أولادُها في ترتيب البطاقة (شبكة العنوان/الاستحقاق تُبقي ترتيبها) */
+  #documentDetailsModal .invoice-preview-header,
+  #documentDetailsModal .invoice-preview .invoice-info-grid:not([style]),
+  #documentDetailsModal .invoice-preview .invoice-info-grid:not([style]) .invoice-info-grid-side {
+    display: contents;
+  }
+
+  /* ─── 1) عنوان نوع المستند: عنوان واضح بلا "كعب" ─── */
+  #documentDetailsModal .invoice-preview-header > .invoice-doc-title {
+    order: 1;
+    display: block;
+    text-align: center;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #212529;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid var(--accent, #198754);
+    border-radius: 0;
+    padding: 0 0 0.35rem;
+    margin: 0;
+  }
+
+  /* ─── 2) بيانات النشاط: الشعار/اسم المتجر/المعلومات التجارية ─── */
+  #documentDetailsModal .invoice-preview-header > .d-flex {
+    order: 2;
+    flex: 1 1 100%;
+    justify-content: center;
+    text-align: center;
+    gap: 0.55rem;
+  }
+
+  #documentDetailsModal .invoice-preview-header > .d-flex .invoice-logo {
+    max-height: 52px;
+  }
+
+  /* ─── 3) رقم الفاتورة + التاريخ: صف مضغوط واضح ─── */
+  #documentDetailsModal .invoice-preview-header > .invoice-meta {
+    order: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0 0.45rem;
+    border-bottom: 1px dashed #dee2e6;
+    font-size: 0.82rem;
+    color: #495057;
+  }
+
+  #documentDetailsModal .invoice-preview-header > .invoice-meta .invoice-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  #documentDetailsModal .invoice-preview-header > .invoice-meta .invoice-meta-item b {
+    color: var(--muted, #6c757d);
+    font-weight: 600;
+  }
+
+  /* ─── 4) العميل/المورد: بلاطة واحدة بعرض كامل ─── */
+  #documentDetailsModal .invoice-preview .invoice-info-grid:not([style]) > .invoice-info-grid-main {
+    order: 4;
+    flex: 1 1 100%;
+  }
+
+  /* بلاطة تاريخ الإصدار المكررة (الرقم+التاريخ أعلاه) محجوبة */
+  #documentDetailsModal .invoice-preview .invoice-info-grid:not([style]) .invoice-info-grid-side .info-tile {
+    display: none;
+  }
+
+  /* ─── 5) شبكة عنوان التسليم/الاستحقاق: تعمّد بلا ذوبان ─── */
+  #documentDetailsModal .invoice-preview .invoice-info-grid[style] {
+    order: 5;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 100%;
+    margin: 0 0 0.25rem !important;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-info-grid[style] .info-tile {
+    flex: 1 1 100%;
+  }
+
+  /* ─── 10) جدول بنود المنتجات: صفّان مصغّران (منتج / كمية / سعر) ─── */
+  #documentDetailsModal .invoice-preview .invoice-table {
+    order: 10;
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 0;
+  }
+
+  /* ترويسة مصغّرة: تُظهر الأعمدة الثلاثة فقط (بنود/كمية/سعر) */
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) thead {
+    display: flex;
+    gap: 0;
+    background: transparent;
+    border-bottom: 1px solid #dee2e6;
+    padding: 0 0 0.35rem;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) thead th {
+    display: none;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--muted, #6c757d);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) thead th:nth-child(2) {
+    display: flex;
+    flex: 1 1 58%;
+    text-align: start;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) thead th:nth-child(3),
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) thead th:nth-child(4) {
+    display: flex;
+    flex: 0 0 21%;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) thead .bilingual-en {
+    display: none;
+  }
+
+  /* صفوف البنود: صف واحد منسّق (58% منتج / 21% كمية / 21% سعر) */
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody tr {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin: 0;
+    padding: 0.5rem 0;
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed #e9ecef;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    padding: 0;
+    border: none;
+    text-align: center;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td::before {
+    content: none;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="البند"] {
+    flex: 1 1 58%;
+    max-width: 58%;
+    justify-content: flex-start;
+    text-align: start;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #212529;
+    overflow-wrap: anywhere;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="الكمية"],
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="سعر الوحدة"] {
+    flex: 0 0 21%;
+    font-size: 0.82rem;
+  }
+
+  /* بقية حقول البند محجوبة؛ القيم المجمعة تظهر في ملخص المبالغ */
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="الخصم"],
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="القيمة"],
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="الضريبة"],
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="مبلغ الضريبة"],
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="الإجمالي"] {
+    display: none !important;
+  }
+
+  /* ─── ملخص المبالغ: المجموع قبل الضريبة ← الضريبة ← الإجمالي النهائي ─── */
+  #documentDetailsModal .invoice-preview .invoice-table tfoot {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    width: 100%;
+    margin-top: 0.35rem;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr th {
+    display: block;
+    border: none;
+    background: transparent;
+    padding: 0;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #343a40;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr th:first-child {
+    text-align: start;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr th:last-child {
+    text-align: end;
+    font-weight: 700;
+    color: #343a40;
+  }
+
+  /* تسميات أوضح للجوال (نص بديل عبر ::after) */
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .subtotal-row th:first-child,
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .total-row th:first-child {
+    font-size: 0;
+    line-height: 0;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .subtotal-row th:first-child::after {
+    content: "المجموع قبل الضريبة";
+    font-size: 0.92rem;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  /* اسم الضريبة الفعلي من الإعدادات — label حيّ، لا نص ثابت */
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .tax-row th:first-child {
+    font-size: 0.92rem;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .total-row th:first-child::after {
+    content: "الإجمالي النهائي";
+    font-size: 1rem;
+    line-height: 1.4;
+    font-weight: 700;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .tax-row {
+    display: flex;
+    border-bottom: 1px dashed #dee2e6;
+    padding-bottom: 0.45rem;
+  }
+
+  /* الإجمالي النهائي: صندوق بارز بخلفية داكنة عالية التباين */
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .total-row {
+    display: flex;
+    background: #146c43;
+    border-radius: 14px;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 2px 6px rgba(20, 108, 67, 0.25);
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .total-row th {
+    color: #ffffff;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .total-row th:last-child {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #ffffff;
+  }
+
+  /* ─── 20) حالة الدفع وطريقة الدفع: أسفل ملخص المبالغ مباشرة ─── */
+  #documentDetailsModal .invoice-preview .invoice-payment-summary {
+    order: 11;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    background: #f8f9fa;
+    border: 1px dashed #dee2e6;
+    border-radius: 12px;
+    padding: 0.6rem 0.75rem;
+    margin-top: 0.2rem;
+  }
+
+/* حالة الفاتورة: عمود Desktop الجانبي؛ على الجوال تُخفى وتظهر ضمن كتلة الدفع */
+  #documentDetailsModal .invoice-preview .invoice-info-grid-side .invoice-status {
+    display: none;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-payment-summary-item {
+    flex: 1 1 50%;
+    min-width: 0;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-payment-summary-item .info-tile-label {
+    font-size: 0.78rem;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-payment-status,
+  #documentDetailsModal .invoice-preview .invoice-payment-method {
+    font-size: 0.92rem;
+  }
+
+  /* ─── 21) سجل المدفوعات ─── */
+  #documentDetailsModal .invoice-preview .invoice-payment-history {
+    order: 21;
+    width: 100%;
+  }
+
+  /* ─── 22) ملاحظات/تذييل الفاتورة ─── */
+  #documentDetailsModal .invoice-preview .invoice-notes,
+  #documentDetailsModal .invoice-preview .invoice-footer {
+    order: 22;
+    width: 100%;
+    margin-top: 0;
+  }
+
+  /* ─── 99) شريط الإغلاق (إن كان المستند مغلقاً) ─── */
+  #documentDetailsModal .invoice-preview .invoice-closed-badge {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: #dc3545;
+    color: #ffffff;
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+  }
+
+  /* ─── 99) الباركود/QR: أسفل الأقسام كلها، واضح وغير مقطوع ─── */
+  #documentDetailsModal .invoice-preview-header > .text-center:not(.invoice-barcode-top) {
+    order: 99;
+    width: 100%;
+    border-top: 1px dashed #dee2e6;
+    padding-top: 0.7rem;
+    margin-top: 0.2rem;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-barcode-wrap {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0.4rem 0.5rem;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-barcode-wrap svg {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-barcode-wrap .invoice-number {
+    font-size: 0.85rem;
+  }
+  }
+
+
+@media screen and (max-width: 767px) {
+  .pdf-doc-chooser {
+    right: auto;
+    left: 0;
+    min-width: 160px;
+  }
+
+  .pdf-doc-option {
+    font-size: 0.84rem;
+    padding: 9px 10px;
+  }
+}
+
+/* Mobile receipt | إيصال الجوال = نسخة Thermal 80mm مستقلة عن Desktop — ترتيب display:contents + order داخل #documentDetailsModal فقط */
+@media screen and (max-width: 767px) {
+
+  /* إيصال الجوال — تصوير الطباعة الحرارية 80mm (مستقل عن Desktop): أبيض/أسود بلا زخارف، الترتيب بـ display:contents + order داخل #documentDetailsModal فقط */
+  #documentDetailsModal .invoice-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 3px;
+    padding: 10px 12px 12px;
+    border: 1px solid #000;
+    border-radius: 0;
+    margin: 0;
+    background: #fff;
+    color: #000;
+    font-size: 12.5px;
+    line-height: 1.35;
+  }
+
+  /* ─── الرأس (إيصال الجوال): الشعار ← اسم/عنوان/سجل/ضريبي/فرع/جوال — عربي/إنجليزي متقابلان ─── */
+  #documentDetailsModal .invoice-preview-header,
+  #documentDetailsModal .invoice-preview-header > .d-flex,
+  #documentDetailsModal .invoice-preview-header > .d-flex > div {
+    display: contents;
+  }
+
+  #documentDetailsModal .invoice-logo {
+    order: 0;
+    display: block;
+    align-self: center;
+    max-height: 44px;
+    width: auto;
+    margin: 0 auto 3px;
+    border-radius: 4px;
+  }
+
+  #documentDetailsModal .invoice-business-name {
+    order: 1;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-size: 14.5px;
+    font-weight: 800;
+    color: #000;
+  }
+
+  #documentDetailsModal .invoice-business-name .bd-en { display: none; }
+
+  #documentDetailsModal .invoice-preview-header > .invoice-doc-title {
+    order: 3;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #000;
+    background: transparent;
+    border: none;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    border-radius: 0;
+    padding: 6px 0;
+    margin: 4px 0 0;
+  }
+
+  #documentDetailsModal .invoice-preview-header > .invoice-meta {
+    order: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    width: 100%;
+    padding: 4px 0 2px;
+    border: none;
+    font-size: 12.5px;
+    color: #000;
+  }
+
+  #documentDetailsModal .invoice-preview-header > .invoice-meta .invoice-meta-item {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    column-gap: 6px;
+    width: 100%;
+    padding: 1px 0;
+    direction: rtl;
+  }
+
+  #documentDetailsModal .receipt-tri-ar {
+    display: block;
+    grid-column: 1;
+    text-align: right;
+    font-weight: 700;
+    font-size: 11.5px;
+    color: #333;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #documentDetailsModal .receipt-tri-val {
+    display: block;
+    grid-column: 2;
+    text-align: center;
+    font-weight: 800;
+    font-size: 13px;
+    color: #000;
+    white-space: nowrap;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #documentDetailsModal .receipt-tri-en {
+    display: block;
+    grid-column: 3;
+    text-align: left;
+    direction: ltr;
+    unicode-bidi: embed;
+    font-size: 9.5px;
+    color: #555;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #documentDetailsModal .invoice-business-details {
+    order: 2;
+    width: 100%;
+    margin: 0;
+    padding: 0.5px 0;
+    font-size: 11px;
+    color: #111;
+    border: none;
+    line-height: 1.3;
+  }
+
+  #documentDetailsModal .invoice-business-details:first-of-type {
+    display: block;
+    text-align: center;
+  }
+
+  #documentDetailsModal .invoice-business-details:first-of-type .bd-ar {
+    display: block;
+    text-align: center;
+  }
+
+  #documentDetailsModal .invoice-business-details:first-of-type .bd-en { display: none; }
+
+  #documentDetailsModal .invoice-business-details:not(:first-of-type) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    column-gap: 2px;
+    direction: rtl;
+  }
+
+  #documentDetailsModal .invoice-business-details:not(:first-of-type) .bd-ar {
+    display: block;
+    grid-column: 1;
+    text-align: right;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #documentDetailsModal .invoice-business-details:not(:first-of-type) .bd-en {
+    display: block;
+    grid-column: 2;
+    text-align: left;
+    direction: ltr;
+    unicode-bidi: embed;
+    font-size: 9px;
+    font-weight: 400;
+    color: #555;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #documentDetailsModal .invoice-business-details i { display: none; }
+
+  #documentDetailsModal .invoice-preview .tl-sep { display: none; }
+
+  /* ─── العميل: العميل يمين | اسم العميل وسط | Customer يسار ─── */
+  #documentDetailsModal .invoice-info-grid { display: contents; }
+
+  #documentDetailsModal .invoice-info-grid .info-tile {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 2px 0;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-info-grid:not([style]) > .invoice-info-grid-main {
+    order: 5;
+    flex: 1 1 100%;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    column-gap: 6px;
+    padding: 1px 0;
+    direction: rtl;
+  }
+
+  #documentDetailsModal .invoice-info-grid .invoice-info-grid-main .info-tile-label {
+    grid-column: 1;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+    text-align: right;
+    min-width: 0;
+  }
+
+  #documentDetailsModal .invoice-info-grid .invoice-info-grid-main .info-tile-value {
+    grid-column: 2;
+    font-size: 13px;
+    font-weight: 800;
+    color: #000;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  #documentDetailsModal .invoice-info-grid .invoice-info-grid-main .info-tile-label .bilingual-en { display: none; }
+
+  #documentDetailsModal .invoice-info-grid .invoice-info-grid-main > .info-tile-label:not(:first-child) {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 9.5px;
+    font-weight: 400;
+    color: #555;
+    width: 100%;
+    min-width: 0;
+  }
+
+  #documentDetailsModal .invoice-info-grid-side { display: contents; }
+
+  #documentDetailsModal .invoice-info-grid-side .info-tile,
+  #documentDetailsModal .invoice-info-grid .invoice-status,
+  #documentDetailsModal .invoice-info-grid[style] {
+    display: none !important;
+  }
+
+  /* ─── جدول البنود: البند|الكمية|سعر الوحدة|الضريبة|الإجمالي — Grid بتوزيع ثابت ─── */
+  #documentDetailsModal .invoice-preview .invoice-table {
+    order: 10;
+    display: block;
+    width: 100%;
+    margin: 3px 0 0;
+    border-top: 1px solid #000;
+    background: transparent;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) thead {
+    display: block;
+    border-bottom: 1px solid #000;
+    padding-bottom: 2px;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) thead tr {
+    display: grid;
+    grid-template-columns: minmax(0, 38fr) minmax(0, 10fr) minmax(0, 16fr) minmax(0, 15fr) minmax(0, 19fr);
+    column-gap: 4px;
+    align-items: stretch;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) thead th {
+    display: none !important;
+    min-width: 0;
+    width: auto !important;
+    padding: 2px 0;
+    border: none;
+    font-size: 11.5px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #000 !important;
+    background: #eee !important;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) thead th[data-label="البند"] { display: block !important; text-align: start; font-weight: 800; }
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) thead th[data-label="الكمية"] { display: block !important; text-align: center; }
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) thead th[data-label="سعر الوحدة"] { display: block !important; text-align: end; }
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) thead th[data-label="الضريبة"] { display: block !important; text-align: end; }
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) thead th[data-label="الإجمالي"] { display: block !important; text-align: end; }
+
+  /* توحيد محتوى الروؤس مع نسخة الطباعة: الإنجليزي سطر تحت العربي في رأس الجدول */
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) thead tr th .bilingual-en {
+    display: block;
+    font-size: 9px;
+    font-weight: 400;
+    color: #666;
+    direction: ltr;
+    unicode-bidi: embed;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody { display: block; }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody tr {
+    display: grid;
+    grid-template-columns: minmax(0, 38fr) minmax(0, 10fr) minmax(0, 16fr) minmax(0, 15fr) minmax(0, 19fr);
+    column-gap: 4px;
+    align-items: center;
+    padding: 4px 0;
+    border: none;
+    border-bottom: 1px dotted #aaa;
+    background: transparent;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td {
+    display: none !important;
+    min-width: 0;
+    width: auto !important;
+    padding: 0;
+    border: none;
+    background: transparent !important;
+    font-size: 12px;
+    line-height: 1.35;
+    color: #000;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td:before { content: none; }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="index"],
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="الخصم"],
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="القيمة"],
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="مبلغ الضريبة"] { display: none !important; }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="البند"],
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="الكمية"],
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="سعر الوحدة"],
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="الضريبة"],
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="الإجمالي"] { display: block !important; }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="البند"] {
+    max-width: none;
+    text-align: start;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="البند"] .bilingual-item-en {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    color: #555;
+    margin-top: 1px;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    direction: ltr;
+    unicode-bidi: embed;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="الكمية"] { text-align: center; white-space: nowrap; }
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="سعر الوحدة"] { text-align: end; white-space: nowrap; overflow-wrap: anywhere; word-break: break-word; }
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="الضريبة"] { text-align: end; white-space: nowrap; overflow-wrap: anywhere; word-break: break-word; }
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="الإجمالي"] { text-align: end; white-space: nowrap; overflow-wrap: anywhere; word-break: break-word; font-weight: 700; }
+
+  /* خلايا الكمية/السعر/الضريبة/الإجمالي تملأ عمودها grid بلا انكماش/قصّ للقيم */
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="الكمية"],
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="سعر الوحدة"],
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="الضريبة"],
+  #documentDetailsModal .invoice-preview .invoice-table:has(tfoot) tbody td[data-label="الإجمالي"] {
+    width: auto;
+    max-width: none;
+    justify-self: stretch;
+  }
+
+  /* ─── الإجماليات: قبل الضريبة ← الضريبة ← الإجمالي الشامل ─── */
+  #documentDetailsModal .invoice-table tfoot { display: block; margin-top: 3px; }
+
+  #documentDetailsModal .invoice-table tfoot tr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 1px 0;
+    border: none;
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  #documentDetailsModal .invoice-table tfoot th {
+    border: none;
+    background: transparent !important;
+    padding: 0;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #000;
+    text-align: end;
+  }
+
+  #documentDetailsModal .invoice-table tfoot th:first-child { text-align: start; }
+  #documentDetailsModal .invoice-table tfoot th:last-child { text-align: end; font-weight: 700; }
+
+  /* إلغاء بدائل ::after والنص المخفي من كتل سابقة — يُعرض النص الأصلي الثنائي */
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr.subtotal-row th:first-child,
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr.total-row th:first-child {
+    font-size: 12.5px;
+    line-height: 1.4;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr.subtotal-row th:first-child::after,
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr.total-row th:first-child::after { content: none; }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr.total-row {
+    margin-top: 3px;
+    padding: 3px 0 2px;
+    border-top: 1px solid #000 !important;
+  }
+
+  /* الإجمالي النهائي: مثلثة — Total يسار | القيمة وسط | الإجمالي يمين */
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr.total-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    direction: rtl;
+    gap: 0;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr.total-row th:first-child {
+    display: contents;
+    font-size: 13px;
+    font-weight: 800;
+    color: #000 !important;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr.total-row th:first-child .tl-sep { display: none; }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr.total-row th:first-child .bilingual-en {
+    grid-column: 3;
+    display: block;
+    text-align: left;
+    direction: ltr;
+    unicode-bidi: embed;
+    font-size: 9.5px;
+    font-weight: 400;
+    color: #555;
+    min-width: 0;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot tr.total-row th:last-child {
+    grid-column: 2;
+    display: block;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 800;
+    color: #000 !important;
+    min-width: 0;
+  }
+
+  /* ─── حالة الدفع وطريقة الدفع أسفل الإجمالي ─── */
+  #documentDetailsModal .invoice-preview .invoice-payment-summary {
+    order: 12;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 3px 0 0;
+    padding: 5px 0 3px;
+    border: 0 !important;
+    border-top: 1px dashed #999 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  #documentDetailsModal .invoice-payment-summary-item {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    column-gap: 6px;
+    min-width: 0;
+    padding: 1px 0;
+    font-size: 12.5px;
+    color: #000;
+    direction: rtl;
+  }
+
+  #documentDetailsModal .invoice-payment-summary-item .info-tile-label {
+    grid-column: 1;
+    margin: 0;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #333;
+    text-align: right;
+  }
+
+  #documentDetailsModal .invoice-payment-summary-item .info-tile-label .bilingual-en { display: none; }
+
+  #documentDetailsModal .invoice-payment-status,
+  #documentDetailsModal .invoice-payment-method {
+    grid-column: 2;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 800;
+    color: #000 !important;
+    white-space: nowrap;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-payment-summary-item .info-tile-label .bilingual-en { display: none; }
+
+  #documentDetailsModal .invoice-preview .invoice-payment-status .bilingual-en,
+  #documentDetailsModal .invoice-preview .invoice-payment-method .bilingual-en {
+    display: block;
+    text-align: center;
+    direction: ltr;
+    unicode-bidi: embed;
+    font-size: 9.5px;
+    font-weight: 400;
+    color: #555;
+    white-space: nowrap;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* الإيصال أبيض/أسود: تحييد ألوان الحالات داخل المعاينة */
+  #documentDetailsModal .invoice-preview .text-success,
+  #documentDetailsModal .invoice-preview .text-warning,
+  #documentDetailsModal .invoice-preview .text-danger { color: #000 !important; }
+
+  /* ─── ملاحظات/تذييل/السجل: مدمجة ومضغوطة ─── */
+  #documentDetailsModal .invoice-notes,
+  #documentDetailsModal .invoice-footer {
+    order: 22;
+    width: 100%;
+    margin-top: 3px;
+    padding: 4px !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    font-size: 11px;
+    color: #111;
+  }
+
+  #documentDetailsModal .invoice-payment-history {
+    order: 21;
+    width: 100%;
+    margin-top: 3px;
+    padding-top: 3px;
+    border-top: 1px dashed #999;
+    font-size: 11px;
+  }
+
+  #documentDetailsModal .invoice-payment-history > div[style*="display:flex"] {
+    padding: 0 !important;
+    gap: 4px !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  /* ─── الباركود مباشرة تحت رقم الجوال ─── */
+  #documentDetailsModal .invoice-preview-header > .text-center:not(.invoice-barcode-top) {
+    order: 2;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 3px;
+    margin: 0;
+    text-align: center;
+  }
+
+  #documentDetailsModal .invoice-closed-badge {
+    display: block;
+    background: #000;
+    color: #fff;
+    border-radius: 999px;
+    padding: 2px 6px;
+    font-size: 10px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    border: none;
+  }
+
+  #documentDetailsModal .invoice-barcode-wrap {
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+  }
+
+  #documentDetailsModal .invoice-barcode-wrap svg {
+    display: block;
+    max-width: 85%;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  #documentDetailsModal .invoice-barcode-wrap .invoice-number {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    color: #000;
+  }
+
+  /* ثنائية اللغة من نظام الترجمة بلا تكرار/تداخل — الإنجليزية سطر تحت العربية */
+  #documentDetailsModal .invoice-preview .bilingual-en {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    color: #333;
+    line-height: 1.25;
+    direction: ltr;
+    unicode-bidi: embed;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-meta .bilingual-en,
+  #documentDetailsModal .invoice-preview .invoice-payment-summary-item .info-tile-label .bilingual-en {
+    display: none;
+  }
+}
+
+
+/* ─── بيانات المنشأة: تخطيط ثلاثي ثابت — إنجليزي يسار | القيمة وسط | عربي يمين.
+   أعمدة grid صريحة (grid-column) تعتمد على اتجاه الحاوية نفسها لا على RTL
+   العام للصفحة، فتبقى بنية ثابتة في الجوال وDesktop والطباعة. ─── */
+#documentDetailsModal .invoice-preview .invoice-preview-header .invoice-business-name,
+#documentDetailsModal .invoice-preview .invoice-preview-header .invoice-business-details,
+#voucherDetailsModal .invoice-preview .invoice-preview-header .invoice-business-name,
+#voucherDetailsModal .invoice-preview .invoice-preview-header .invoice-business-details {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: 6px;
+  width: 100%;
+  direction: rtl;
+}
+
+#documentDetailsModal .invoice-preview-header .invoice-business-name .receipt-tri-ar,
+#documentDetailsModal .invoice-preview-header .invoice-business-details .receipt-tri-ar,
+#voucherDetailsModal .invoice-preview-header .invoice-business-name .receipt-tri-ar,
+#voucherDetailsModal .invoice-preview-header .invoice-business-details .receipt-tri-ar {
+  grid-column: 1;
+  text-align: right;
+  font-weight: 600;
+  color: var(--muted, #6c757d);
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#documentDetailsModal .invoice-preview-header .invoice-business-name .receipt-tri-val,
+#documentDetailsModal .invoice-preview-header .invoice-business-details .receipt-tri-val,
+#voucherDetailsModal .invoice-preview-header .invoice-business-name .receipt-tri-val,
+#voucherDetailsModal .invoice-preview-header .invoice-business-details .receipt-tri-val {
+  grid-column: 2;
+  text-align: center;
+  font-weight: 700;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+#documentDetailsModal .invoice-preview-header .invoice-business-name .receipt-tri-en,
+#documentDetailsModal .invoice-preview-header .invoice-business-details .receipt-tri-en,
+#voucherDetailsModal .invoice-preview-header .invoice-business-name .receipt-tri-en,
+#voucherDetailsModal .invoice-preview-header .invoice-business-details .receipt-tri-en {
+  grid-column: 3;
+  text-align: left;
+  direction: ltr;
+  unicode-bidi: embed;
+  font-size: 0.75em;
+  font-weight: 400;
+  color: var(--muted, #6c757d);
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#documentDetailsModal .invoice-preview-header .invoice-business-details i,
+#voucherDetailsModal .invoice-preview-header .invoice-business-details i {
+  display: none;
+}
+
+/* ─── الجوال (≤767px): (أ) صف الضريبة يُعرض بالكامل بلا قصّ للنص،
+   (ب) حقل المبلغ في سطر السند ظاهر بوضوح ولا يُحجب في أي نقطة توقف ─── */
+@media screen and (max-width: 767px) {
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .tax-row,
+  #voucherDetailsModal .invoice-preview .invoice-table tfoot .tax-row {
+    flex-wrap: wrap;
+    min-height: 2.5rem;
+    overflow: visible;
+    padding-top: 0.35rem;
+    padding-bottom: 0.45rem;
+    column-gap: 8px;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .tax-row th:first-child,
+  #voucherDetailsModal .invoice-preview .invoice-table tfoot .tax-row th:first-child {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1.5;
+    white-space: normal;
+    text-align: start;
+    padding: 0;
+    overflow: visible;
+  }
+
+  #documentDetailsModal .invoice-preview .invoice-table tfoot .tax-row th:last-child,
+  #voucherDetailsModal .invoice-preview .invoice-table tfoot .tax-row th:last-child {
+    flex: 0 0 auto;
+    white-space: nowrap;
+text-align: end;
+    padding: 0;
+  }
+}
+
+/* ─── زر تثبيت التطبيق البارز في الهيدر ─── */
+.btn-install-cta {
+  background: linear-gradient(135deg, #ffb703 0%, #fb8500 100%);
+  color: #3a2500;
+  font-weight: 700;
+  border: none;
+  animation: installCtaPulse 2.2s infinite;
+  position: relative;
+}
+.btn-install-cta:hover,
+.btn-install-cta:focus {
+  background: linear-gradient(135deg, #ffc21a 0%, #ff9500 100%);
+  color: #2a1a00;
+}
+@keyframes installCtaPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 183, 3, 0.55); }
+  50%      { box-shadow: 0 0 0 9px rgba(255, 183, 3, 0); }
+}
+
+/* ─── نافذة شرح التثبيت (منبثقة بأسهم تشير للطريقة) ─── */
+.install-modal-card {
+  border-radius: 16px;
+  border: 0;
+  overflow: hidden;
+}
+.install-modal-header {
+  background: linear-gradient(135deg, #198754 0%, #0f6b41 100%);
+  color: #fff;
+  padding: 0.95rem 1.1rem;
+  text-align: center;
+}
+.install-modal-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px dashed #e3e6e8;
+}
+.install-modal-step:last-child { border-bottom: 0; }
+.install-step-badge {
+  flex: 0 0 2.6rem;
+  height: 2.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  background: #198754;
+  border-radius: 12px;
+}
+.install-step-arrow {
+  background: linear-gradient(135deg, #ffb703, #fb8500);
+  color: #3a2500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  font-size: 1.6rem;
+  line-height: 1;
+  animation: installArrowBounce 1s infinite;
+}
+@keyframes installArrowBounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(5px); }
+}
+.install-step-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: block;
+}
+.install-step-detail {
+  font-size: 0.85rem;
+  color: #555;
+  margin: 0;
+}

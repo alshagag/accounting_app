@@ -90,3 +90,132 @@ Small Description Text | النص الوصفي الصغير
 .version-item small{
   color:#777;
 }
+
+
+
+.back-home{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:20px;
+    padding:10px 18px;
+    background:#0d6efd;
+    color:#fff;
+    border:1px solid #0d6efd;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
+    transition:all .2s ease;
+}
+
+.back-home:hover{
+    background:#0b5ed7;
+    border-color:#0b5ed7;
+    color:#fff;
+    transform:translateY(-1px);
+    box-shadow:0 4px 12px rgba(13,110,253,.25);
+}
+
+.back-home:active{
+    transform:translateY(0);
+}
+
+.back-home i{
+    font-size:1rem;
+}
+
+/* ---- Footer support cards (compact): word ABOVE icon, label BELOW it --------
+   تصميم مبتكر: "تبرع"/"اشتري" فوق الأيقونة، والعنوان تحتها — مكدّس عموديًا.
+   لا فاصل "|" بين البطاقتين. متجاوب مع مقاس الجوال. */
+.footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 0.5rem;
+  max-width: 100%;
+}
+
+.support-intro {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin-bottom: 0.45rem;
+}
+
+.support-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  padding: 0.45rem 1rem;
+  min-width: 7rem;
+  background: #0d6efd;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 0.55rem;
+  box-shadow: 0 2px 8px rgba(13, 110, 253, 0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.support-card:hover {
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.35);
+}
+
+.support-card .support-word {
+  font-weight: 700;
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.support-card .support-label {
+  font-size: 0.68rem;
+  opacity: 0.92;
+  line-height: 1.2;
+}
+
+.support-card svg,
+.support-card i {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.support-card--store {
+  background: #800000;
+  box-shadow: 0 2px 8px rgba(128, 0, 0, 0.25);
+}
+
+.support-card--store:hover {
+  box-shadow: 0 4px 12px rgba(128, 0, 0, 0.35);
+}
+
+@media screen and (max-width: 767px) {
+  .footer-actions {
+    gap: 0.4rem;
+  }
+
+  .support-card {
+    flex: 1 1 7.5rem;
+    max-width: 8.5rem;
+    min-width: 0;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .support-card svg,
+  .support-card i {
+    font-size: 1.05rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .support-card {
+    flex: 1 1 6.75rem;
+    padding: 0.35rem 0.5rem;
+  }
+}

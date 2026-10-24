@@ -21,6 +21,9 @@ dist/
 dist-ssr/
 out/
 build/
+.next/
+.next-cache/
+*.tsbuildinfo
 
 # ========================
 # Environment variables
@@ -57,3 +60,19 @@ Thumbs.db
 # Optional
 # ========================
 *.local
+
+# ========================
+# AI / local development notes (not needed in Production)
+# ========================
+AGENTS.md
+CLAUDE.md
+TODO.md
+PROJECT_MAP.md
+
+# ========================
+# Browser test artifacts
+# ========================
+/test/
+test-results/
+playwright-report/
+blob-report/

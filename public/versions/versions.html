@@ -6,7 +6,8 @@
   <title>إصدارات المشروع</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/versions.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">  <link rel="stylesheet" href="css/versions.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
@@ -20,6 +21,11 @@
     <h1>إصدارات المحاسب المبسط</h1>
     <p>اختر أي نسخة تريد استعراضها</p>
 
+    <div class="page-header d-flex justify-content-center align-items-center gap-2">
+    <a href="/accounting" class="back-home">
+        <i class="bi bi-arrow-right"></i>
+        العودة إلى الصفحة الرئيسية
+    </a>
   </div>
 </header>
 
@@ -28,10 +34,10 @@
   <div class="version-list">
 
     <!-- Current -->
-    <a href="/accounting.html" class="version-item current">
+    <a href="/accounting" class="version-item current">
       <div>
-        <h5>v1.1 الإصدار الحالي</h5>
-        <small>تحسينات هيكلة الملفات وواجهة المستخدم</small>
+        <h5><v1 class="2"></v1> الإصدار الحالي</h5>
+        <small>تعديلات عديدة انشاء فواتير و انشاء سندات ادارة المخزون والكثير</small>
       </div>
       <span class="badge bg-success">حالي</span>
     </a>
@@ -45,9 +51,50 @@
       <span class="badge bg-primary">قديم</span>
     </a>
 
+    <!-- v1.1 -->
+    <a href="v1.1/index.html" class="version-item">
+      <div>
+        <h5>v1.1</h5>
+        <small>تحسينات هيكلة الملفات وواجهة المستخدم</small>
+      </div>
+      <span class="badge bg-primary">قديم</span>
+    </a>
+
   </div>
 
 </div>
+
+<!-- Footer | التذييل -->
+<footer class="text-center mt-4 py-3 border-top">
+  </div>
+  </a>
+  <div class="footer-support mb-3">
+  <div class="support-intro">
+    <i class="bi bi-cup-hot-fill"></i>
+    <span>عجبك المشروع؟ تبرع أو اشتري.</span>
+  </div>
+  <div class="footer-actions">
+    <a href="https://paypal.me/alshagag" target="_blank" class="support-card">
+      <span class="support-word">تبرع</span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M7.5 2h6.2c3.3 0 5.3 1.7 5.3 4.6 0 3.6-2.8 5.9-6.9 5.9h-2l-1 6.3H4.7L7.5 2z"/>
+        <path d="M17.5 6.6c-.5 3.4-3.2 5.3-7.2 5.3H8.6L7.8 17h3.5l.7-4.3h1.8c3.6 0 5.8-1.6 6.3-4.9.2-1.5-.2-2.6-1.1-3.2z"/>
+      </svg>
+      <span class="support-label">دعم بكوب شاي</span>
+    </a>
+    <a href="https://safsif.net" target="_blank" class="support-card support-card--store">
+      <span class="support-word">اشتري</span>
+      <i class="bi bi-shop"></i>
+      <span class="support-label">متجر سفسيف</span>
+    </a>
+  </div>
+</div>
+
+</footer>
+    
+ 
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,35 @@
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* Ensures columns maintain specified widths */
+}
+.invoice-table th,
+.invoice-table td {
+  padding: 8px;
+  border: 1px solid #dee2e6;
+  text-align: right; /* Default to right-aligned for Arabic content */
+  vertical-align: middle; /* Vertically align content in the middle */
+  word-wrap: break-word; /* Prevent long words from overflowing */
+}
+.invoice-table th {
+  background-color: #f8f9fa;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  font-weight: bold;
+}
+/* Specific alignment overrides */
+.invoice-table .text-start-override {
+  text-align: start; /* For product names which need to be left-aligned in Arabic */
+}
+.invoice-table .text-center-override {
+  text-align: center; /* For buttons/icons that should be centered */
+}
+/* Uniform height for input-like elements within table cells if needed, though not directly in invoice-html.js */
+.invoice-table input,
+.invoice-table select,
+.invoice-table .input-group {
+  width: 100%;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  min-height: 38px; /* Standard height for Bootstrap form controls */
+}
