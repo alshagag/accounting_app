@@ -73,6 +73,7 @@ PROJECT_MAP.md
 # Browser test artifacts
 # ========================
 /test/
+/tests/
 test-results/
 playwright-report/
 blob-report/
