@@ -40,10 +40,6 @@ A simple and lightweight accounting system designed to help small businesses man
 
 # 🖥️ صور المشروع | Screenshots
 
-## 🏠 الصفحة الرئيسية | Dashboard
-
-![Dashboard](screenshots/index.png)
-
 ## 🖥️ لوحة التحكم | Accounting dashboard
 
 ![Accounting dashboard](screenshots/index2.png)
