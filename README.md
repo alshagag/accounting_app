@@ -44,6 +44,14 @@ A simple and lightweight accounting system designed to help small businesses man
 
 ![Dashboard](screenshots/index.png)
 
+## 🖥️ لوحة التحكم | Accounting dashboard
+
+![Accounting dashboard](screenshots/index2.png)
+
+## 📦 قائمة المنتجات | Products list
+
+![Products list](screenshots/index3.png)
+
 ---
 
 # 🚀 Live Demo | النسخة التجريبية
